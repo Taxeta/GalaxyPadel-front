@@ -1,0 +1,56 @@
+:root {
+  --primaryColor: #302f2c;
+  --secondaryColor: #235789;
+  --buttonColor: #1b4078;
+  --errorColor: #b14040;
+  --black: rgb(27, 27, 27);
+  --white: #ffffff;
+  --primaryFont: "Nunito", "sans-serif";
+  --secondaryFont: "Assistant", "sans-serif";
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--secondaryFont);
+  background-color: var(--secondaryColor);
+  color: var(--white);
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+input,
+button {
+  font: inherit;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+h1 {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
