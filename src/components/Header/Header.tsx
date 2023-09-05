@@ -1,4 +1,4 @@
-import galaxyPadelLogo from "../../../public/galaxyPadelLogo.png";
+import galaxyPadelLogo from "../../Assets/galaxyPadelLogo.png";
 import "./Header.css";
 const Header = (): React.ReactElement => {
   return (
