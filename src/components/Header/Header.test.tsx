@@ -47,3 +47,21 @@ describe("Given a Header component inside App component", () => {
     });
   });
 });
+
+describe("Given a Button component inside Header component", () => {
+  describe("When it's rendered", () => {
+    test("Then it should show a exit image inside a button", () => {
+      const buttonText = "Exit icon";
+
+      render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>,
+      );
+
+      const button = screen.getByRole("button", { name: buttonText });
+
+      expect(button).toBeInTheDocument();
+    });
+  });
+});

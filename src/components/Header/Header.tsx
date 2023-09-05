@@ -2,6 +2,7 @@ import galaxyPadelLogo from "../../Assets/galaxyPadelLogo.png";
 import exitLogout from "../../Assets/exitLogout.png";
 import Navigation from "../Navigation/Navigation";
 import "./Header.css";
+import Button from "../Button/Button";
 
 const Header = (): React.ReactElement => {
   return (
@@ -15,9 +16,9 @@ const Header = (): React.ReactElement => {
           />
           <h1 className="header__title">Galaxy Padel</h1>
         </div>
-        <button>
+        <Button className="header__logout">
           <img className="header__logout" src={exitLogout} alt="Exit icon" />
-        </button>
+        </Button>
       </div>
       <Navigation />
     </header>
