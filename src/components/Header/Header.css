@@ -8,13 +8,13 @@
   box-shadow: 0 4px 4px 0 #000000;
 }
 
-.header-logo {
+.header__logo {
   width: 45px;
   height: 45px;
   margin: 0 20px 24px 0;
 }
 
-.header-title {
+.header__title {
   display: flex;
   flex-direction: column;
   font-family: var(--secondaryFont);
@@ -26,18 +26,18 @@
   vertical-align: baseline;
 }
 
-.header-container {
+.header__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
 
-.logo-container {
+.header__container-logo {
   display: flex;
 }
 
-.logout {
+.header__logout {
   display: flex;
   margin-bottom: 25px;
 }
