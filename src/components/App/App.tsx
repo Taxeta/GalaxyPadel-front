@@ -1,9 +1,10 @@
+import Header from "../Header/Header";
+
 const App = (): React.ReactElement => {
   return (
     <div>
-      <main className="main-content">
-        <p>Galaxy Padel</p>
-      </main>
+      <Header />
+      <main className="main-content"></main>
     </div>
   );
 };
