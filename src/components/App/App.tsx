@@ -1,3 +1,4 @@
+import HomePage from "../../pages/homePage/homePage";
 import Header from "../Header/Header";
 import { Navigate, Route, Routes } from "react-router-dom";
 
@@ -8,7 +9,7 @@ const App = (): React.ReactElement => {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<HomePage />} />
         </Routes>
       </main>
     </div>
