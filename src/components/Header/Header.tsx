@@ -1,4 +1,5 @@
 import galaxyPadelLogo from "../../Assets/galaxyPadelLogo.png";
+import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 const Header = (): React.ReactElement => {
   return (
@@ -11,6 +12,7 @@ const Header = (): React.ReactElement => {
         />
         <h1 className="header-title">Galaxy Padel</h1>
       </div>
+      <Navigation />
     </header>
   );
 };
