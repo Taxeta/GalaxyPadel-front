@@ -1,5 +1,5 @@
 import Button from "../../components/Button/Button";
-import imageLogin from "../../images/imageLogin.png";
+import imageLogin from "../../assets/imageLogin.png";
 import "./HomePage.css";
 
 const HomePage = (): React.ReactElement => {
