@@ -1,4 +1,4 @@
-import HomePage from "../../pages/ChangeName/HomePage";
+import HomePage from "../../pages/HomePage/HomePage";
 import Header from "../Header/Header";
 import { Navigate, Route, Routes } from "react-router-dom";
 
