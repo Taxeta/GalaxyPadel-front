@@ -1,5 +1,5 @@
-import galaxyPadelLogo from "../../Assets/galaxyPadelLogo.png";
-import exitLogout from "../../Assets/exitLogout.png";
+import galaxyPadelLogo from "../../images/galaxyPadelLogo.png";
+import exitLogout from "../../images/exitLogout.png";
 import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 import Button from "../Button/Button";

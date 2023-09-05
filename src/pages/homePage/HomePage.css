@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-image: url("../../assets/loginBackground.png");
+  background-image: var(--backgroundLoginImage);
   background-position: center;
   grid-gap: 60px;
 }
