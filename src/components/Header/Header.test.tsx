@@ -31,5 +31,19 @@ describe("Given a Header component inside App component", () => {
 
       expect(imageHeader).toBeInTheDocument();
     });
+
+    test("Then it should show a 'Exit icon' alternative text logo", () => {
+      const alternativeLogoText = "Exit icon";
+
+      render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>,
+      );
+
+      const imageHeader = screen.getByAltText(alternativeLogoText);
+
+      expect(imageHeader).toBeInTheDocument();
+    });
   });
 });
