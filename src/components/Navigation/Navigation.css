@@ -1,0 +1,21 @@
+.navigation-list.active {
+  border-bottom: 1px solid var(--white);
+  cursor: pointer;
+}
+
+.main-container {
+  width: 100%;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 700;
+  align-items: center;
+  padding-top: 9px;
+  border-top: 1px solid var(--white);
+  justify-content: space-between;
+}
+
+.navigation-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 22px 0 22px;
+}

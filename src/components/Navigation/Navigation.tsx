@@ -1,14 +1,19 @@
 import { NavLink } from "react-router-dom";
+import "./Navigation.css";
 
 const Navigation = (): React.ReactElement => {
   return (
-    <nav>
-      <ul>
+    <nav className="main-container">
+      <ul className="navigation-list">
         <li>
-          <NavLink to="/home">Home</NavLink>
+          <NavLink className="navigation-list" to="/home">
+            Home
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/home">Create</NavLink>
+          <NavLink className="navigation-list" to="/">
+            Create
+          </NavLink>
         </li>
       </ul>
     </nav>
