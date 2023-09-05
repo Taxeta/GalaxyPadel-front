@@ -1,13 +1,17 @@
 import App from "../App/App";
-import Header from "./Header";
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 
-describe("Given a Header component", () => {
+describe("Given a Header component inside App component", () => {
   describe("When it's rendered", () => {
     test("Then it should show a 'Galaxy Padel'", () => {
       const appTitle = "Galaxy Padel";
 
-      render(<App />);
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>,
+      );
 
       const textHeader = screen.getByRole("heading", { name: appTitle });
 
@@ -17,7 +21,11 @@ describe("Given a Header component", () => {
     test("Then it should show a 'Galaxy Padel logo app' alternative text logo", () => {
       const alternativeLogoText = "Galaxy Padel logo app";
 
-      render(<Header />);
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>,
+      );
 
       const imageHeader = screen.getByAltText(alternativeLogoText);
 
