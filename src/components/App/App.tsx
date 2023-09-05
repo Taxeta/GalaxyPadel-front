@@ -1,5 +1,11 @@
 const App = (): React.ReactElement => {
-  return <p>Galaxy Padel</p>;
+  return (
+    <div>
+      <main className="main-content">
+        <p>Galaxy Padel</p>
+      </main>
+    </div>
+  );
 };
 
 export default App;
