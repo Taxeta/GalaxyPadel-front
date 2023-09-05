@@ -1,6 +1,6 @@
-import App from "../App/App";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
+import Header from "./Header";
 
 describe("Given a Header component inside App component", () => {
   describe("When it's rendered", () => {
@@ -9,7 +9,7 @@ describe("Given a Header component inside App component", () => {
 
       render(
         <BrowserRouter>
-          <App />
+          <Header />
         </BrowserRouter>,
       );
 
@@ -23,7 +23,21 @@ describe("Given a Header component inside App component", () => {
 
       render(
         <BrowserRouter>
-          <App />
+          <Header />
+        </BrowserRouter>,
+      );
+
+      const imageHeader = screen.getByAltText(alternativeLogoText);
+
+      expect(imageHeader).toBeInTheDocument();
+    });
+
+    test("Then it should show a 'Exit icon' alternative text logo", () => {
+      const alternativeLogoText = "Exit icon";
+
+      render(
+        <BrowserRouter>
+          <Header />
         </BrowserRouter>,
       );
 
