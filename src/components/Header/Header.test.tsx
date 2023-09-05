@@ -4,7 +4,7 @@ import Header from "./Header";
 
 describe("Given a Header component inside App component", () => {
   describe("When it's rendered", () => {
-    test("Then it should show a 'Galaxy Padel'", () => {
+    test("Then it should show a 'Galaxy Padel' title", () => {
       const appTitle = "Galaxy Padel";
 
       render(
