@@ -4,18 +4,16 @@ import "./Navigation.css";
 const Navigation = (): React.ReactElement => {
   return (
     <nav className="main-container">
-      <ul className="navigation-list">
-        <li>
-          <NavLink className="navigation-list" to="/home">
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className="navigation-list" to="/">
-            Create
-          </NavLink>
-        </li>
-      </ul>
+      <div className="navigation-line">
+        <ul className="navigation-list">
+          <li>
+            <NavLink to="/home">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/">Create</NavLink>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };

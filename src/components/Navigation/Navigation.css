@@ -9,13 +9,19 @@
   text-transform: uppercase;
   font-weight: 700;
   align-items: center;
-  padding-top: 9px;
-  border-top: 1px solid var(--white);
+  padding: 0 12px 15px 15px;
   justify-content: space-between;
+  background: var(--primaryColor);
+  box-shadow: 0 4px 4px 0 #000000;
+}
+
+.navigation-line {
+  border-top: 1px solid var(--white);
 }
 
 .navigation-list {
   display: flex;
   justify-content: space-between;
-  margin: 0 22px 0 22px;
+  padding-top: 12px;
+  margin: 0 10px 0 10px;
 }

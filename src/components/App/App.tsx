@@ -5,7 +5,7 @@ import "./App.css";
 
 const App = (): React.ReactElement => {
   return (
-    <div>
+    <>
       <Header />
       <main className="main-content">
         <Routes>
@@ -13,7 +13,7 @@ const App = (): React.ReactElement => {
           <Route path="/home" element={<HomePage />} />
         </Routes>
       </main>
-    </div>
+    </>
   );
 };
 
