@@ -21,7 +21,7 @@ const HomePage = (): React.ReactElement => {
         <>
           <h2 className="login-text">Login to access your account</h2>
           <Button className="login-button" onClick={login}>
-            <img src={imageLogin} alt="Github logo" />
+            <img className="login-image" src={imageLogin} alt="Github logo" />
             Login via Github
           </Button>
         </>

@@ -7,7 +7,7 @@
   --white: #ffffff;
   --primaryFont: "Nunito", "sans-serif";
   --secondaryFont: "Assistant", "sans-serif";
-  --backgroundLoginImage: url(../assets/loginBackground.png);
+  --backgroundLoginImage: url(../assets/loginBackground.webp);
 }
 
 *,
