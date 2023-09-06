@@ -11,7 +11,7 @@
 .header__logo {
   width: 45px;
   height: 45px;
-  margin: 0 20px 24px 0;
+  margin: 5px 20px 24px 0;
 }
 
 .header__title {
@@ -39,4 +39,5 @@
 .header__logout {
   display: flex;
   height: fit-content;
+  margin-top: 2px;
 }

@@ -2,17 +2,14 @@ import { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
 interface ButtonProps
   extends PropsWithChildren,
-    ButtonHTMLAttributes<HTMLButtonElement> {
-  className: string;
-}
+    ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const Button = ({
-  className,
   children,
   ...props
-}: ButtonProps): React.ReactElement => {
+}: Partial<ButtonProps>): React.ReactElement => {
   return (
-    <button type="button" className={className} {...props}>
+    <button type="button" {...props}>
       {children}
     </button>
   );

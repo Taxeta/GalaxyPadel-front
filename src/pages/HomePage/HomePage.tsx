@@ -14,14 +14,17 @@ const HomePage = (): React.ReactElement => {
 
   return (
     <section className="login-container">
-      <h2 className="login-text">Login to access your account</h2>
+      <div className="white-filter"></div>
       {user ? (
         <span className="login-user">{`Welcome ${user?.displayName}`}</span>
       ) : (
-        <Button className="login-button" onClick={login}>
-          <img src={imageLogin} alt="Github logo" />
-          Login via Github
-        </Button>
+        <>
+          <h2 className="login-text">Login to access your account</h2>
+          <Button className="login-button" onClick={login}>
+            <img src={imageLogin} alt="Github logo" />
+            Login via Github
+          </Button>
+        </>
       )}
     </section>
   );
