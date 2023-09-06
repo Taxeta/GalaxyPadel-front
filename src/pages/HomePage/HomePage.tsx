@@ -14,7 +14,6 @@ const HomePage = (): React.ReactElement => {
 
   return (
     <div className="login-container">
-      <div className="white-filter"></div>
       {user ? (
         <span className="login-user">{`Welcome ${user?.displayName}`}</span>
       ) : (
