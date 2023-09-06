@@ -3,7 +3,7 @@ import { signInWithPopup } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import imageLogin from "../../assets/imageLogin.png";
 import "./HomePage.css";
-import auth, { githubProvider } from "../../firebase/firebase";
+import { auth, githubProvider } from "../../firebase/firebase";
 
 const HomePage = (): React.ReactElement => {
   const [user] = useAuthState(auth);
@@ -13,7 +13,7 @@ const HomePage = (): React.ReactElement => {
   };
 
   return (
-    <section className="login-container">
+    <div className="login-container">
       <div className="white-filter"></div>
       {user ? (
         <span className="login-user">{`Welcome ${user?.displayName}`}</span>
@@ -26,7 +26,7 @@ const HomePage = (): React.ReactElement => {
           </Button>
         </>
       )}
-    </section>
+    </div>
   );
 };
 
