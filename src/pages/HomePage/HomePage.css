@@ -49,3 +49,8 @@
   color: var(--black);
   font-weight: 700;
 }
+
+.login-image {
+  width: 40px;
+  height: 40px;
+}
