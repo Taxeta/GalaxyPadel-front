@@ -24,7 +24,7 @@ const Header = (): React.ReactElement => {
         />
         <h1 className="header__title">Galaxy Padel</h1>
         {user && (
-          <Button className="header__logout" onClick={logout}>
+          <Button className="header__logout" onClick={logout} aria-label="exit">
             <img className="header__logout" src={exitLogout} alt="Exit icon" />
           </Button>
         )}

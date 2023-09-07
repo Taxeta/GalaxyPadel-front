@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import RacketsPage from "../../pages/RacketsPage/RacketsPage";
 
 const App = (): React.ReactElement => {
   return (
@@ -16,6 +17,7 @@ const App = (): React.ReactElement => {
             path="/rackets"
             element={
               <ProtectedRoute>
+                <RacketsPage />
                 <Navigate to="/rackets" />
               </ProtectedRoute>
             }
