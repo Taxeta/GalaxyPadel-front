@@ -9,7 +9,7 @@ const App = (): React.ReactElement => {
       <Header />
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/" element={<Navigate to="/mainpage" />} />
           <Route path="/home" element={<HomePage />} />
         </Routes>
       </main>

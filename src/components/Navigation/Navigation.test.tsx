@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 describe("Given a Navigation component", () => {
   describe("When it's rendered", () => {
     test("Then it should show the links 'Home' and 'Create'", () => {
-      const homeLink = "Home";
+      const homeLink = "Rackets";
       const createLink = "Create";
 
       render(
