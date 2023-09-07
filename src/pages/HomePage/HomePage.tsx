@@ -4,12 +4,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import imageLogin from "../../assets/imageLogin.png";
 import "./HomePage.css";
 import { auth, githubProvider } from "../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import paths from "../../paths/paths";
 
 const HomePage = (): React.ReactElement => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const login = async () => {
     await signInWithPopup(auth, githubProvider);
+    navigate(paths.rackets);
   };
 
   return (

@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, PropsWithChildren } from "react";
 interface ButtonProps
   extends PropsWithChildren,
     ButtonHTMLAttributes<HTMLButtonElement> {
-  className: string;
+  className?: string;
 }
 
 const Button = ({
@@ -12,7 +12,7 @@ const Button = ({
   ...props
 }: Partial<ButtonProps>): React.ReactElement => {
   return (
-    <button type="button" className={className} {...props}>
+    <button className={`Button ${className}`} {...props}>
       {children}
     </button>
   );

@@ -2,13 +2,18 @@ import { render, screen } from "@testing-library/react";
 import HomePage from "./HomePage";
 import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Given a HomePage page", () => {
   describe("When it's rendered", () => {
     test("Then it should show a heading with 'Login to access your account' text", () => {
       const expectedHeadingText = "Login to access your account";
 
-      render(<HomePage />);
+      render(
+        <BrowserRouter>
+          <HomePage />
+        </BrowserRouter>,
+      );
 
       const textHeading = screen.getByRole("heading", {
         name: expectedHeadingText,
@@ -25,7 +30,11 @@ describe("Given a HomePage page", () => {
       const alternativeTextImage = "Github logo";
       const buttonText = `${alternativeTextImage} Login via Github`;
 
-      render(<HomePage />);
+      render(
+        <BrowserRouter>
+          <HomePage />
+        </BrowserRouter>,
+      );
 
       const textOnButton = screen.getByRole("button", { name: buttonText });
       const logoAltText = screen.getByAltText(alternativeTextImage);
@@ -46,7 +55,11 @@ describe("Given a HomePage component", () => {
 
       const initialText = "Welcome Arturo";
 
-      render(<HomePage />);
+      render(
+        <BrowserRouter>
+          <HomePage />
+        </BrowserRouter>,
+      );
 
       const feedbackText = await screen.getByText(initialText);
 
