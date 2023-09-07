@@ -1,17 +1,10 @@
-.header-login {
+.header {
   display: flex;
   flex-direction: row;
   padding: 15px 15px 0 15px;
   background-color: var(--primaryColor);
   box-shadow: 0 4px 4px 0 #000000;
-}
-
-.header-logout {
-  display: flex;
-  flex-direction: row;
-  padding: 15px 15px 0 15px;
-  background-color: var(--primaryColor);
-  box-shadow: 0 4px 4px 0 #000000;
+  color: var(--white);
 }
 
 .header__logo {
