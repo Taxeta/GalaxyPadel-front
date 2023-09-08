@@ -19,11 +19,11 @@ const HomePage = (): React.ReactElement => {
   return (
     <div className="login-container">
       {user ? (
-        <span className="login-user">{`Welcome ${user?.displayName}`}</span>
+        <span className="login-user">{`Welcome ${user.displayName}`}</span>
       ) : (
         <>
           <h2 className="login-text">Login to access your account</h2>
-          <Button className="login-button" onClick={login}>
+          <Button className="button button--outline" onClick={login}>
             <img className="login-image" src={imageLogin} alt="Github logo" />
             Login via Github
           </Button>
