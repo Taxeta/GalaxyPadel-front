@@ -12,7 +12,7 @@ const Button = ({
   ...props
 }: Partial<ButtonProps>): React.ReactElement => {
   return (
-    <button className={`Button ${className}`} {...props}>
+    <button className={`button ${className}`} {...props}>
       {children}
     </button>
   );

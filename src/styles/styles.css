@@ -1,13 +1,13 @@
 :root {
-  --primaryColor: #302f2c;
-  --secondaryColor: #235789;
-  --buttonColor: #1b4078;
-  --errorColor: #b14040;
+  --primary-color: #302f2c;
+  --secondary-color: #235789;
+  --button-color: #1b4078;
+  --error-color: #b14040;
   --black: rgb(27, 27, 27);
   --white: #ffffff;
-  --primaryFont: "Nunito", "sans-serif";
-  --secondaryFont: "Assistant", "sans-serif";
-  --backgroundLoginImage: url(../assets/loginBackground.webp);
+  --primary-font: "Nunito", "sans-serif";
+  --secondary-font: "Assistant", "sans-serif";
+  --background-login-image: url(../assets/loginBackground.webp);
 }
 
 *,
@@ -23,8 +23,8 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--secondaryFont);
-  background-color: var(--secondaryColor);
+  font-family: var(--secondary-font);
+  background-color: var(--secondary-color);
   min-height: 100vh;
   background-size: contain;
 }

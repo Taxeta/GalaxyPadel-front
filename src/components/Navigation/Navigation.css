@@ -1,5 +1,5 @@
-.navigation__rackets.active,
-.navigation__create.active {
+.navigation-list__rackets.active,
+.navigation-list__create.active {
   border-bottom: 1px solid var(--white);
   cursor: pointer;
 }
@@ -12,13 +12,13 @@
   font-weight: 700;
   color: var(--white);
   padding: 0 12px 15px 15px;
-  background: var(--primaryColor);
+  background: var(--primary-color);
   box-shadow: 0 4px 4px 0 #000000;
   position: absolute;
   z-index: 1;
 }
 
-.navigation__list {
+.navigation-list {
   display: flex;
   justify-content: space-between;
   padding-top: 12px;

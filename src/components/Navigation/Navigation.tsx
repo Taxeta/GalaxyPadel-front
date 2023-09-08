@@ -4,14 +4,14 @@ import "./Navigation.css";
 const Navigation = (): React.ReactElement => {
   return (
     <nav className="navigation">
-      <ul className="navigation__list">
+      <ul className="navigation-list">
         <li>
-          <NavLink className="navigation__rackets" to="/rackets">
+          <NavLink className="navigation-list__rackets" to="/rackets">
             Rackets
           </NavLink>
         </li>
         <li>
-          <NavLink className="navigation__create" to="/create">
+          <NavLink className="navigation-list__create" to="/create">
             Create
           </NavLink>
         </li>

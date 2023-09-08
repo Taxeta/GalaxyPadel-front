@@ -1,16 +1,16 @@
 .login-container {
-  padding: 140px 20px 20px 20px;
+  padding: 160px 20px 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: var(--backgroundLoginImage);
+  background-image: var(--background-login-image);
   background-position: center;
   grid-gap: 60px;
   min-height: 100vh;
 }
 
 .login-text {
-  font-family: var(--secondaryFont);
+  font-family: var(--secondary-font);
   font-size: 24px;
   padding-top: 136px;
   font-weight: 700;
@@ -18,9 +18,9 @@
   color: var(--black);
 }
 
-.login-button {
+.button--outline {
   display: flex;
-  font-family: var(--secondaryFont);
+  font-family: var(--secondary-font);
   font-weight: 700;
   font-size: 18px;
   border: 2px solid var(--black);
@@ -33,7 +33,7 @@
 
 .login-user {
   display: flex;
-  font-family: var(--primaryFont);
+  font-family: var(--primary-font);
   font-size: 16px;
   color: var(--black);
   font-weight: 700;
