@@ -55,11 +55,11 @@ describe("Given a Header component inside App component", () => {
 describe("Given a Header component", () => {
   describe("When it's rendered", () => {
     test("Then it should show a exit image inside a button", () => {
-      const buttonText = "exit";
+      const buttonText = "Exit icon";
 
       renderFunction();
 
-      const button = screen.getByLabelText(buttonText);
+      const button = screen.getByRole("button", { name: buttonText });
 
       expect(button).toBeInTheDocument();
     });

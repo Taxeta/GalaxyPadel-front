@@ -8,11 +8,14 @@
   width: 100%;
   font-size: 22px;
   text-transform: uppercase;
+  margin-top: 88px;
   font-weight: 700;
   color: var(--white);
   padding: 0 12px 15px 15px;
   background: var(--primaryColor);
   box-shadow: 0 4px 4px 0 #000000;
+  position: absolute;
+  z-index: 1;
 }
 
 .navigation__list {
