@@ -20,7 +20,7 @@ describe("Given a RacketsPage with protected by ProtectedRoute component", () =>
       auth.useAuthState = vi.fn().mockReturnValue(hookMock);
 
       render(
-        <MemoryRouter initialEntries={[paths.rackets]}>
+        <MemoryRouter initialEntries={[paths.home]}>
           <ProtectedRoute>
             <RacketsPage />
           </ProtectedRoute>
