@@ -1,4 +1,6 @@
 import { useAppSelector } from "../../store";
+import RacketCard from "../RacketsCard/RacketsCard";
+import "./RacketsList.css";
 
 const RacketsList = (): React.ReactElement => {
   const rackets = useAppSelector((state) => state.racketsState.rackets);
@@ -6,7 +8,9 @@ const RacketsList = (): React.ReactElement => {
   return (
     <ul>
       {rackets.map((racket) => (
-        <li key={racket.id}></li>
+        <li className="racket-content" key={racket.id}>
+          <RacketCard racket={racket} />
+        </li>
       ))}
     </ul>
   );
