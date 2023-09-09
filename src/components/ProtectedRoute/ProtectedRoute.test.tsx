@@ -5,6 +5,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import { render, screen } from "@testing-library/react";
 import paths from "../../paths/paths";
 import RacketsPage from "../../pages/RacketsPage/RacketsPage";
+import { Provider } from "react-redux";
+import { store } from "../../store";
 
 vi.mock("firebase/auth");
 
@@ -20,11 +22,13 @@ describe("Given a RacketsPage with protected by ProtectedRoute component", () =>
       auth.useAuthState = vi.fn().mockReturnValue(hookMock);
 
       render(
-        <MemoryRouter initialEntries={[paths.home]}>
-          <ProtectedRoute>
-            <RacketsPage />
-          </ProtectedRoute>
-        </MemoryRouter>,
+        <Provider store={store}>
+          <MemoryRouter initialEntries={[paths.home]}>
+            <ProtectedRoute>
+              <RacketsPage />
+            </ProtectedRoute>
+          </MemoryRouter>
+        </Provider>,
       );
 
       const protectedPageTitle = screen.getByRole("heading", {
