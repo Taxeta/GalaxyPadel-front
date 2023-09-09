@@ -1,7 +1,9 @@
+import RacketsList from "../../components/RacketsList/RacketsList";
+
 const RacketsPage = (): React.ReactElement => {
   return (
     <>
-      <h2>Padel Professional Rackets</h2>
+      <RacketsList />
     </>
   );
 };

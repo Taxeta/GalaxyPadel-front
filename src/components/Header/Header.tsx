@@ -17,12 +17,14 @@ const Header = (): React.ReactElement => {
   return (
     <>
       <header className="header">
-        <img
-          className="header__logo"
-          src={galaxyPadelLogo}
-          alt="Galaxy Padel logo app"
-        />
-        <h1 className="header__title">Galaxy Padel</h1>
+        <div className="header__container">
+          <img
+            className="header__logo"
+            src={galaxyPadelLogo}
+            alt="Galaxy Padel logo app"
+          />
+          <h1 className="header__title">Galaxy Padel</h1>
+        </div>
         {user && (
           <Button className="header__logout" onClick={logout}>
             <img className="header__logout" src={exitLogout} alt="Exit icon" />
