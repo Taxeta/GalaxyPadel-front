@@ -8,6 +8,7 @@
 .list-page__title {
   color: var(--white);
   font-family: var(--secondary-font);
+  font-weight: 24px;
   font-weight: 700;
   padding: 0 17px;
   text-align: center;
