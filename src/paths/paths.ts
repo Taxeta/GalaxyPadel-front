@@ -1,6 +1,6 @@
-import { pathsTypes } from "./types";
+import { pathStructure } from "./types";
 
-const paths: pathsTypes = {
+const paths: pathStructure = {
   home: "/home",
   rackets: "/rackets",
   create: "/create",
