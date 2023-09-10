@@ -5,7 +5,7 @@ import RacketCard from "./RacketsCard";
 import { racketsMock } from "../../mocks/racketsMock";
 import { BrowserRouter } from "react-router-dom";
 
-describe("Given a RacketCard compponent", () => {
+describe("Given a RacketCard component", () => {
   describe("When it's rendered", () => {
     test("Then it should show an image with the alternative text 'Adidas Metalbone 3.2 racket'", () => {
       const alternativeText = "Adidas Metalbone 3.2 racket";
