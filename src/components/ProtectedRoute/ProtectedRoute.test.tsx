@@ -8,8 +8,6 @@ import RacketsPage from "../../pages/RacketsPage/RacketsPage";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 
-vi.mock("firebase/auth");
-
 describe("Given a RacketsPage with protected by ProtectedRoute component", () => {
   describe("When the user is logged", () => {
     test("Then it should show 'Padel Professional Rackets' in a heading", async () => {

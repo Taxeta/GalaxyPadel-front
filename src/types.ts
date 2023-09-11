@@ -9,12 +9,17 @@ export interface ApiRackets {
   description: string;
   image: string;
   favorite: boolean;
+  user: string;
+}
+
+export interface RacketsApi {
+  rackets: ApiRackets[];
 }
 
 export interface Racket extends Omit<ApiRackets, "_id"> {
   id: string;
 }
 
-export interface RacketsUser extends Partial<Racket> {
-  user: string;
+export interface RacketsMock {
+  racketsMock: Racket[];
 }

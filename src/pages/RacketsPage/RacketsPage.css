@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--secondary-color);
+  min-height: 100vh;
 }
 
 .list-page__title {
