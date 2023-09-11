@@ -7,10 +7,10 @@ import { Racket, RacketsApi } from "../types";
 const useRacketsApi = () => {
   const apiUrl = import.meta.env.VITE_API_RACKETS_URL;
   const [user] = useIdToken(auth);
-  const getRackets = useCallback(async (): Promise<Racket[]> => {
-    const token = await user?.getIdToken();
 
+  const getRackets = useCallback(async () => {
     try {
+      const token = await user?.getIdToken();
       const { data: apiRackets } = await axios.get<RacketsApi>(
         `${apiUrl}rackets`,
         { headers: { Authorization: `Bearer ${token}` } },
