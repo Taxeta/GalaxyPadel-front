@@ -24,7 +24,7 @@ const RacketsPage = (): React.ReactElement => {
 
   return (
     <div className="list-page">
-      <h2 className="list-page__title">Padel Professional Rackets</h2>
+      <h1 className="list-page__title">Padel Professional Rackets</h1>
       <RacketsList />
     </div>
   );

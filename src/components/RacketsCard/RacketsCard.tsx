@@ -11,7 +11,7 @@ const RacketCard = ({
 }: RacketsCardProps): React.ReactElement => {
   return (
     <article className="racket">
-      <img className="racket__image" src={`${image}`} alt={`${name} racket`} />
+      <img className="racket__image" src={image} alt={`${name} racket`} />
       <h2 className="racket__name">{name}</h2>
 
       <div className="racket__container">

@@ -6,13 +6,13 @@
   background-image: var(--background-login-image);
   background-position: center;
   grid-gap: 60px;
+  justify-content: center;
   min-height: 100vh;
 }
 
 .login-text {
   font-family: var(--secondary-font);
   font-size: 24px;
-  padding-top: 136px;
   font-weight: 700;
   text-align: center;
   color: var(--black);
