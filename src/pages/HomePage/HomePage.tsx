@@ -6,6 +6,9 @@ import "./HomePage.css";
 import { auth, githubProvider } from "../../firebase/firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import paths from "../../paths/paths";
+import { lazy } from "react";
+
+export const HomePagePreload = lazy(() => import("./HomePage"));
 
 const HomePage = (): React.ReactElement => {
   const [user] = useAuthState(auth);
