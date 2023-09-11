@@ -3,8 +3,8 @@ import { ApiRackets, Racket } from "../types";
 export const racketsMock: Racket[] = [
   {
     id: "64f3a180784b0b6d4ddd8fe2",
-    favorite: false,
     control: 8,
+    favorite: false,
     description:
       "Slightly softer core, slightly increasing sweet spot size and core reactivity. Intermediate-advanced level players looking for power and control.",
     image:
@@ -14,6 +14,7 @@ export const racketsMock: Racket[] = [
     power: 10,
     shape: "Diamond shape",
     weight: 355,
+    user: "userId",
   },
   {
     id: "64f3a180784b0b6d4ddd8fe3",
@@ -28,11 +29,13 @@ export const racketsMock: Racket[] = [
     power: 7,
     shape: "Round shape",
     weight: 370,
+    user: "userId",
   },
 ];
 
 export const apiRacketsMock: ApiRackets[] = [
   {
+    user: "userId",
     _id: "64f3a180784b0b6d4ddd8fe2",
     favorite: false,
     control: 8,
@@ -59,5 +62,6 @@ export const apiRacketsMock: ApiRackets[] = [
     power: 7,
     shape: "Round shape",
     weight: 370,
+    user: "userId",
   },
 ];

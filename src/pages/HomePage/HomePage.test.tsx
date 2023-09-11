@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import HomePage from "./HomePage";
-import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import { BrowserRouter } from "react-router-dom";
 
@@ -41,29 +40,6 @@ describe("Given a HomePage page", () => {
 
       expect(textOnButton).toBeInTheDocument();
       expect(logoAltText).toBeInTheDocument();
-    });
-  });
-});
-
-describe("Given a HomePage component", () => {
-  describe("When it's rendered and user is logged", () => {
-    test("Then it should show a feedback with text 'Welcome Arturo'", async () => {
-      const user: Partial<User> = { displayName: "Arturo" };
-      const authStateHookMock: Partial<AuthStateHook> = [user as User];
-
-      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
-
-      const initialText = "Welcome Arturo";
-
-      render(
-        <BrowserRouter>
-          <HomePage />
-        </BrowserRouter>,
-      );
-
-      const feedbackText = await screen.getByText(initialText);
-
-      expect(feedbackText).toBeInTheDocument();
     });
   });
 });

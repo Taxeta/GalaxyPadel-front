@@ -5,8 +5,16 @@ import paths from "../../paths/paths";
 import authHook, { AuthStateHook } from "react-firebase-hooks/auth";
 import userEvent from "@testing-library/user-event";
 import { User } from "firebase/auth";
+import { Provider } from "react-redux";
+import { store } from "../../store";
 
 vi.mock("firebase/auth");
+
+const user: Partial<User> = {
+  getIdToken: vi.fn().mockResolvedValue("token"),
+};
+
+authHook.useIdToken = vi.fn().mockReturnValue([user]);
 
 describe("Given a App component", () => {
   describe("When it's rendered", () => {
@@ -17,12 +25,14 @@ describe("Given a App component", () => {
         displayName: "Arturo",
       };
 
-      const hookMock: Partial<AuthStateHook> = [user as User];
-      authHook.useAuthState = vi.fn().mockReturnValue(hookMock);
+      const authStateHookMock: Partial<AuthStateHook> = [user as User];
+      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
       render(
         <BrowserRouter>
-          <App />
+          <Provider store={store}>
+            <App />
+          </Provider>
         </BrowserRouter>,
       );
 

@@ -3,7 +3,7 @@ import RacketsList from "../../components/RacketsList/RacketsList";
 import { useAppDispatch } from "../../store";
 import { loadRacketsActionCreator } from "../../store/Rackets/racketsSlice";
 import "./RacketsPage.css";
-import useRacketsApi from "../../components/hooks/useRacketsApi";
+import useRacketsApi from "../../hooks/useRacketsApi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
 
@@ -13,13 +13,13 @@ const RacketsPage = (): React.ReactElement => {
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    if (!user) {
-      return;
-    }
-    async () => {
-      const rackets = await getRackets();
-      dispatch(loadRacketsActionCreator(rackets));
-    };
+    (async () => {
+      if (user) {
+        const rackets = await getRackets();
+
+        dispatch(loadRacketsActionCreator(rackets));
+      }
+    })();
   }, [dispatch, getRackets, user]);
 
   return (

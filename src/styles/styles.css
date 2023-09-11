@@ -24,7 +24,6 @@ html {
 body {
   margin: 0;
   font-family: var(--secondary-font);
-  background-color: var(--secondary-color);
   min-height: 100vh;
   background-size: contain;
 }
