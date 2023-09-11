@@ -5,6 +5,7 @@ import "./App.css";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import RacketsPage from "../../pages/RacketsPage/RacketsPage";
 import paths from "../../paths/paths";
+import { Suspense } from "react";
 
 const App = (): React.ReactElement => {
   return (
@@ -12,18 +13,33 @@ const App = (): React.ReactElement => {
       <Header />
       <main className="main-content">
         <Routes>
-          <Route path={paths.root} element={<Navigate to={paths.home} />} />
-          <Route path={paths.home} element={<HomePage />} />
+          <Route
+            path={paths.root}
+            element={
+              <Suspense>
+                <Navigate to={paths.home} />
+              </Suspense>
+            }
+          />
+          <Route
+            path={paths.home}
+            element={
+              <Suspense>
+                <HomePage />
+              </Suspense>
+            }
+          />
           <Route
             path={paths.rackets}
             element={
               <ProtectedRoute>
-                <RacketsPage />
-                <Navigate to={paths.rackets} />
+                <Suspense>
+                  <RacketsPage />
+                  <Navigate to={paths.rackets} />
+                </Suspense>
               </ProtectedRoute>
             }
           />
-          <Route path={paths.root} element={<Navigate to={paths.home} />} />
         </Routes>
       </main>
     </>

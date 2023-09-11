@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import RacketsList from "../../components/RacketsList/RacketsList";
 import { useAppDispatch } from "../../store";
 import { loadRacketsActionCreator } from "../../store/Rackets/racketsSlice";
@@ -6,6 +6,8 @@ import "./RacketsPage.css";
 import useRacketsApi from "../../hooks/useRacketsApi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
+
+export const RacketsPagePreload = lazy(() => import("./RacketsPage"));
 
 const RacketsPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
