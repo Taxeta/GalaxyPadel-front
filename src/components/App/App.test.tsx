@@ -1,14 +1,25 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import App from "./App";
 import paths from "../../paths/paths";
 import authHook, { AuthStateHook } from "react-firebase-hooks/auth";
 import userEvent from "@testing-library/user-event";
-import { User } from "firebase/auth";
+import { Auth, User, signInWithPopup, signOut } from "firebase/auth";
 import { Provider } from "react-redux";
 import { store } from "../../store";
 
-vi.mock("firebase/auth");
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
+vi.mock("firebase/auth", async () => {
+  const actual: Auth = await vi.importActual("firebase/auth");
+  return {
+    ...actual,
+    signInWithPopup: vi.fn(),
+    signOut: vi.fn(),
+  };
+});
 
 const user: Partial<User> = {
   getIdToken: vi.fn().mockResolvedValue("token"),
@@ -43,29 +54,90 @@ describe("Given a App component", () => {
   });
 
   describe("When login button is clicked", () => {
-    test("Then it should show 'Padel Professional Rackets' on heading", async () => {
+    test("Then it should show call login function", async () => {
       const buttonText = "Github logo Login via Github";
-      const headingText = "Login to access your account";
-
       const route = paths.home;
-      const authStateHookMock: Partial<AuthStateHook> = [null as null];
 
+      const authStateHookMock: Partial<AuthStateHook> = [null as null];
       authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
       render(
         <MemoryRouter initialEntries={[route]}>
-          <App />
+          <Provider store={store}>
+            <App />
+          </Provider>
         </MemoryRouter>,
       );
 
       const loginButton = screen.getByRole("button", { name: buttonText });
       await userEvent.click(loginButton);
 
-      waitFor(() => {
-        const heading = screen.getByRole("heading", { name: headingText });
+      expect(signInWithPopup).toHaveBeenCalled();
+    });
+  });
 
-        expect(heading).toBeInTheDocument();
-      });
+  describe("When the user clicks on the logout Button", () => {
+    test("Then it should call logout function", async () => {
+      const buttonText = "Exit icon";
+      const route = paths.rackets;
+
+      const authStateHookMock: Partial<AuthStateHook> = [user as User];
+      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+      render(
+        <MemoryRouter initialEntries={[route]}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </MemoryRouter>,
+      );
+
+      const logoutButton = screen.getByRole("button", { name: buttonText });
+      await userEvent.click(logoutButton);
+
+      expect(signOut).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the user is not logged", () => {
+    test("Then it should show 'Login to access your account'", () => {
+      const route = paths.rackets;
+      const text = "Login to access your account";
+      const authStateHookMock: Partial<AuthStateHook> = [null as null];
+      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+      render(
+        <MemoryRouter initialEntries={[route]}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </MemoryRouter>,
+      );
+
+      const headingText = screen.getByRole("heading", { name: text });
+
+      expect(headingText).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user is logged", () => {
+    test("Then it should show 'Login to access your account'", () => {
+      const route = paths.home;
+      const text = "Padel Professional Rackets";
+      const authStateHookMock: Partial<AuthStateHook> = [user as User];
+      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+      render(
+        <MemoryRouter initialEntries={[route]}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </MemoryRouter>,
+      );
+
+      const headingText = screen.getByRole("heading", { name: text });
+
+      expect(headingText).toBeInTheDocument();
     });
   });
 });
