@@ -50,8 +50,8 @@ describe("Given a RacketCard component", () => {
     });
 
     test("It should show a list with properties like 'Diamond shape' or '355 g'", () => {
-      const expectedShape = "shape";
-      const expectedWeight = "weight";
+      const expectedShape = "Diamond shape";
+      const expectedWeight = "355 g";
 
       render(
         <Provider store={store}>
@@ -59,8 +59,8 @@ describe("Given a RacketCard component", () => {
         </Provider>,
       );
 
-      const shapeText = screen.getByLabelText(expectedShape);
-      const weightText = screen.getByLabelText(expectedWeight);
+      const shapeText = screen.getByText(expectedShape);
+      const weightText = screen.getByText(expectedWeight);
 
       expect(shapeText).toBeInTheDocument();
       expect(weightText).toBeInTheDocument();
