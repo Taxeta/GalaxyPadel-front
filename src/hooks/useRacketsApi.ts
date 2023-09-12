@@ -17,8 +17,8 @@ const useRacketsApi = () => {
 
   const getRackets = useCallback(async () => {
     dispatch(startLoadingActionCreator());
-    showToast("Cards Loaded!", true);
     try {
+      showToast("Cards Loaded!", true);
       const token = await user?.getIdToken();
       const { data: apiRackets } = await axios.get<RacketsApi>(
         `${apiUrl}rackets`,

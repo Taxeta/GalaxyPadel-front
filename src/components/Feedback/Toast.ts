@@ -4,7 +4,7 @@ export const showToast = (message: string, success: boolean) => {
   success
     ? toast.success(message, {
         position: "bottom-center",
-        autoClose: 5000,
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -14,7 +14,7 @@ export const showToast = (message: string, success: boolean) => {
       })
     : toast.error(message, {
         position: "bottom-center",
-        autoClose: 5000,
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -22,4 +22,17 @@ export const showToast = (message: string, success: boolean) => {
         progress: undefined,
         theme: "colored",
       });
+};
+
+export const showInfoToast = (message: string) => {
+  toast.info(message, {
+    position: "bottom-center",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
 };
