@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import RacketsPage from "./RacketsPage";
 import { Provider } from "react-redux";
 import { store } from "../../store";
-import { BrowserRouter } from "react-router-dom";
 
 describe("Given a RacketsList component", () => {
   describe("When it's rendered", () => {
@@ -11,9 +10,7 @@ describe("Given a RacketsList component", () => {
 
       render(
         <Provider store={store}>
-          <BrowserRouter>
-            <RacketsPage />
-          </BrowserRouter>
+          <RacketsPage />
         </Provider>,
       );
 

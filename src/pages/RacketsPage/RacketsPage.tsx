@@ -23,7 +23,7 @@ const RacketsPage = (): React.ReactElement => {
       if (user) {
         showInfoToast(`Welcome ${user?.displayName}!`);
         const rackets = await getRackets();
-        dispatch(loadRacketsActionCreator(rackets));
+        dispatch(loadRacketsActionCreator(rackets!));
       }
     })();
   }, [dispatch, getRackets, user]);

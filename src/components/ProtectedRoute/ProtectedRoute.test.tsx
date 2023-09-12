@@ -1,9 +1,9 @@
 import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
-import { MemoryRouter } from "react-router-dom";
+
 import ProtectedRoute from "./ProtectedRoute";
 import { render, screen } from "@testing-library/react";
-import paths from "../../paths/paths";
+
 import RacketsPage from "../../pages/RacketsPage/RacketsPage";
 import { Provider } from "react-redux";
 import { store } from "../../store";
@@ -21,11 +21,9 @@ describe("Given a RacketsPage with protected by ProtectedRoute component", () =>
 
       render(
         <Provider store={store}>
-          <MemoryRouter initialEntries={[paths.home]}>
-            <ProtectedRoute>
-              <RacketsPage />
-            </ProtectedRoute>
-          </MemoryRouter>
+          <ProtectedRoute>
+            <RacketsPage />
+          </ProtectedRoute>
         </Provider>,
       );
 
