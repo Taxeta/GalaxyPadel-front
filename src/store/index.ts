@@ -4,7 +4,7 @@ import {
   configureStore,
 } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { racketsReducer } from "./patataFrita/racketsSlice";
+import { racketsReducer } from "./rackets/racketsSlice";
 
 const rootReducer = combineReducers({
   racketsState: racketsReducer,
