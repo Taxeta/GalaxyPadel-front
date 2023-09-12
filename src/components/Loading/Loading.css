@@ -1,5 +1,5 @@
 .loader {
-  position: relative;
+  position: absolute;
   width: 120px;
   height: 90px;
   margin: 0 auto;
@@ -7,10 +7,11 @@
 
 .loader-container {
   display: flex;
+  align-content: center;
   justify-content: center;
-  align-items: center;
-  padding-top: 160px 0 0 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.745);
+  z-index: 1;
 }
 
 .loader:before {

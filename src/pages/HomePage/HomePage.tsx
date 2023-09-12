@@ -7,14 +7,16 @@ import { auth, githubProvider } from "../../firebase/firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import paths from "../../paths/paths";
 import { lazy } from "react";
+import { useAppSelector } from "../../store";
 
 export const HomePagePreload = lazy(() => import("./HomePage"));
 
 const HomePage = (): React.ReactElement => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const isLoading = useAppSelector((state) => state.uiState.isLoading);
 
-  if (user) {
+  if (user && !isLoading) {
     return <Navigate to={paths.rackets} />;
   }
 
