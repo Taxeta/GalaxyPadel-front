@@ -8,6 +8,7 @@ import {
   startLoadingActionCreator,
   stopLoadingActionCreator,
 } from "../store/ui/ui";
+import { showToast } from "../components/Feedback/Toast";
 
 const useRacketsApi = () => {
   const apiUrl = import.meta.env.VITE_API_RACKETS_URL;
@@ -16,6 +17,7 @@ const useRacketsApi = () => {
 
   const getRackets = useCallback(async () => {
     dispatch(startLoadingActionCreator());
+    showToast("Cards Loaded!", true);
     try {
       const token = await user?.getIdToken();
       const { data: apiRackets } = await axios.get<RacketsApi>(
@@ -26,13 +28,14 @@ const useRacketsApi = () => {
       const apiRacketsCards = apiRackets.rackets;
 
       const rackets = apiRacketsCards.map<Racket>(({ _id, ...rackets }) => ({
-        ...rackets,
         id: _id,
+        ...rackets,
       }));
 
       dispatch(stopLoadingActionCreator());
       return rackets;
     } catch {
+      showToast("Couldn't show rackets", false);
       dispatch(stopLoadingActionCreator());
       throw new Error("Can't get any racket");
     }
