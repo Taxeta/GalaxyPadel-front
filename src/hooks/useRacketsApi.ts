@@ -18,22 +18,24 @@ const useRacketsApi = () => {
   const getRackets = useCallback(async () => {
     dispatch(startLoadingActionCreator());
     try {
-      showToast("Cards Loaded!", true);
-      const token = await user?.getIdToken();
-      const { data: apiRackets } = await axios.get<RacketsApi>(
-        `${apiUrl}rackets`,
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      if (user) {
+        showToast("Cards Loaded!", true);
+        const token = await user.getIdToken();
+        const { data: apiRackets } = await axios.get<RacketsApi>(
+          `${apiUrl}rackets`,
+          { headers: { Authorization: `Bearer ${token}` } },
+        );
 
-      const apiRacketsCards = apiRackets.rackets;
+        const apiRacketsCards = apiRackets.rackets;
 
-      const rackets = apiRacketsCards.map<Racket>(({ _id, ...rackets }) => ({
-        id: _id,
-        ...rackets,
-      }));
+        const rackets = apiRacketsCards.map<Racket>(({ _id, ...rackets }) => ({
+          id: _id,
+          ...rackets,
+        }));
 
-      dispatch(stopLoadingActionCreator());
-      return rackets;
+        dispatch(stopLoadingActionCreator());
+        return rackets;
+      }
     } catch {
       showToast("Couldn't show rackets", false);
       dispatch(stopLoadingActionCreator());

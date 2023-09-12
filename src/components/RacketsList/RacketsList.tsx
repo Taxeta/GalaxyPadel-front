@@ -7,7 +7,7 @@ const RacketsList = (): React.ReactElement => {
 
   return (
     <ul>
-      {rackets.map((racket) => (
+      {rackets?.map((racket) => (
         <li className="racket-content" key={racket.id}>
           <RacketCard racket={racket} />
         </li>
