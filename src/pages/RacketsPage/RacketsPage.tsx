@@ -1,7 +1,7 @@
 import { lazy, useEffect } from "react";
 import RacketsList from "../../components/RacketsList/RacketsList";
 import { useAppDispatch } from "../../store";
-import { loadRacketsActionCreator } from "../../store/Rackets/racketsSlice";
+import { loadRacketsActionCreator } from "../../store/patataFrita/racketsSlice";
 import "./RacketsPage.css";
 import useRacketsApi from "../../hooks/useRacketsApi";
 import { useAuthState } from "react-firebase-hooks/auth";

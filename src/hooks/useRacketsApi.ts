@@ -18,33 +18,10 @@ const useRacketsApi = () => {
 
       const apiRacketsCards = apiRackets.rackets;
 
-      const rackets = apiRacketsCards.map<Racket>(
-        ({
-          _id,
-          name,
-          image,
-          control,
-          power,
-          material,
-          favorite,
-          shape,
-          weight,
-          description,
-          user,
-        }) => ({
-          id: _id,
-          name,
-          image,
-          control,
-          power,
-          material,
-          favorite,
-          shape,
-          weight,
-          description,
-          user,
-        }),
-      );
+      const rackets = apiRacketsCards.map<Racket>(({ _id, ...rackets }) => ({
+        ...rackets,
+        id: _id,
+      }));
 
       return rackets;
     } catch {
