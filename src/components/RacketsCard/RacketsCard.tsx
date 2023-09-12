@@ -16,12 +16,8 @@ const RacketCard = ({
 
       <div className="racket__container">
         <ul className="racket__atributes">
-          <li>
-            <span aria-label="shape">{shape}</span>
-          </li>
-          <li>
-            <span aria-label="weight">{weight}g</span>
-          </li>
+          <li>{shape}</li>
+          <li>{weight} g</li>
         </ul>
         <Button className="button button__fill">See details</Button>
       </div>
