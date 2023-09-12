@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import HomePage from "./HomePage";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "../../store";
 
 describe("Given a HomePage page", () => {
   describe("When it's rendered", () => {
@@ -9,9 +11,11 @@ describe("Given a HomePage page", () => {
       const expectedHeadingText = "Login to access your account";
 
       render(
-        <BrowserRouter>
-          <HomePage />
-        </BrowserRouter>,
+        <Provider store={store}>
+          <BrowserRouter>
+            <HomePage />
+          </BrowserRouter>
+        </Provider>,
       );
 
       const textHeading = screen.getByRole("heading", {
@@ -30,9 +34,11 @@ describe("Given a HomePage page", () => {
       const buttonText = `${alternativeTextImage} Login via Github`;
 
       render(
-        <BrowserRouter>
-          <HomePage />
-        </BrowserRouter>,
+        <Provider store={store}>
+          <BrowserRouter>
+            <HomePage />
+          </BrowserRouter>
+        </Provider>,
       );
 
       const textOnButton = screen.getByRole("button", { name: buttonText });

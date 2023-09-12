@@ -5,6 +5,9 @@ import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import { errorHandlers } from "../mocks/handlers";
 import { server } from "../mocks/server";
+import { setupStore } from "../store";
+import { Provider } from "react-redux";
+import { PropsWithChildren } from "react";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -19,12 +22,17 @@ auth.useIdToken = vi.fn().mockReturnValue([user]);
 auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
 describe("Given a function getRackets from useRacketsApi hook", () => {
+  const uiWrapper = ({ children }: PropsWithChildren): React.ReactElement => {
+    const store = setupStore({ racketsState: { rackets: racketsMock } });
+
+    return <Provider store={store}>{children}</Provider>;
+  };
   describe("When the function is called", () => {
     const {
       result: {
         current: { getRackets },
       },
-    } = renderHook(() => useRacketsApi());
+    } = renderHook(() => useRacketsApi(), { wrapper: uiWrapper });
 
     test("Then it should receive a list of rackets", async () => {
       const rackets = await getRackets();
