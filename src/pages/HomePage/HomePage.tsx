@@ -8,7 +8,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import paths from "../../paths/paths";
 import { lazy } from "react";
 import { useAppSelector } from "../../store";
-import { showInfoToast } from "../../components/Feedback/Toast";
+import { showToastFunction } from "../../components/Toast/Toast";
 
 export const HomePagePreload = lazy(() => import("./HomePage"));
 
@@ -23,7 +23,7 @@ const HomePage = (): React.ReactElement => {
 
   const login = async () => {
     await signInWithPopup(auth, githubProvider);
-    showInfoToast(`Welcome to Galaxy Padel!`);
+    showToastFunction(`Welcome to Galaxy Padel!`, "info");
     navigate(paths.rackets);
   };
 

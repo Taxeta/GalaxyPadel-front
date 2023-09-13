@@ -8,7 +8,7 @@ import {
   startLoadingActionCreator,
   stopLoadingActionCreator,
 } from "../store/ui/ui";
-import { showToast } from "../components/Feedback/Toast";
+import { showToastFunction } from "../components/Toast/Toast";
 
 const useRacketsApi = () => {
   const apiUrl = import.meta.env.VITE_API_RACKETS_URL;
@@ -36,7 +36,7 @@ const useRacketsApi = () => {
         return rackets;
       }
     } catch {
-      showToast("Couldn't show rackets");
+      showToastFunction("Couldn't show rackets", "error");
       dispatch(stopLoadingActionCreator());
       throw new Error("Can't get any racket");
     }

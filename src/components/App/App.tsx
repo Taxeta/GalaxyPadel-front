@@ -7,6 +7,8 @@ import RacketsPage from "../../pages/RacketsPage/RacketsPage";
 import paths from "../../paths/paths";
 import { Suspense } from "react";
 import { ErrorPagePreload } from "../../pages/ErrorPage/ErrorPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 const App = (): React.ReactElement => {
   return (
@@ -44,6 +46,7 @@ const App = (): React.ReactElement => {
             }
           />
         </Routes>
+        <ToastContainer />
       </main>
     </>
   );
