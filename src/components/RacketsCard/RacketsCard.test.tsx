@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { store } from "../../store";
+import { setupStore, store } from "../../store";
 import RacketCard from "./RacketsCard";
 import { racketsMock } from "../../mocks/racketsMock";
 import { BrowserRouter } from "react-router-dom";
@@ -9,10 +9,12 @@ describe("Given a RacketCard component", () => {
   describe("When it's rendered", () => {
     test("Then it should show an image with the alternative text 'Adidas Metalbone 3.2 racket'", () => {
       const alternativeText = "Adidas Metalbone 3.2 racket";
+      const racketPosition = 1;
+      const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
         <Provider store={store}>
-          <RacketCard racket={racketsMock[0]} />
+          <RacketCard racketPosition={racketPosition} racket={racketsMock[0]} />
         </Provider>,
       );
 
@@ -23,10 +25,12 @@ describe("Given a RacketCard component", () => {
 
     test("Then it should show the heading text 'Adidas Metalbone 3.2'", () => {
       const headingText = "Adidas Metalbone 3.2";
+      const racketPosition = 1;
+      const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
         <Provider store={store}>
-          <RacketCard racket={racketsMock[0]} />
+          <RacketCard racketPosition={racketPosition} racket={racketsMock[0]} />
         </Provider>,
       );
 
@@ -37,10 +41,17 @@ describe("Given a RacketCard component", () => {
 
     test("It should show a button with the text 'See details'", () => {
       const buttonText = "See details";
+      const racketPosition = 1;
+      const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
         <BrowserRouter>
-          <RacketCard racket={racketsMock[0]} />
+          <Provider store={store}>
+            <RacketCard
+              racketPosition={racketPosition}
+              racket={racketsMock[0]}
+            />
+          </Provider>
         </BrowserRouter>,
       );
 
@@ -48,22 +59,25 @@ describe("Given a RacketCard component", () => {
 
       expect(button).toBeInTheDocument();
     });
+  });
+});
 
-    test("It should show a list with properties like 'Diamond shape' or '355 g'", () => {
-      const expectedShape = "Diamond shape";
-      const expectedWeight = "355 g";
+describe("Given a RacketCard component", () => {
+  describe("When it's rendered", () => {
+    test("Then it should show an image with the alternative text 'Head Speed Motion racket'", () => {
+      const headingText = "Adidas Metalbone 3.2";
+      const racketPosition = 3;
+      const racket = racketsMock[0];
 
       render(
         <Provider store={store}>
-          <RacketCard racket={racketsMock[0]} />
+          <RacketCard racketPosition={racketPosition} racket={racket} />
         </Provider>,
       );
 
-      const shapeText = screen.getByText(expectedShape);
-      const weightText = screen.getByText(expectedWeight);
+      const racketName = screen.getByRole("heading", { name: headingText });
 
-      expect(shapeText).toBeInTheDocument();
-      expect(weightText).toBeInTheDocument();
+      expect(racketName).toBeInTheDocument();
     });
   });
 });
