@@ -4,14 +4,21 @@ import "./RacketsCard.css";
 
 interface RacketsCardProps {
   racket: Partial<Racket>;
+  racketPosition: number;
 }
 
 const RacketCard = ({
   racket: { name, image, shape, weight },
+  racketPosition,
 }: RacketsCardProps): React.ReactElement => {
   return (
     <article className="racket">
-      <img className="racket__image" src={image} alt={`${name} racket`} />
+      <img
+        className="racket__image"
+        src={image}
+        alt={`${name} racket`}
+        loading={racketPosition > 2 ? "lazy" : "eager"}
+      />
       <h2 className="racket__name">{name}</h2>
 
       <div className="racket__container">
