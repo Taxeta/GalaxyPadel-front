@@ -39,6 +39,7 @@
 
 .header__logout {
   display: flex;
-  height: fit-content;
   margin-top: 2px;
+  width: 48px;
+  height: 48px;
 }

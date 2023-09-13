@@ -9,6 +9,7 @@
   display: flex;
   align-content: center;
   justify-content: center;
+  padding-top: 100px;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.745);
   z-index: 1;

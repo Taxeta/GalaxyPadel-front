@@ -8,7 +8,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
 import Loading from "../../components/Loading/Loading";
 import FeedBack from "../../components/Feedback/Feedback";
-import { showInfoToast } from "../../components/Feedback/Toast";
 
 export const RacketsPagePreload = lazy(() => import("./RacketsPage"));
 
@@ -19,13 +18,12 @@ const RacketsPage = (): React.ReactElement => {
   const isLoading = useAppSelector((state) => state.uiState.isLoading);
 
   useEffect(() => {
-    (async () => {
-      if (user) {
-        showInfoToast(`Welcome ${user?.displayName}!`);
+    if (user) {
+      (async () => {
         const rackets = await getRackets();
         dispatch(loadRacketsActionCreator(rackets!));
-      }
-    })();
+      })();
+    }
   }, [dispatch, getRackets, user]);
 
   return (
