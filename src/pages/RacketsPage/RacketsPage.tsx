@@ -7,7 +7,6 @@ import useRacketsApi from "../../hooks/useRacketsApi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
 import Loading from "../../components/Loading/Loading";
-import FeedBack from "../../components/Feedback/Feedback";
 
 export const RacketsPagePreload = lazy(() => import("./RacketsPage"));
 
@@ -28,7 +27,6 @@ const RacketsPage = (): React.ReactElement => {
 
   return (
     <div className="list-page">
-      <FeedBack />
       <h1 className="list-page__title">Padel Professional Rackets</h1>
       {isLoading && <Loading />}
       <RacketsList />
