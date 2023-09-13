@@ -3,4 +3,5 @@ export interface PathStructure {
   rackets: string;
   create: string;
   root: string;
+  errorPage: string;
 }

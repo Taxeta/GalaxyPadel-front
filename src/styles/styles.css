@@ -8,6 +8,7 @@
   --primary-font: "Nunito", "sans-serif";
   --secondary-font: "Assistant", "sans-serif";
   --background-login-image: url(../assets/loginBackground.webp);
+  --background-error-image: url(../assets/backgroundError.webp);
 }
 
 *,

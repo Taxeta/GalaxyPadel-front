@@ -5,6 +5,7 @@ const paths: PathStructure = {
   home: "/home",
   rackets: "/rackets",
   create: "/create",
+  errorPage: "/*",
 };
 
 export default paths;

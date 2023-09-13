@@ -28,8 +28,8 @@ const useRacketsApi = () => {
         const apiRacketsCards = apiRackets.rackets;
 
         const rackets = apiRacketsCards.map<Racket>(({ _id, ...rackets }) => ({
-          id: _id,
           ...rackets,
+          id: _id,
         }));
 
         dispatch(stopLoadingActionCreator());
