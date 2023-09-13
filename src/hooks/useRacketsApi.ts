@@ -19,7 +19,6 @@ const useRacketsApi = () => {
     dispatch(startLoadingActionCreator());
     try {
       if (user) {
-        showToast("Cards Loaded!", true);
         const token = await user.getIdToken();
         const { data: apiRackets } = await axios.get<RacketsApi>(
           `${apiUrl}rackets`,
@@ -37,7 +36,7 @@ const useRacketsApi = () => {
         return rackets;
       }
     } catch {
-      showToast("Couldn't show rackets", false);
+      showToast("Couldn't show rackets");
       dispatch(stopLoadingActionCreator());
       throw new Error("Can't get any racket");
     }
