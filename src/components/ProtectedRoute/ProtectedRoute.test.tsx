@@ -1,33 +1,28 @@
-import { User } from "firebase/auth";
-import auth, { AuthStateHook } from "react-firebase-hooks/auth";
-
-import ProtectedRoute from "./ProtectedRoute";
+import authHook, { AuthStateHook } from "react-firebase-hooks/auth";
 import { render, screen } from "@testing-library/react";
-
-import RacketsPage from "../../pages/RacketsPage/RacketsPage";
 import { Provider } from "react-redux";
 import { store } from "../../store";
+import { MemoryRouter } from "react-router-dom";
+import App from "../App/App";
+import paths from "../../paths/paths";
 
 describe("Given a RacketsPage with protected by ProtectedRoute component", () => {
   describe("When the user is logged", () => {
-    test("Then it should show 'Padel Professional Rackets' in a heading", async () => {
-      const connectedHeadingText = "Padel Professional Rackets";
-      const user: Partial<User> = {
-        displayName: "Arturo",
-      };
+    test("Then it should show 'Galaxy Padel' in a heading", async () => {
+      const connectedHeadingText = "Galaxy Padel";
 
-      const hookMock: Partial<AuthStateHook> = [user as User];
-      auth.useAuthState = vi.fn().mockReturnValue(hookMock);
+      const hookMock: Partial<AuthStateHook> = [null];
+      authHook.useAuthState = vi.fn().mockReturnValue(hookMock);
 
       render(
         <Provider store={store}>
-          <ProtectedRoute>
-            <RacketsPage />
-          </ProtectedRoute>
+          <MemoryRouter initialEntries={[paths.home]}>
+            <App />
+          </MemoryRouter>
         </Provider>,
       );
 
-      const protectedPageTitle = screen.getByRole("heading", {
+      const protectedPageTitle = await screen.findByRole("heading", {
         name: connectedHeadingText,
       });
 

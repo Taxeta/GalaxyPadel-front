@@ -1,23 +1,4 @@
-.list-page {
-  padding: 170px 20px 20px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--secondary-color);
-  min-height: 100vh;
-}
-
-.list-page__title {
-  color: var(--white);
-  font-family: var(--secondary-font);
-  font-size: 24px;
-  font-weight: 700;
-  padding: 0 17px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.list-page__secondtitle {
+.no-rackets__title {
   display: flex;
   color: var(--white);
   font-family: var(--secondary-font);
@@ -26,6 +7,15 @@
   margin: 50px 32px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.no-rackets {
+  padding: 170px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-color);
+  min-height: 100vh;
 }
 
 .create-link {

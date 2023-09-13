@@ -7,14 +7,19 @@ import useRacketsApi from "../../hooks/useRacketsApi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
 import Loading from "../../components/Loading/Loading";
+import NoRackets from "../../components/NoRackets/NoRackets";
 
 export const RacketsPagePreload = lazy(() => import("./RacketsPage"));
 
 const RacketsPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { getRackets } = useRacketsApi();
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+
   const isLoading = useAppSelector((state) => state.uiState.isLoading);
+  const rackets = useAppSelector((state) => state.racketsState.rackets);
+
+  const hasRackets = rackets.length > 0;
 
   useEffect(() => {
     if (user) {
@@ -27,9 +32,15 @@ const RacketsPage = (): React.ReactElement => {
 
   return (
     <div className="list-page">
-      <h1 className="list-page__title">Padel Professional Rackets</h1>
+      {hasRackets
+        ? !loading && (
+            <>
+              <h1 className="list-page__title">Padel Professional Rackets</h1>
+              <RacketsList />
+            </>
+          )
+        : !isLoading && !loading && <NoRackets />}
       {isLoading && <Loading />}
-      <RacketsList />
     </div>
   );
 };
