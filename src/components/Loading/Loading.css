@@ -9,9 +9,8 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  padding-top: 100px;
+  margin-top: 160px;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.745);
   z-index: 1;
 }
 
@@ -24,7 +23,7 @@
   width: 30px;
   border-radius: 50%;
   background: #f3e710;
-  animation: loading-bounce 0.5s ease-in-out infinite alternate;
+  animation: loading-bounce 0.5s ease-out infinite alternate;
 }
 
 .loader:after {
@@ -36,9 +35,9 @@
   width: 45px;
   border-radius: 4px;
   box-shadow:
-    0 5px 0 #060606,
-    -35px 50px 0 #0b0a0a,
-    -70px 95px 0 #0d0d0d;
+    0 5px 0 var(--primary-color),
+    -35px 50px 0 var(--primary-color),
+    -70px 95px 0 var(--primary-color);
   animation: loading-step 1s ease-in-out infinite;
 }
 
@@ -60,16 +59,16 @@
 @keyframes loading-step {
   0% {
     box-shadow:
-      0 10px 0 rgba(0, 0, 0, 0),
-      0 10px 0 #1c1b1b,
-      -35px 50px 0 #1c1b1b,
-      -70px 90px 0 #1c1b1b;
+      0 10px 0 var(--primary-color),
+      0 10px 0 var(--primary-color),
+      -35px 50px 0 var(--primary-color),
+      -70px 90px 0 var(--primary-color);
   }
   100% {
     box-shadow:
-      0 10px 0 #1c1b1b,
-      -35px 50px 0 #1c1b1b,
-      -70px 90px 0 #1c1b1b,
-      -70px 90px 0 rgba(0, 0, 0, 0);
+      0 10px 0 var(--primary-color),
+      -35px 50px 0 var(--primary-color),
+      -70px 90px 0 var(--primary-color),
+      -70px 90px 0 var(--primary-color);
   }
 }

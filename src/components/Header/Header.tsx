@@ -22,12 +22,20 @@ const Header = (): React.ReactElement => {
             className="header__logo"
             src={galaxyPadelLogo}
             alt="Galaxy Padel logo app"
+            width="45"
+            height="45"
           />
           <h1 className="header__title">Galaxy Padel</h1>
         </div>
         {user && (
           <Button className="header__logout" onClick={logout}>
-            <img className="header__logout" src={exitLogout} alt="Exit icon" />
+            <img
+              className="header__logout"
+              src={exitLogout}
+              alt="Exit icon"
+              width="48"
+              height="48"
+            />
           </Button>
         )}
       </header>
