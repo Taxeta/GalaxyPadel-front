@@ -20,8 +20,6 @@
 .header__logo {
   display: flex;
   justify-content: flex-end;
-  width: 45px;
-  height: 45px;
   margin: 5px 20px 24px 0;
 }
 
@@ -40,6 +38,4 @@
 .header__logout {
   display: flex;
   margin-top: 2px;
-  width: 48px;
-  height: 48px;
 }

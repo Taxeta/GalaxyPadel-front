@@ -21,21 +21,28 @@ const RacketCard = ({
   };
   return (
     <article className="racket">
-      <div className="button-container">
-        <Button className="button-icon" onClick={deleteRacket}>
-          <img
-            className="delete-icon"
-            src={deleteIcon}
-            alt={`${name} delete icon`}
-          />
-        </Button>
+      <div className="button-altcontainer">
+        <div className="button-container">
+          <Button className="button-icon" onClick={deleteRacket}>
+            <img
+              className="delete-icon"
+              src={deleteIcon}
+              alt={`${name} delete icon`}
+              width="48"
+              height="48"
+            />
+          </Button>
+        </div>
+
+        <img
+          className="racket__image"
+          src={image}
+          alt={`${name} racket`}
+          width="280"
+          height="280"
+          loading={racketPosition > 2 ? "lazy" : "eager"}
+        />
       </div>
-      <img
-        className="racket__image"
-        src={image}
-        alt={`${name} racket`}
-        loading={racketPosition > 2 ? "lazy" : "eager"}
-      />
       <h2 className="racket__name">{name}</h2>
       <div className="racket__container">
         <ul className="racket__atributes">
