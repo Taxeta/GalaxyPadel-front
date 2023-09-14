@@ -53,10 +53,11 @@ const useRacketsApi = () => {
           });
 
           const message = data;
-
+          showToastFunction("SuccessFully deleted", "success");
           return message;
         }
       } catch {
+        showToastFunction("Couldn't delete the racket", "success");
         throw new Error("Couldn't delete the racket");
       }
     },
