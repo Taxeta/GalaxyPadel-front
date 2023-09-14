@@ -48,14 +48,13 @@ const useRacketsApi = () => {
         if (user) {
           const token = await user.getIdToken();
 
-          const { data: apiRackets } = await axios.delete<RacketsApi>(
-            `${apiUrl}rackets/${id}`,
-            { headers: { Authorization: `Bearer ${token}` } },
-          );
+          const { data } = await axios.delete(`${apiUrl}rackets/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
 
-          const information = apiRackets;
+          const message = data;
 
-          return information;
+          return message;
         }
       } catch {
         throw new Error("Couldn't delete the racket");
