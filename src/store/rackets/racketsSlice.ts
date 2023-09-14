@@ -33,5 +33,5 @@ const racketsSlice = createSlice({
 export const racketsReducer = racketsSlice.reducer;
 export const {
   loadRackets: loadRacketsActionCreator,
-  deleteRackets: removeRacketActionCreator,
+  deleteRackets: deleteRacketActionCreator,
 } = racketsSlice.actions;

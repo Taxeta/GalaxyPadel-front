@@ -10,12 +10,11 @@
 }
 
 .no-rackets {
-  padding: 170px 20px 20px 20px;
   display: flex;
   flex-direction: column;
+  padding-bottom: -350px;
   align-items: center;
   background-color: var(--secondary-color);
-  min-height: 100vh;
 }
 
 .create-link {

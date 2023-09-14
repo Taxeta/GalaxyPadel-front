@@ -1,6 +1,6 @@
 import { racketsMock } from "../../../mocks/racketsMock";
 import { RacketState } from "../../types";
-import { removeRacketActionCreator, racketsReducer } from "../racketsSlice";
+import { deleteRacketActionCreator, racketsReducer } from "../racketsSlice";
 
 describe("Given a rackets Slice", () => {
   describe("When it receives a deleteRacket action with a rackets 'Adidas Metalbone 3.2' and 'Bullpadel Vertex 03 CTR' and id 'addidasId'", () => {
@@ -11,7 +11,7 @@ describe("Given a rackets Slice", () => {
       rackets: racketsMock,
     };
 
-    const removeRacketAction = removeRacketActionCreator(
+    const removeRacketAction = deleteRacketActionCreator(
       "64f3a180784b0b6d4ddd8fe2",
     );
 
@@ -28,7 +28,7 @@ describe("Given a rackets Slice", () => {
       const currentRacketsState: RacketState = {
         rackets: racketsMock,
       };
-      const deleteRacketAction = removeRacketActionCreator("noexistid");
+      const deleteRacketAction = deleteRacketActionCreator("noexistid");
 
       const newRacketsState = racketsReducer(
         currentRacketsState,
