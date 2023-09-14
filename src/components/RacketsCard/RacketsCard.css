@@ -43,3 +43,16 @@
   background-color: var(--button-color);
   padding: 15px 12px;
 }
+
+.button-container {
+  position: absolute;
+  right: 20px;
+}
+
+.button-icon {
+  padding: 10px 10px 0 0;
+}
+
+.delete-icon {
+  object-fit: cover;
+}
