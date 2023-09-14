@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import { ErrorPagePreload } from "../../pages/ErrorPage/ErrorPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import { FormPagePreload } from "../../pages/FormPage/FormPage";
 
 const App = (): React.ReactElement => {
   return (
@@ -33,6 +34,17 @@ const App = (): React.ReactElement => {
                 <Suspense>
                   <RacketsPage />
                   <Navigate to={paths.rackets} />
+                </Suspense>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={paths.create}
+            element={
+              <ProtectedRoute>
+                <Suspense>
+                  <FormPagePreload />
+                  <Navigate to={paths.create} />
                 </Suspense>
               </ProtectedRoute>
             }

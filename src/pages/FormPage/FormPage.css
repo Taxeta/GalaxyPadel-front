@@ -1,0 +1,16 @@
+.form {
+  padding: 170px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-color);
+  min-height: 100vh;
+}
+
+.form-title {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-family: var(--secondary-font);
+  color: var(--white);
+  font-weight: 700;
+}
