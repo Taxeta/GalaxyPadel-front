@@ -23,7 +23,11 @@ const RacketCard = ({
     <article className="racket">
       <div className="button-container">
         <Button className="button-icon" onClick={deleteRacket}>
-          <img className="delete-icon" src={deleteIcon} alt="Delete icon" />
+          <img
+            className="delete-icon"
+            src={deleteIcon}
+            alt={`${name} delete icon`}
+          />
         </Button>
       </div>
       <img
@@ -38,7 +42,7 @@ const RacketCard = ({
           <li>{shape}</li>
           <li>{weight} g</li>
         </ul>
-        <Button className="button button__fill">See details</Button>
+        <Button className="button-fill">See details</Button>
       </div>
     </article>
   );
