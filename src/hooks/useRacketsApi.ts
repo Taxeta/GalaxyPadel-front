@@ -42,7 +42,29 @@ const useRacketsApi = () => {
     }
   }, [user, apiUrl, dispatch]);
 
-  return { getRackets };
+  const deleteRacketApi = useCallback(
+    async (id: string) => {
+      try {
+        if (user) {
+          const token = await user.getIdToken();
+
+          const { data: apiRackets } = await axios.delete<RacketsApi>(
+            `${apiUrl}rackets/${id}`,
+            { headers: { Authorization: `Bearer ${token}` } },
+          );
+
+          const information = apiRackets;
+
+          return information;
+        }
+      } catch {
+        throw new Error("Couldn't delete the racket");
+      }
+    },
+    [apiUrl, user],
+  );
+
+  return { getRackets, deleteRacketApi };
 };
 
 export default useRacketsApi;
