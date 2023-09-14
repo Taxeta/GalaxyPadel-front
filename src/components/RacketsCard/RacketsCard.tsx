@@ -4,6 +4,7 @@ import deleteIcon from "../../assets/deleteIcon.svg";
 import "./RacketsCard.css";
 import { useAppDispatch } from "../../store";
 import { deleteRacketActionCreator } from "../../store/rackets/racketsSlice";
+import useRacketsApi from "../../hooks/useRacketsApi";
 
 interface RacketsCardProps {
   racket: Partial<Racket>;
@@ -15,8 +16,11 @@ const RacketCard = ({
   racketPosition,
 }: RacketsCardProps): React.ReactElement => {
   const dispatch = useAppDispatch();
+  const { deleteRacketApi } = useRacketsApi();
 
-  const deleteRacket = () => {
+  const deleteRacket = async () => {
+    await deleteRacketApi(id!);
+
     dispatch(deleteRacketActionCreator(id!));
   };
   return (
