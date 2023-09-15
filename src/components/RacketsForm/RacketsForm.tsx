@@ -1,8 +1,31 @@
+import { useState } from "react";
+import { Racket } from "../../types";
 import Button from "../Button/Button";
 import { DataList } from "./DataList";
 import "./RacketsForm.css";
 
 const RacketsForm = (): React.ReactElement => {
+  const [newRacket, setNewRacket] = useState<
+    Omit<Racket, "id" | "user" | "favorite">
+  >({
+    name: "",
+    shape: "",
+    weight: 0,
+    material: "",
+    power: 1,
+    control: 1,
+    image: "",
+    description: "",
+  });
+
+  const changeNewRacket = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    setNewRacket({ ...newRacket, [event.target.id]: event.target.value });
+  };
+
   return (
     <form className="form">
       <div className="form-slot">
@@ -14,18 +37,25 @@ const RacketsForm = (): React.ReactElement => {
           id="name"
           type="text"
           maxLength={45}
+          onChange={changeNewRacket}
           required
         />
       </div>
       <div className="form-slot">
-        <label className="form__label" htmlFor="size">
-          Size:
+        <label className="form__label" htmlFor="shape">
+          Shape:
         </label>
-        <select name="size" id="size" className="form__input" required>
-          <option value="">--Size Racket--</option>
-          <option value="softeva">Tear shape</option>
-          <option value="mideva">Round shape</option>
-          <option value="multieva">Diamond shape</option>
+        <select
+          name="shape"
+          id="shape"
+          className="form__input"
+          onChange={changeNewRacket}
+          required
+        >
+          <option value="">--Shape Racket--</option>
+          <option value="Tear shape">Tear shape</option>
+          <option value="Round shape">Round shape</option>
+          <option value="Diamond shape">Diamond shape</option>
         </select>
       </div>
       <div className="form-slot">
@@ -38,7 +68,8 @@ const RacketsForm = (): React.ReactElement => {
           type="number"
           min="300"
           max="400"
-          pattern="^[300-400]+"
+          value={newRacket.weight === 0 ? "" : newRacket.weight}
+          onChange={changeNewRacket}
           required
         />
       </div>
@@ -46,11 +77,17 @@ const RacketsForm = (): React.ReactElement => {
         <label className="form__label" htmlFor="material">
           Material:
         </label>
-        <select name="material" id="material" className="form__input" required>
+        <select
+          name="material"
+          id="material"
+          className="form__input"
+          onChange={changeNewRacket}
+          required
+        >
           <option value="">--Select Material--</option>
-          <option value="softeva">Soft EVA</option>
-          <option value="mideva">Mid EVA</option>
-          <option value="multieva">Multi EVA</option>
+          <option value="Soft EVA">Soft EVA</option>
+          <option value="Mid EVA">Mid EVA</option>
+          <option value="Multi EVA">Multi EVA</option>
         </select>
       </div>
       <div className="form-slot-range">
@@ -64,6 +101,7 @@ const RacketsForm = (): React.ReactElement => {
           min="1"
           max="10"
           list="datalist"
+          onChange={changeNewRacket}
         />
         <DataList />
       </div>
@@ -78,6 +116,7 @@ const RacketsForm = (): React.ReactElement => {
           min="1"
           max="10"
           list="datalist"
+          onChange={changeNewRacket}
         />
         <DataList />
       </div>
@@ -85,7 +124,13 @@ const RacketsForm = (): React.ReactElement => {
         <label className="form__label" htmlFor="image">
           Image URL:
         </label>
-        <input className="form__input" id="image" type="url" required />
+        <input
+          className="form__input"
+          id="image"
+          type="url"
+          onChange={changeNewRacket}
+          required
+        />
       </div>
       <div className="form-slot">
         <label className="form__label" htmlFor="description">
@@ -97,6 +142,7 @@ const RacketsForm = (): React.ReactElement => {
           id="description"
           rows={8}
           cols={20}
+          onChange={changeNewRacket}
           required
         />
       </div>
