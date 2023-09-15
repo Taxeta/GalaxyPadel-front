@@ -65,3 +65,19 @@ export const apiRacketsMock: ApiRackets[] = [
     user: "userId",
   },
 ];
+
+export const newRacketsMock: Racket = {
+  user: "userId",
+  id: "64f3a180784b0b6d4ddd8feb",
+  favorite: false,
+  control: 10,
+  description:
+    "It is a perfect padel racket for players who like soft padel rackets who are looking for good control, but who need a bit of power.",
+  image:
+    "https://cdn.discordapp.com/attachments/1150483066259775582/1151422445706813541/Black-Crown-racket-Hurricane-2-1.webp",
+  material: "Soft EVA",
+  name: "Black Crown Hurricane 2.0",
+  power: 8,
+  shape: "Round shape",
+  weight: 365,
+};
