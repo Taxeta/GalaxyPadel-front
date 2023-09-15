@@ -53,7 +53,7 @@ const useRacketsApi = () => {
           });
 
           const message = data;
-          showToastFunction("SuccessFully deleted", "success");
+          showToastFunction("Successfully deleted", "success");
           return message;
         }
       } catch {
