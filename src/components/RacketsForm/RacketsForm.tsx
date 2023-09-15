@@ -1,4 +1,5 @@
 import Button from "../Button/Button";
+import { DataList } from "./DataList";
 import "./RacketsForm.css";
 
 const RacketsForm = (): React.ReactElement => {
@@ -20,8 +21,8 @@ const RacketsForm = (): React.ReactElement => {
         <label className="form__label" htmlFor="size">
           Size:
         </label>
-        <select name="material" id="material" className="form__input" required>
-          <option value="" />
+        <select name="size" id="size" className="form__input" required>
+          <option value="">--Size Racket--</option>
           <option value="softeva">Tear shape</option>
           <option value="mideva">Round shape</option>
           <option value="multieva">Diamond shape</option>
@@ -46,7 +47,7 @@ const RacketsForm = (): React.ReactElement => {
           Material:
         </label>
         <select name="material" id="material" className="form__input" required>
-          <option value="" />
+          <option value="">--Select Material--</option>
           <option value="softeva">Soft EVA</option>
           <option value="mideva">Mid EVA</option>
           <option value="multieva">Multi EVA</option>
@@ -59,22 +60,12 @@ const RacketsForm = (): React.ReactElement => {
         <input
           className="form__range"
           type="range"
+          id="power"
           min="1"
           max="10"
-          list="values"
+          list="datalist"
         />
-        <datalist className="detail-list" id="values">
-          <option value="1" label="1" />
-          <option value="2" label="2" />
-          <option value="3" label="3" />
-          <option value="4" label="4" />
-          <option value="5" label="5" />
-          <option value="6" label="6" />
-          <option value="7" label="7" />
-          <option value="8" label="8" />
-          <option value="9" label="9" />
-          <option value="10" label="10" />
-        </datalist>
+        <DataList />
       </div>
       <div className="form-slot-range">
         <label className="form__label" htmlFor="control">
@@ -83,22 +74,12 @@ const RacketsForm = (): React.ReactElement => {
         <input
           className="form__range"
           type="range"
+          id="control"
           min="1"
           max="10"
-          list="values"
+          list="datalist"
         />
-        <datalist className="detail-list" id="values">
-          <option value="1" label="1" />
-          <option value="2" label="2" />
-          <option value="3" label="3" />
-          <option value="4" label="4" />
-          <option value="5" label="5" />
-          <option value="6" label="6" />
-          <option value="7" label="7" />
-          <option value="8" label="8" />
-          <option value="9" label="9" />
-          <option value="10" label="10" />
-        </datalist>
+        <DataList />
       </div>
       <div className="form-slot">
         <label className="form__label" htmlFor="image">
