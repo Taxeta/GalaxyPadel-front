@@ -38,9 +38,7 @@ const racketsSlice = createSlice({
       action: PayloadAction<Racket>,
     ) => ({
       ...currentRacketState,
-      rackets: currentRacketState.rackets.map((racket) =>
-        racket.id === action.payload.id ? action.payload : racket,
-      ),
+      selectedRacket: action.payload,
     }),
   },
 });
