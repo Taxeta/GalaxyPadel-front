@@ -82,7 +82,7 @@ export const newRacketsMock: ApiRackets = {
   weight: 365,
 };
 
-export const formMock: Racket = {
+export const racketMock: Racket = {
   user: "userId",
   id: "64f3a180784b0b6d4ddd8feb",
   favorite: false,

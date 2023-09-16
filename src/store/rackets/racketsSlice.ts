@@ -32,6 +32,14 @@ const racketsSlice = createSlice({
       ...currentRacketsState,
       rackets: [...currentRacketsState.rackets, action.payload],
     }),
+
+    loadSelectedRacket: (
+      currentRacketState,
+      action: PayloadAction<Racket>,
+    ) => ({
+      ...currentRacketState,
+      selectedRacket: action.payload,
+    }),
   },
 });
 
@@ -40,4 +48,5 @@ export const {
   loadRackets: loadRacketsActionCreator,
   deleteRackets: deleteRacketActionCreator,
   addRacket: addRacketActionCreator,
+  loadSelectedRacket: loadSelectedRacketActionCreator,
 } = racketsSlice.actions;
