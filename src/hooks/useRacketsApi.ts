@@ -64,7 +64,31 @@ const useRacketsApi = () => {
     [apiUrl, user],
   );
 
-  return { getRackets, deleteRacketApi };
+  const createRacketApi = useCallback(
+    async (newRacket: Omit<Racket, "id" | "user" | "favorite">) => {
+      try {
+        if (user) {
+          const token = await user.getIdToken();
+
+          const { data } = await axios.post<{ racket: Racket }>(
+            `${apiUrl}rackets`,
+            newRacket,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            },
+          );
+
+          const { racket } = data;
+          return racket;
+        }
+      } catch {
+        throw new Error("Couldn't create the racket");
+      }
+    },
+    [apiUrl, user],
+  );
+
+  return { getRackets, deleteRacketApi, createRacketApi };
 };
 
 export default useRacketsApi;
