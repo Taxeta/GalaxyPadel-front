@@ -164,7 +164,9 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
         />
       </div>
       <div className="form__button">
-        <Button className="big-button-solid">Create</Button>
+        <Button type="submit" className="big-button-solid">
+          Create
+        </Button>
       </div>
     </form>
   );
