@@ -4,6 +4,8 @@ import RacketsForm from "./RacketsForm";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+const actionOnSubmit = vi.fn();
+
 describe("Given a RacketsForm component", () => {
   const nameLabelText = "Name:";
   const shapeLabelText = "Shape:";
@@ -25,7 +27,7 @@ describe("Given a RacketsForm component", () => {
     test("Then it should show a 'Name','Shape', 'Weight ( 300 - 400g )', 'Material:', 'Power:', 'Control:', 'https://image.png', 'Description:',  fields", async () => {
       render(
         <Provider store={store}>
-          <RacketsForm />
+          <RacketsForm actionOnSubmit={actionOnSubmit} />
         </Provider>,
       );
 
@@ -69,7 +71,7 @@ describe("Given a RacketsForm component", () => {
     test("Then it should show a 'Black Piton','Tear shape', '350', 'Soft EVA', 'Power:', 'Control:', 'Image URL:', 'Racket to prove if description is ok',  fields", async () => {
       render(
         <Provider store={store}>
-          <RacketsForm />
+          <RacketsForm actionOnSubmit={actionOnSubmit} />
         </Provider>,
       );
 
@@ -93,6 +95,33 @@ describe("Given a RacketsForm component", () => {
       expect(materialLabel).toHaveValue(material);
       expect(imageLabel).toHaveValue(image);
       expect(descriptionLabel).toHaveValue(description);
+    });
+  });
+
+  describe("When inputs are filled and the user submit the form", () => {
+    test("Then the action on submit function should be called", async () => {
+      const buttonText = "Create";
+
+      render(<RacketsForm actionOnSubmit={actionOnSubmit} />);
+
+      const nameLabel = screen.getByLabelText(nameLabelText);
+      const shapeLabel = screen.getByLabelText(shapeLabelText);
+      const weightLabel = screen.getByLabelText(weightLabelText);
+      const materialLabel = screen.getByLabelText(materialLabelText);
+      const imageLabel = screen.getByLabelText(imageLabelText);
+      const descriptionLabel = screen.getByLabelText(descriptionLabelText);
+
+      await userEvent.type(nameLabel, name);
+      await userEvent.selectOptions(shapeLabel, size);
+      await userEvent.type(weightLabel, weight.toString());
+      await userEvent.selectOptions(materialLabel, material);
+      await userEvent.type(imageLabel, image);
+      await userEvent.type(descriptionLabel, description);
+
+      const button = screen.getByRole("button", { name: buttonText });
+      await userEvent.click(button);
+
+      expect(actionOnSubmit).toHaveBeenCalled();
     });
   });
 });

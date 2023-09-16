@@ -43,12 +43,12 @@ const useRacketsApi = () => {
   }, [user, apiUrl, dispatch]);
 
   const deleteRacketApi = useCallback(
-    async (id: string) => {
+    async (_id: string) => {
       try {
         if (user) {
           const token = await user.getIdToken();
 
-          const { data } = await axios.delete(`${apiUrl}rackets/${id}`, {
+          const { data } = await axios.delete(`${apiUrl}rackets/${_id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
 
@@ -64,7 +64,36 @@ const useRacketsApi = () => {
     [apiUrl, user],
   );
 
-  return { getRackets, deleteRacketApi };
+  const createRacketApi = useCallback(
+    async (newRacket: Omit<Racket, "id" | "user" | "favorite">) => {
+      try {
+        if (user) {
+          const token = await user.getIdToken();
+
+          const { data: createApiRacket } = await axios.post(
+            `${apiUrl}rackets`,
+            newRacket,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            },
+          );
+
+          const racket = {
+            ...createApiRacket.racket,
+            id: createApiRacket.racket._id,
+          };
+          delete racket._id;
+
+          return racket;
+        }
+      } catch {
+        throw new Error("Couldn't create the racket");
+      }
+    },
+    [apiUrl, user],
+  );
+
+  return { getRackets, deleteRacketApi, createRacketApi };
 };
 
 export default useRacketsApi;

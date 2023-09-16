@@ -44,7 +44,6 @@
 }
 
 .big-button-solid {
-  margin-top: 25px;
   font-family: var(--primary-font);
   font-size: 22px;
   border: 1px hidden;
@@ -54,10 +53,12 @@
   padding: 24px 56px;
 }
 
-.form-button {
+.form__button {
   display: flex;
   justify-content: center;
   padding: 0 30px;
+  margin-top: 25px;
+  color: var(--white);
 }
 
 .detail-list {

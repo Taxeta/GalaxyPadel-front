@@ -1,12 +1,13 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import App from "./App";
 import paths from "../../paths/paths";
-import authHook, { AuthStateHook } from "react-firebase-hooks/auth";
+import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import userEvent from "@testing-library/user-event";
 import { Auth, User, signInWithPopup, signOut } from "firebase/auth";
 import { Provider } from "react-redux";
-import { store } from "../../store";
+import { setupStore, store } from "../../store";
+import { racketsMock } from "../../mocks/racketsMock";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -25,7 +26,7 @@ const user: Partial<User> = {
   getIdToken: vi.fn().mockResolvedValue("token"),
 };
 
-authHook.useIdToken = vi.fn().mockReturnValue([user]);
+auth.useIdToken = vi.fn().mockReturnValue([user]);
 
 describe("Given a App component", () => {
   describe("When it's rendered", () => {
@@ -37,7 +38,7 @@ describe("Given a App component", () => {
       };
 
       const authStateHookMock: Partial<AuthStateHook> = [user as User];
-      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
       render(
         <BrowserRouter>
@@ -59,7 +60,7 @@ describe("Given a App component", () => {
       const route = paths.home;
 
       const authStateHookMock: Partial<AuthStateHook> = [null as null];
-      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
       render(
         <MemoryRouter initialEntries={[route]}>
@@ -82,7 +83,7 @@ describe("Given a App component", () => {
       const route = paths.rackets;
 
       const authStateHookMock: Partial<AuthStateHook> = [user as User];
-      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
       render(
         <MemoryRouter initialEntries={[route]}>
@@ -104,7 +105,7 @@ describe("Given a App component", () => {
       const route = paths.rackets;
       const text = "Login to access your account";
       const authStateHookMock: Partial<AuthStateHook> = [null as null];
-      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
       render(
         <MemoryRouter initialEntries={[route]}>
@@ -124,8 +125,9 @@ describe("Given a App component", () => {
     test("Then it should show 'Login to access your account'", () => {
       const route = paths.home;
       const text = "Padel Professional Rackets";
+
       const authStateHookMock: Partial<AuthStateHook> = [user as User];
-      authHook.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
       render(
         <MemoryRouter initialEntries={[route]}>
@@ -138,6 +140,74 @@ describe("Given a App component", () => {
       const headingText = screen.getByRole("heading", { name: text });
 
       expect(headingText).toBeInTheDocument();
+    });
+  });
+});
+
+describe("Given a RacketsForm component rendered on App component", () => {
+  describe("When the user creates a racket 'newRacket' in FormPage", () => {
+    test("Then it should show the RacketsPage with 'Black Crown Hurricane 2.0' racket", async () => {
+      const nameLabelText = "Name:";
+      const shapeLabelText = "Shape:";
+      const weightLabelText = "Weight ( 300 - 400g ):";
+      const materialLabelText = "Material:";
+      const imageLabelText = "Image URL:";
+      const descriptionLabelText = "Description:";
+
+      const name = "Black Piton";
+      const size = "Tear shape";
+      const weight = 350;
+      const material = "Soft EVA";
+      const image = "https://image.png";
+      const description = "Racket to prove if description is ok";
+
+      const user: Partial<User> = {
+        displayName: "Arturo",
+      };
+
+      const authStateHookMock: Partial<AuthStateHook> = [user as User];
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+      const store = setupStore({
+        racketsState: { rackets: racketsMock },
+      });
+
+      const buttonText = "Create";
+      const headingText = "Adidas Metalbone 3.2";
+
+      render(
+        <MemoryRouter initialEntries={[paths.create]}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </MemoryRouter>,
+      );
+
+      const nameLabel = await screen.findByLabelText(nameLabelText);
+      const shapeLabel = await screen.findByLabelText(shapeLabelText);
+      const weightLabel = await screen.findByLabelText(weightLabelText);
+      const materialLabel = await screen.findByLabelText(materialLabelText);
+      const imageLabel = await screen.findByLabelText(imageLabelText);
+      const descriptionLabel = await screen.findByLabelText(
+        descriptionLabelText,
+      );
+
+      await userEvent.type(nameLabel, name);
+      await userEvent.selectOptions(shapeLabel, size);
+      await userEvent.type(weightLabel, weight.toString());
+      await userEvent.selectOptions(materialLabel, material);
+      await userEvent.type(imageLabel, image);
+      await userEvent.type(descriptionLabel, description);
+
+      const button = await screen.findByRole("button", { name: buttonText });
+      await userEvent.click(button);
+
+      await waitFor(async () => {
+        const heading = await screen.findByRole("heading", {
+          name: headingText,
+        });
+        expect(heading).toBeInTheDocument();
+      });
     });
   });
 });

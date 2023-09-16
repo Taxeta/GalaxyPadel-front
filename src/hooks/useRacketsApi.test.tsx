@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import useRacketsApi from "./useRacketsApi";
-import { racketsMock } from "../mocks/racketsMock";
+import { formMock, racketsMock } from "../mocks/racketsMock";
 import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import { errorHandlers } from "../mocks/handlers";
@@ -84,6 +84,37 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
       const message = deleteRacketApi(id);
 
       expect(message).rejects.toThrowError(error);
+    });
+  });
+
+  describe("When is received a createRacketApi function with a racket 'newRacketMock'", async () => {
+    const user: Partial<User> = {
+      getIdToken: vi.fn().mockResolvedValue("token"),
+    };
+
+    const authStateHookMock: Partial<AuthStateHook> = [user as User];
+    auth.useIdToken = vi.fn().mockReturnValue([user]);
+    auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+    const { result } = renderHook(async () => await useRacketsApi(), {
+      wrapper: uiWrapper,
+    });
+    const { createRacketApi } = await result.current;
+
+    test("Then it should show a new racket 'Black Crown Hurricane 2.0'", async () => {
+      const newRacket = await createRacketApi(formMock);
+
+      expect(newRacket).toStrictEqual(formMock);
+    });
+
+    test("Then it should throw an error 'Couldn't create the racket'", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const error = new Error("Couldn't create the racket");
+
+      const newRacket = createRacketApi(formMock);
+
+      expect(newRacket).rejects.toThrowError(error);
     });
   });
 });
