@@ -4,11 +4,12 @@ import RacketsForm from "../../components/RacketsForm/RacketsForm";
 
 export const FormPagePreload = lazy(() => import("./FormPage"));
 
-const FormPage = (): React.ReactElement => {
+const FormPage = () => {
+  const actionOnSubmit = () => {};
   return (
     <div className="form-page">
       <h1 className="form-title">Create your racket</h1>
-      <RacketsForm />
+      <RacketsForm actionOnSubmit={actionOnSubmit} />
     </div>
   );
 };

@@ -54,7 +54,7 @@
   padding: 24px 56px;
 }
 
-.form-button {
+.form__button {
   display: flex;
   justify-content: center;
   padding: 0 30px;

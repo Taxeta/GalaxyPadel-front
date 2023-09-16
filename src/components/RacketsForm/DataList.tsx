@@ -2,7 +2,7 @@ import "./RacketsForm.css";
 
 export const DataList = (): React.ReactElement => {
   return (
-    <datalist className="detail-list" id="controlvalues">
+    <datalist className="detail-list" id="datalist">
       <option value="1" label="1" />
       <option value="2" label="2" />
       <option value="3" label="3" />

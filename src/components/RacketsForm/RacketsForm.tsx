@@ -4,7 +4,11 @@ import Button from "../Button/Button";
 import { DataList } from "./DataList";
 import "./RacketsForm.css";
 
-const RacketsForm = (): React.ReactElement => {
+interface FormProps {
+  actionOnSubmit: (newRacket: Omit<Racket, "id" | "user" | "favorite">) => void;
+}
+
+const RacketsForm = ({ actionOnSubmit }: FormProps) => {
   const [newRacket, setNewRacket] = useState<
     Omit<Racket, "id" | "user" | "favorite">
   >({
@@ -26,8 +30,14 @@ const RacketsForm = (): React.ReactElement => {
     setNewRacket({ ...newRacket, [event.target.id]: event.target.value });
   };
 
+  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    actionOnSubmit(newRacket);
+  };
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={submitForm}>
       <div className="form-slot">
         <label className="form__label" htmlFor="name">
           Name:
@@ -37,6 +47,7 @@ const RacketsForm = (): React.ReactElement => {
           id="name"
           type="text"
           maxLength={45}
+          value={newRacket.name}
           onChange={changeNewRacket}
           required
         />
@@ -49,6 +60,7 @@ const RacketsForm = (): React.ReactElement => {
           name="shape"
           id="shape"
           className="form__input"
+          value={newRacket.shape}
           onChange={changeNewRacket}
           required
         >
@@ -81,6 +93,7 @@ const RacketsForm = (): React.ReactElement => {
           name="material"
           id="material"
           className="form__input"
+          value={newRacket.material}
           onChange={changeNewRacket}
           required
         >
@@ -100,6 +113,7 @@ const RacketsForm = (): React.ReactElement => {
           id="power"
           min="1"
           max="10"
+          value={newRacket.power}
           list="datalist"
           onChange={changeNewRacket}
         />
@@ -116,6 +130,7 @@ const RacketsForm = (): React.ReactElement => {
           min="1"
           max="10"
           list="datalist"
+          value={newRacket.control}
           onChange={changeNewRacket}
         />
         <DataList />
@@ -128,6 +143,7 @@ const RacketsForm = (): React.ReactElement => {
           className="form__input"
           id="image"
           type="url"
+          value={newRacket.image}
           onChange={changeNewRacket}
           required
         />
@@ -142,11 +158,12 @@ const RacketsForm = (): React.ReactElement => {
           id="description"
           rows={8}
           cols={20}
+          value={newRacket.description}
           onChange={changeNewRacket}
           required
         />
       </div>
-      <div className="form-button">
+      <div className="form__button">
         <Button className="big-button-solid">Create</Button>
       </div>
     </form>

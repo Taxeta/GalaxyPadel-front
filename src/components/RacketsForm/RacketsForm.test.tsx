@@ -4,6 +4,8 @@ import RacketsForm from "./RacketsForm";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+const actionOnSubmit = vi.fn();
+
 describe("Given a RacketsForm component", () => {
   const nameLabelText = "Name:";
   const shapeLabelText = "Shape:";
@@ -25,7 +27,7 @@ describe("Given a RacketsForm component", () => {
     test("Then it should show a 'Name','Shape', 'Weight ( 300 - 400g )', 'Material:', 'Power:', 'Control:', 'https://image.png', 'Description:',  fields", async () => {
       render(
         <Provider store={store}>
-          <RacketsForm />
+          <RacketsForm actionOnSubmit={actionOnSubmit} />
         </Provider>,
       );
 
@@ -69,7 +71,7 @@ describe("Given a RacketsForm component", () => {
     test("Then it should show a 'Black Piton','Tear shape', '350', 'Soft EVA', 'Power:', 'Control:', 'Image URL:', 'Racket to prove if description is ok',  fields", async () => {
       render(
         <Provider store={store}>
-          <RacketsForm />
+          <RacketsForm actionOnSubmit={actionOnSubmit} />
         </Provider>,
       );
 
