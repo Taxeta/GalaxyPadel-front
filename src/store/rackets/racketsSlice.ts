@@ -32,6 +32,16 @@ const racketsSlice = createSlice({
       ...currentRacketsState,
       rackets: [...currentRacketsState.rackets, action.payload],
     }),
+
+    loadSelectedRacket: (
+      currentRacketState,
+      action: PayloadAction<Racket>,
+    ) => ({
+      ...currentRacketState,
+      rackets: currentRacketState.rackets.map((racket) =>
+        racket.id === action.payload.id ? action.payload : racket,
+      ),
+    }),
   },
 });
 
@@ -40,4 +50,5 @@ export const {
   loadRackets: loadRacketsActionCreator,
   deleteRackets: deleteRacketActionCreator,
   addRacket: addRacketActionCreator,
+  loadSelectedRacket: loadSelectedRacketActionCreator,
 } = racketsSlice.actions;
