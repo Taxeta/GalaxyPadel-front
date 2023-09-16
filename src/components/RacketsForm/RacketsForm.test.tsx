@@ -97,4 +97,31 @@ describe("Given a RacketsForm component", () => {
       expect(descriptionLabel).toHaveValue(description);
     });
   });
+
+  describe("When inputs are filled and the user submit the form", () => {
+    test("Then the action on submit function should be called", async () => {
+      const buttonText = "Create";
+
+      render(<RacketsForm actionOnSubmit={actionOnSubmit} />);
+
+      const nameLabel = screen.getByLabelText(nameLabelText);
+      const shapeLabel = screen.getByLabelText(shapeLabelText);
+      const weightLabel = screen.getByLabelText(weightLabelText);
+      const materialLabel = screen.getByLabelText(materialLabelText);
+      const imageLabel = screen.getByLabelText(imageLabelText);
+      const descriptionLabel = screen.getByLabelText(descriptionLabelText);
+
+      await userEvent.type(nameLabel, name);
+      await userEvent.selectOptions(shapeLabel, size);
+      await userEvent.type(weightLabel, weight.toString());
+      await userEvent.selectOptions(materialLabel, material);
+      await userEvent.type(imageLabel, image);
+      await userEvent.type(descriptionLabel, description);
+
+      const button = screen.getByRole("button", { name: buttonText });
+      await userEvent.click(button);
+
+      expect(actionOnSubmit).toHaveBeenCalled();
+    });
+  });
 });

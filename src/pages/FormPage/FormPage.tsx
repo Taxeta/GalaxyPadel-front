@@ -20,7 +20,7 @@ const FormPage = () => {
   ) => {
     const racket = await createRacketApi(newRacket);
 
-    dispatch(addRacketActionCreator(racket!));
+    dispatch(addRacketActionCreator(racket));
 
     navigate(paths.rackets);
   };

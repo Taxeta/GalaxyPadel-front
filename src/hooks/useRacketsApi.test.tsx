@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import useRacketsApi from "./useRacketsApi";
-import { newRacketsMock, racketsMock } from "../mocks/racketsMock";
+import { formMock, racketsMock } from "../mocks/racketsMock";
 import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import { errorHandlers } from "../mocks/handlers";
@@ -102,9 +102,9 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
     const { createRacketApi } = await result.current;
 
     test("Then it should show a new racket 'Black Crown Hurricane 2.0'", async () => {
-      const newRacket = await createRacketApi(newRacketsMock);
+      const newRacket = await createRacketApi(formMock);
 
-      expect(newRacket).toStrictEqual(newRacketsMock);
+      expect(newRacket).toStrictEqual(formMock);
     });
 
     test("Then it should throw an error 'Couldn't create the racket'", async () => {
@@ -112,7 +112,7 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
 
       const error = new Error("Couldn't create the racket");
 
-      const newRacket = createRacketApi(newRacketsMock);
+      const newRacket = createRacketApi(formMock);
 
       expect(newRacket).rejects.toThrowError(error);
     });

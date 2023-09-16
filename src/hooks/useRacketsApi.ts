@@ -70,7 +70,7 @@ const useRacketsApi = () => {
         if (user) {
           const token = await user.getIdToken();
 
-          const { data } = await axios.post<{ racket: Racket }>(
+          const { data: createApiRacket } = await axios.post(
             `${apiUrl}rackets`,
             newRacket,
             {
@@ -78,7 +78,11 @@ const useRacketsApi = () => {
             },
           );
 
-          const { racket } = data;
+          const racket = {
+            ...createApiRacket.racket,
+            id: createApiRacket.racket._id,
+          };
+          delete racket._id;
 
           return racket;
         }

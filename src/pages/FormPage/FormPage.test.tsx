@@ -5,6 +5,7 @@ import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import { Provider } from "react-redux";
 import { store } from "../../store";
+import { MemoryRouter } from "react-router-dom";
 
 const user: Partial<User> = {
   getIdToken: vi.fn().mockResolvedValue("token"),
@@ -18,12 +19,15 @@ describe("Given a FormPage component", () => {
   describe("When it's rendered", () => {
     test("Then it should show a heading with text 'Create your racket'", () => {
       const pageTitle = "Create your racket";
+      const path = "/rackets";
 
       render(
         <Provider store={store}>
-          <React.Suspense>
-            <FormPage />
-          </React.Suspense>
+          <MemoryRouter initialEntries={[path]}>
+            <React.Suspense>
+              <FormPage />
+            </React.Suspense>
+          </MemoryRouter>
         </Provider>,
       );
 
