@@ -44,6 +44,7 @@ const useRacketsApi = () => {
 
   const deleteRacketApi = useCallback(
     async (_id: string) => {
+      dispatch(startLoadingActionCreator());
       try {
         if (user) {
           const token = await user.getIdToken();
@@ -53,15 +54,17 @@ const useRacketsApi = () => {
           });
 
           const message = data;
+          dispatch(stopLoadingActionCreator());
           showToastFunction("Successfully deleted", "success");
           return message;
         }
       } catch {
-        showToastFunction("Couldn't delete the racket", "success");
+        dispatch(stopLoadingActionCreator());
+        showToastFunction("Couldn't delete the racket", "error");
         throw new Error("Couldn't delete the racket");
       }
     },
-    [apiUrl, user],
+    [apiUrl, user, dispatch],
   );
 
   const createRacketApi = useCallback(
@@ -83,14 +86,17 @@ const useRacketsApi = () => {
             id: createApiRacket.racket._id,
           };
           delete racket._id;
-
+          dispatch(stopLoadingActionCreator());
+          showToastFunction("Successfully created", "success");
           return racket;
         }
       } catch {
+        dispatch(stopLoadingActionCreator());
+        showToastFunction("Couldn't create the racket", "error");
         throw new Error("Couldn't create the racket");
       }
     },
-    [apiUrl, user],
+    [apiUrl, user, dispatch],
   );
 
   return { getRackets, deleteRacketApi, createRacketApi };
