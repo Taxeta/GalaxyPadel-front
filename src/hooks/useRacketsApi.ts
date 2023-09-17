@@ -99,7 +99,35 @@ const useRacketsApi = () => {
     [apiUrl, user, dispatch],
   );
 
-  return { getRackets, deleteRacketApi, createRacketApi };
+  const getRacketByIdApi = useCallback(
+    async (_id: string) => {
+      try {
+        if (user) {
+          const token = await user.getIdToken();
+
+          const { data: racketDetail } = await axios.get(
+            `${apiUrl}rackets/${_id}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            },
+          );
+
+          const racket = {
+            ...racketDetail.racket,
+            id: racketDetail.racket._id,
+          };
+          delete racket._id;
+
+          return racket;
+        }
+      } catch {
+        throw new Error("Couldn't get the racket");
+      }
+    },
+    [apiUrl, user],
+  );
+
+  return { getRackets, deleteRacketApi, createRacketApi, getRacketByIdApi };
 };
 
 export default useRacketsApi;

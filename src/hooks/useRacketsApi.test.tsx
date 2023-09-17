@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import useRacketsApi from "./useRacketsApi";
-import { racketMock, racketsMock } from "../mocks/racketsMock";
+import { myMockId, racketMock, racketsMock } from "../mocks/racketsMock";
 import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
 import { errorHandlers } from "../mocks/handlers";
@@ -66,7 +66,7 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
     });
     const { deleteRacketApi } = await result.current;
 
-    test("Then it should return the message ''", async () => {
+    test("Then it should return the message 'Success, racket deleted!'", async () => {
       const expectedMessage = { message: "Success, racket deleted!" };
       const id = "64f3a180784b0b6d4ddd8fe2";
 
@@ -113,6 +113,39 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
       const error = new Error("Couldn't create the racket");
 
       const newRacket = createRacketApi(racketMock);
+
+      expect(newRacket).rejects.toThrowError(error);
+    });
+  });
+
+  describe("When calls a getRacketByIdApi function with id '64f3a180784b0b6d4ddd8feb'", async () => {
+    const user: Partial<User> = {
+      getIdToken: vi.fn().mockResolvedValue("token"),
+    };
+
+    const authStateHookMock: Partial<AuthStateHook> = [user as User];
+    auth.useIdToken = vi.fn().mockReturnValue([user]);
+    auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+    const { result } = renderHook(async () => await useRacketsApi(), {
+      wrapper: uiWrapper,
+    });
+    const { getRacketByIdApi } = await result.current;
+
+    const id = "64f3a180784b0b6d4ddd8fe2";
+
+    test("Then it should return a racket 'Puma SolarATTACK Momo'", async () => {
+      const selectedRacket = await getRacketByIdApi(id);
+
+      expect(selectedRacket).toStrictEqual(myMockId);
+    });
+
+    test("Then it should throw an error 'Couldn't create the racket'", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const error = new Error("Couldn't get the racket");
+
+      const newRacket = getRacketByIdApi(id);
 
       expect(newRacket).rejects.toThrowError(error);
     });

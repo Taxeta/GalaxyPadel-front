@@ -1,5 +1,11 @@
 import { rest } from "msw";
-import { apiRacketsMock, newRacketsMock, racketsMock } from "./racketsMock";
+import {
+  apiRacketsMock,
+  getMockId,
+  newRacketsMock,
+  onlyMockId,
+  racketsMock,
+} from "./racketsMock";
 
 export const handlers = [
   rest.get(
@@ -25,6 +31,13 @@ export const handlers = [
       return res(ctx.status(201), ctx.json({ racket: newRacketsMock }));
     },
   ),
+
+  rest.get(
+    `${import.meta.env.VITE_API_RACKETS_URL}rackets/${onlyMockId}`,
+    (_req, res, ctx) => {
+      return res(ctx.json({ racket: getMockId }));
+    },
+  ),
 ];
 
 export const errorHandlers = [
@@ -46,6 +59,13 @@ export const errorHandlers = [
     `${import.meta.env.VITE_API_RACKETS_URL}rackets`,
     (_req, res, ctx) => {
       return res(ctx.status(500, "Could not create the racket"));
+    },
+  ),
+
+  rest.get(
+    `${import.meta.env.VITE_API_RACKETS_URL}rackets/${onlyMockId}`,
+    (_req, res, ctx) => {
+      return res(ctx.status(500, "Couldn't load tha racket"));
     },
   ),
 ];
