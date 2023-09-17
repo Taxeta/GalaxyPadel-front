@@ -5,6 +5,7 @@ import "./RacketsCard.css";
 import { useAppDispatch } from "../../store";
 import { deleteRacketActionCreator } from "../../store/rackets/racketsSlice";
 import useRacketsApi from "../../hooks/useRacketsApi";
+import { Link } from "react-router-dom";
 
 interface RacketsCardProps {
   racket: Partial<Racket>;
@@ -53,7 +54,9 @@ const RacketCard = ({
           <li>{shape}</li>
           <li>{weight} g</li>
         </ul>
-        <Button className="button-fill">See details</Button>
+        <Link to={`/rackets/${id}`} className="button-fill">
+          See details
+        </Link>
       </div>
     </article>
   );

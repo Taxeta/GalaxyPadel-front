@@ -100,13 +100,13 @@ const useRacketsApi = () => {
   );
 
   const getRacketByIdApi = useCallback(
-    async (_id: string) => {
+    async (id: string) => {
       try {
         if (user) {
           const token = await user.getIdToken();
 
           const { data: racketDetail } = await axios.get(
-            `${apiUrl}rackets/${_id}`,
+            `${apiUrl}rackets/${id}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             },

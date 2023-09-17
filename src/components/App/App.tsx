@@ -10,6 +10,7 @@ import { ErrorPagePreload } from "../../pages/ErrorPage/ErrorPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { FormPagePreload } from "../../pages/FormPage/FormPage";
+import { DetailRacketPagePreload } from "../../pages/DetailRacketPage/DetailRacketPage";
 
 const App = (): React.ReactElement => {
   return (
@@ -55,6 +56,16 @@ const App = (): React.ReactElement => {
               <Suspense>
                 <ErrorPagePreload />
               </Suspense>
+            }
+          />
+          <Route
+            path={paths.detailPage}
+            element={
+              <ProtectedRoute>
+                <Suspense>
+                  <DetailRacketPagePreload />
+                </Suspense>
+              </ProtectedRoute>
             }
           />
         </Routes>

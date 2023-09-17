@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { setupStore } from "../../store";
 import RacketsList from "./RacketsList";
 import { racketsMock } from "../../mocks/racketsMock";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Given a RacketsList component", () => {
   describe("When it's rendered", () => {
@@ -10,9 +11,11 @@ describe("Given a RacketsList component", () => {
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
-        <Provider store={store}>
-          <RacketsList />
-        </Provider>,
+        <BrowserRouter>
+          <Provider store={store}>
+            <RacketsList />
+          </Provider>
+        </BrowserRouter>,
       );
 
       racketsMock.forEach((racket) => {
