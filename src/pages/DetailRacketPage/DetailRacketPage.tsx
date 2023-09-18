@@ -42,26 +42,39 @@ const DetailRacketPage = (): React.ReactElement => {
 
         <ul className="detail__list">
           <li>
-            <span className="detail__list-bold">Shape:</span> {racket?.shape}
+            <span className="detail__list-bold" aria-label="shape">
+              Shape:
+            </span>{" "}
+            {racket?.shape}
           </li>
           <li>
-            <span className="detail__list-bold">Weight:</span> {racket?.weight}{" "}
-            g
+            <span className="detail__list-bold" aria-label="weight">
+              Weight:
+            </span>{" "}
+            {racket?.weight} g
           </li>
           <li>
-            <span className="detail__list-bold">Material: </span>
+            <span className="detail__list-bold" aria-label="material">
+              Material:
+            </span>{" "}
             {racket?.material}
           </li>
           <li>
-            <span className="detail__list-bold">Power(1-10): </span>
+            <span className="detail__list-bold" aria-label="power">
+              Power(1-10):
+            </span>{" "}
             {racket?.power}
           </li>
           <li>
-            <span className="detail__list-bold">Control (1-10):</span>
+            <span className="detail__list-bold" aria-label="control">
+              Control (1-10):
+            </span>{" "}
             {racket?.control}
           </li>
           <li>
-            <span className="detail__list-bold">Description:</span>{" "}
+            <span className="detail__list-bold" aria-label="description">
+              Description:
+            </span>{" "}
             {racket?.description}
           </li>
         </ul>

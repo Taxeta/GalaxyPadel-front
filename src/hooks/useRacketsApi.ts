@@ -20,6 +20,7 @@ const useRacketsApi = () => {
     try {
       if (user) {
         const token = await user.getIdToken();
+
         const { data: apiRackets } = await axios.get<RacketsApi>(
           `${apiUrl}rackets`,
           { headers: { Authorization: `Bearer ${token}` } },

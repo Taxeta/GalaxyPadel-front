@@ -12,7 +12,6 @@
 .no-rackets {
   display: flex;
   flex-direction: column;
-  padding-bottom: -350px;
   align-items: center;
   background-color: var(--secondary-color);
 }
