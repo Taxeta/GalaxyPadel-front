@@ -51,19 +51,19 @@ const RacketCard = ({
       </div>
       <div className="button-favorite-container">
         <Button className="button-favorite__icon" onClick={toggleRacket}>
-          {favorite ? (
+          {!favorite ? (
             <img
               className="favorite-icon"
-              src={favoriteFillIcon}
-              alt={`${name} favorite icon`}
+              src={favoriteEmptyIcon}
+              alt={`Empty favorite icon`}
               width="48"
               height="48"
             />
           ) : (
             <img
               className="favorite-icon"
-              src={favoriteEmptyIcon}
-              alt={`${name} unfavorite icon`}
+              src={favoriteFillIcon}
+              alt={`Fill favorite icon`}
               width="48"
               height="48"
             />
