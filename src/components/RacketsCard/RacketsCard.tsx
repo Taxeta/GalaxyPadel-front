@@ -1,9 +1,14 @@
 import { Racket } from "../../types";
 import Button from "../Button/Button";
 import deleteIcon from "../../assets/deleteIcon.svg";
+import favoriteEmptyIcon from "../../assets/favoriteEmptyIcon.svg";
+import favoriteFillIcon from "../../assets/favoriteFillIcon.svg";
 import "./RacketsCard.css";
 import { useAppDispatch } from "../../store";
-import { deleteRacketActionCreator } from "../../store/rackets/racketsSlice";
+import {
+  deleteRacketActionCreator,
+  toggleRacketActionCreator,
+} from "../../store/rackets/racketsSlice";
 import useRacketsApi from "../../hooks/useRacketsApi";
 import { Link } from "react-router-dom";
 
@@ -13,7 +18,7 @@ interface RacketsCardProps {
 }
 
 const RacketCard = ({
-  racket: { id, name, image, shape, weight },
+  racket: { id, name, image, shape, weight, favorite },
   racketPosition,
 }: RacketsCardProps): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -24,11 +29,16 @@ const RacketCard = ({
 
     dispatch(deleteRacketActionCreator(id!));
   };
+
+  const toggleRacket = () => {
+    dispatch(toggleRacketActionCreator(id!));
+  };
+
   return (
     <article className="racket">
-      <div className="button-altcontainer">
-        <div className="button-container">
-          <Button className="button-icon" onClick={deleteRacket}>
+      <div className="icons-container">
+        <div className="button-delete-container">
+          <Button className="button-delete__icon" onClick={deleteRacket}>
             <img
               className="delete-icon"
               src={deleteIcon}
@@ -38,16 +48,38 @@ const RacketCard = ({
             />
           </Button>
         </div>
-
-        <img
-          className="racket__image"
-          src={image}
-          alt={`${name} racket`}
-          width="280"
-          height="280"
-          loading={racketPosition > 2 ? "lazy" : "eager"}
-        />
       </div>
+      <div className="button-favorite-container">
+        <Button className="button-favorite__icon" onClick={toggleRacket}>
+          {!favorite ? (
+            <img
+              className="favorite-icon"
+              src={favoriteEmptyIcon}
+              alt={`Empty favorite icon`}
+              width="48"
+              height="48"
+            />
+          ) : (
+            <img
+              className="favorite-icon"
+              src={favoriteFillIcon}
+              alt={`Fill favorite icon`}
+              width="48"
+              height="48"
+            />
+          )}
+        </Button>
+      </div>
+
+      <img
+        className="racket__image"
+        src={image}
+        alt={`${name} racket`}
+        width="280"
+        height="280"
+        loading={racketPosition > 2 ? "lazy" : "eager"}
+      />
+
       <h2 className="racket__name">{name}</h2>
       <div className="racket__container">
         <ul className="racket__atributes">
