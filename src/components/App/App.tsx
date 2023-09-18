@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { FormPagePreload } from "../../pages/FormPage/FormPage";
 import { DetailRacketPagePreload } from "../../pages/DetailRacketPage/DetailRacketPage";
+import Footer from "../Footer/Footer";
 
 const App = (): React.ReactElement => {
   return (
@@ -70,6 +71,7 @@ const App = (): React.ReactElement => {
           />
         </Routes>
         <ToastContainer />
+        <Footer />
       </main>
     </>
   );
