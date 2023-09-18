@@ -34,7 +34,7 @@ const racketsSlice = createSlice({
     }),
 
     loadSelectedRacket: (
-      currentRacketState,
+      currentRacketState: RacketState,
       action: PayloadAction<Racket>,
     ) => ({
       ...currentRacketState,

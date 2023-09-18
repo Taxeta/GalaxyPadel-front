@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import App from "./App";
 import paths from "../../paths/paths";
-import auth, { AuthStateHook } from "react-firebase-hooks/auth";
+import auth, { AuthStateHook, IdTokenHook } from "react-firebase-hooks/auth";
 import userEvent from "@testing-library/user-event";
 import { Auth, User, signInWithPopup, signOut } from "firebase/auth";
 import { Provider } from "react-redux";
@@ -205,6 +205,43 @@ describe("Given a RacketsForm component rendered on App component", () => {
       await waitFor(async () => {
         const heading = await screen.findByRole("heading", {
           name: headingText,
+        });
+        expect(heading).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("When the user clicks on 'see details' link", () => {
+    test("Then it should navigate to detail and show the name of the racket in a heading", async () => {
+      const rackets = "/rackets";
+      const detail = "/rackets/64f3a180784b0b6d4ddd8fe2";
+      const headingText = "See details";
+      const racketText = "Puma SolarATTACK Momo";
+
+      const store = setupStore({ racketsState: { rackets: racketsMock } });
+
+      const authStateHookMock: Partial<AuthStateHook> = [user as User];
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+      const authIdTokenHookMock: Partial<IdTokenHook> = [user as User];
+      auth.useAuthState = vi.fn().mockReturnValue(authIdTokenHookMock);
+
+      render(
+        <MemoryRouter initialEntries={[rackets, detail]} initialIndex={0}>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </MemoryRouter>,
+      );
+
+      const detailLink = await screen.findAllByRole("link", {
+        name: headingText,
+      });
+
+      await userEvent.click(detailLink[0]);
+
+      await waitFor(async () => {
+        const heading = await screen.findByRole("heading", {
+          name: racketText,
         });
         expect(heading).toBeInTheDocument();
       });

@@ -13,9 +13,14 @@ describe("Given a RacketCard component", () => {
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
-        <Provider store={store}>
-          <RacketCard racketPosition={racketPosition} racket={racketsMock[0]} />
-        </Provider>,
+        <BrowserRouter>
+          <Provider store={store}>
+            <RacketCard
+              racketPosition={racketPosition}
+              racket={racketsMock[0]}
+            />
+          </Provider>
+        </BrowserRouter>,
       );
 
       const racketImage = screen.getByAltText(alternativeText);
@@ -25,22 +30,6 @@ describe("Given a RacketCard component", () => {
 
     test("Then it should show the heading text 'Adidas Metalbone 3.2'", () => {
       const headingText = "Adidas Metalbone 3.2";
-      const racketPosition = 1;
-      const store = setupStore({ racketsState: { rackets: racketsMock } });
-
-      render(
-        <Provider store={store}>
-          <RacketCard racketPosition={racketPosition} racket={racketsMock[0]} />
-        </Provider>,
-      );
-
-      const racketName = screen.getByRole("heading", { name: headingText });
-
-      expect(racketName).toBeInTheDocument();
-    });
-
-    test("It should show a button with the text 'See details'", () => {
-      const buttonText = "See details";
       const racketPosition = 1;
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
@@ -55,9 +44,9 @@ describe("Given a RacketCard component", () => {
         </BrowserRouter>,
       );
 
-      const button = screen.getByRole("button", { name: buttonText });
+      const racketName = screen.getByRole("heading", { name: headingText });
 
-      expect(button).toBeInTheDocument();
+      expect(racketName).toBeInTheDocument();
     });
   });
 });
@@ -70,14 +59,41 @@ describe("Given a RacketCard component", () => {
       const racket = racketsMock[0];
 
       render(
-        <Provider store={store}>
-          <RacketCard racketPosition={racketPosition} racket={racket} />
-        </Provider>,
+        <BrowserRouter>
+          <Provider store={store}>
+            <RacketCard racketPosition={racketPosition} racket={racket} />
+          </Provider>
+        </BrowserRouter>,
       );
 
       const racketName = screen.getByRole("heading", { name: headingText });
 
       expect(racketName).toBeInTheDocument();
+    });
+  });
+});
+
+describe("Given a RacketCard component", () => {
+  describe("When it's rendered", () => {
+    test("It should show a button with the text 'See details'", () => {
+      const linkText = "See details";
+      const racketPosition = 1;
+      const store = setupStore({ racketsState: { rackets: racketsMock } });
+
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <RacketCard
+              racketPosition={racketPosition}
+              racket={racketsMock[0]}
+            />
+          </Provider>
+        </BrowserRouter>,
+      );
+
+      const link = screen.getByRole("link", { name: linkText });
+
+      expect(link).toBeInTheDocument();
     });
   });
 });

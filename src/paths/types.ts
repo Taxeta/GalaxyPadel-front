@@ -4,4 +4,5 @@ export interface PathStructure {
   create: string;
   root: string;
   errorPage: string;
+  detailPage: string;
 }

@@ -16,11 +16,13 @@ describe("Given a RacketsList component", () => {
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
-        <Provider store={store}>
-          <React.Suspense>
-            <RacketsPage />
-          </React.Suspense>
-        </Provider>,
+        <BrowserRouter>
+          <Provider store={store}>
+            <React.Suspense>
+              <RacketsPage />
+            </React.Suspense>
+          </Provider>
+        </BrowserRouter>,
       );
 
       const headingTitle = await screen.findByRole("heading", {
