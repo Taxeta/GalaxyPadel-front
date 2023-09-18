@@ -37,7 +37,6 @@ const useRacketsApi = () => {
         return rackets;
       }
     } catch {
-      showToastFunction("Couldn't show rackets", "error");
       dispatch(stopLoadingActionCreator());
       throw new Error("Can't get any racket");
     }

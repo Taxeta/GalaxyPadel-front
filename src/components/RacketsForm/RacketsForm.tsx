@@ -57,7 +57,6 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
           Shape:
         </label>
         <select
-          name="shape"
           id="shape"
           className="form__input"
           value={newRacket.shape}
@@ -90,7 +89,6 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
           Material:
         </label>
         <select
-          name="material"
           id="material"
           className="form__input"
           value={newRacket.material}
@@ -154,7 +152,6 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
         </label>
         <textarea
           className="form__textarea"
-          name="description"
           id="description"
           rows={8}
           cols={20}
