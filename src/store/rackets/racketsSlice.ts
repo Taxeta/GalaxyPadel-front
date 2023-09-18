@@ -48,7 +48,7 @@ const racketsSlice = createSlice({
       ...currentUsersState,
       rackets: currentUsersState.rackets.map((racket) =>
         racket.id === action.payload
-          ? { ...racket, isFriend: !racket.favorite }
+          ? { ...racket, favorite: !racket.favorite }
           : { ...racket },
       ),
     }),
