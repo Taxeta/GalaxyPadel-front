@@ -42,18 +42,34 @@
   background-color: var(--button-color);
   padding: 15px 12px;
 }
-.button-altcontainer {
-  display: flex;
-  justify-content: end;
-}
-.button-container {
+
+.button-delete-container {
   position: absolute;
+  display: flex;
 }
 
-.button-icon {
+.button-delete__icon {
   padding: 10px 10px 0 0;
 }
 
 .delete-icon {
   object-fit: cover;
+}
+
+.favorite-icon {
+  object-fit: cover;
+}
+
+.button-favorite__icon {
+  padding: 10px 0 0 10px;
+}
+
+.button-favorite-container {
+  display: flex;
+  position: absolute;
+}
+
+.icons-container {
+  display: flex;
+  justify-content: flex-end;
 }
