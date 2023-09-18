@@ -216,7 +216,7 @@ describe("Given a RacketsForm component rendered on App component", () => {
       const rackets = "/rackets";
       const detail = "/rackets/64f3a180784b0b6d4ddd8fe2";
       const headingText = "See details";
-      const racketText = "Puma SolarATTACK Momo";
+      const racketText = "description";
 
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
@@ -239,12 +239,8 @@ describe("Given a RacketsForm component rendered on App component", () => {
 
       await userEvent.click(detailLink[0]);
 
-      await waitFor(async () => {
-        const heading = await screen.findByRole("heading", {
-          name: racketText,
-        });
-        expect(heading).toBeInTheDocument();
-      });
+      const heading = await screen.findByLabelText(racketText);
+      expect(heading).toBeInTheDocument();
     });
   });
 });

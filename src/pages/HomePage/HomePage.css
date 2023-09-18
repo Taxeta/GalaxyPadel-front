@@ -8,6 +8,7 @@
   grid-gap: 60px;
   justify-content: center;
   min-height: 100vh;
+  position: relative;
 }
 
 .login-text {
