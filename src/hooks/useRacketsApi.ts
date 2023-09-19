@@ -155,6 +155,7 @@ const useRacketsApi = () => {
 
         return racketChanged;
       } catch {
+        showToastFunction("Could not favorite", "error");
         throw new Error("Couldn't modify the racket");
       }
     },

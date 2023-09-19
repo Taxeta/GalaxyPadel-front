@@ -22,12 +22,10 @@ const Footer = (): React.ReactElement => {
         </ul>
       )}
       <div className="footer__data">
-        <span className="company-name" aria-label="company">
-          Galaxy Padel S.L.
-        </span>
-        <span aria-label="email">galaxypadel@gmail.com</span>
-        <span aria-label="adress">Av/ Diagonal 167, Bcn</span>
-        <span aria-label="phone">+34 665403563</span>
+        <span className="company-name">Galaxy Padel S.L.</span>
+        <span>galaxypadel@gmail.com</span>
+        <span>Av/ Diagonal 167, Bcn</span>
+        <span>+34 665403563</span>
       </div>
     </footer>
   );

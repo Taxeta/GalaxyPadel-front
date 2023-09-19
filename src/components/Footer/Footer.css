@@ -13,7 +13,7 @@
 .footer__data {
   display: flex;
   flex-direction: column;
-  max-width: 70%;
+  max-width: 60%;
   font-size: 16px;
   font-family: var(--primary-font);
 }
@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
   font-family: var(--secondary-font);
 }

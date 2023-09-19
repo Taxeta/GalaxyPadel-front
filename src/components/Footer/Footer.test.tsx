@@ -31,8 +31,10 @@ describe("Given a Footer component", () => {
 
   describe("When it's rendered", () => {
     test("Then it should show the links 'Rackets' and 'Create'", () => {
-      const footerText1 = "company";
-      const footerText2 = "email";
+      const footerTextName = "Galaxy Padel S.L.";
+      const footerTextEmail = "galaxypadel@gmail.com";
+      const footerTextAdress = "Av/ Diagonal 167, Bcn";
+      const footerTextPhone = "+34 665403563";
 
       render(
         <BrowserRouter>
@@ -40,11 +42,15 @@ describe("Given a Footer component", () => {
         </BrowserRouter>,
       );
 
-      const companyName = screen.getByLabelText(footerText1);
-      const companyEmail = screen.getByLabelText(footerText2);
+      const companyName = screen.getByText(footerTextName);
+      const companyEmail = screen.getByText(footerTextEmail);
+      const companyAdress = screen.getByText(footerTextAdress);
+      const companyPhone = screen.getByText(footerTextPhone);
 
       expect(companyName).toBeInTheDocument();
       expect(companyEmail).toBeInTheDocument();
+      expect(companyAdress).toBeInTheDocument();
+      expect(companyPhone).toBeInTheDocument();
     });
   });
 });
