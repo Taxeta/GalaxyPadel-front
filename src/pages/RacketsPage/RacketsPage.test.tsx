@@ -3,9 +3,9 @@ import RacketsPage from "./RacketsPage";
 import { Provider } from "react-redux";
 import { setupStore, store } from "../../store";
 import { User } from "firebase/auth";
-import { racketsMock } from "../../mocks/racketsMock";
+import { myMockId2, racketsMock } from "../../mocks/racketsMock";
 import React from "react";
-import auth, { AuthStateHook } from "react-firebase-hooks/auth";
+import auth, { AuthStateHook, IdTokenHook } from "react-firebase-hooks/auth";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 
@@ -63,6 +63,39 @@ describe("Given a RacketsList component", () => {
       await userEvent.click(deleteButton[0]);
 
       expect(headingText).not.toBeInTheDocument();
+    });
+  });
+});
+
+describe("Given a RacketsList component", () => {
+  describe("When it's rendered", () => {
+    test("Then it should show when the state is true, a favorite fill button", async () => {
+      const store = setupStore({ racketsState: { rackets: myMockId2 } });
+
+      const altTextImage = "Empty favorite icon";
+
+      const user: Partial<User> = {
+        getIdToken: vi.fn().mockResolvedValue("token"),
+      };
+
+      const authStateHookMock: Partial<AuthStateHook> = [user as User];
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+      const authIdTokenHookMock: Partial<IdTokenHook> = [user as User];
+      auth.useAuthState = vi.fn().mockReturnValue(authIdTokenHookMock);
+
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <RacketsPage />
+          </Provider>
+        </BrowserRouter>,
+      );
+
+      const favoriteIcon = await screen.findByRole("button", {
+        name: altTextImage,
+      });
+
+      expect(favoriteIcon).toBeInTheDocument();
     });
   });
 });

@@ -33,6 +33,39 @@ export const racketsMock: Racket[] = [
   },
 ];
 
+export const racketsMock1: Racket[] = [
+  {
+    id: "64f3a180784b0b6d4ddd8fe2",
+    control: 8,
+    favorite: false,
+    description:
+      "Slightly softer core, slightly increasing sweet spot size and core reactivity. Intermediate-advanced level players looking for power and control.",
+    image:
+      "https://cdn.discordapp.com/attachments/1150483066259775582/1151422444540809246/AdidasMetalbone.webp",
+    material: "Soft EVA",
+    name: "Adidas Metalbone 3.2",
+    power: 10,
+    shape: "Diamond shape",
+    weight: 355,
+    user: "userId",
+  },
+  {
+    id: "64f3a180784b0b6d4ddd8fe3",
+    control: 10,
+    description:
+      "Precise touch and high maneuverability. This racket will help players excel on defense and disguise drop shots. It is not designed to be the most powerful racket.",
+    favorite: true,
+    image:
+      "https://cdn.discordapp.com/attachments/1150483066259775582/1151422446835081226/BullPadelVertex.webp",
+    material: "Multi-EVA",
+    name: "Bullpadel Vertex 03 CTR",
+    power: 7,
+    shape: "Round shape",
+    weight: 370,
+    user: "userId",
+  },
+];
+
 export const apiRacketsMock: ApiRackets[] = [
   {
     user: "userId",
@@ -139,6 +172,24 @@ export const myMockId2: Racket[] = [
     description:
       "Its low balance also makes it very easy to use, and probably part of the reason Momo has been able to pull off so many amazing “tweeners”.",
     favorite: false,
+    image:
+      "https://cdn.discordapp.com/attachments/1150483066259775582/1151422447099330560/MomoPuma.webp",
+    material: "Soft EVA",
+    name: "Puma SolarATTACK Momo",
+    power: 8,
+    shape: "Round shape",
+    weight: 370,
+    user: "64fafa72adb338f7af6830f5",
+  },
+];
+
+export const myMockId3: Racket[] = [
+  {
+    id: "64f3a180784b0b6d4ddd8fe2",
+    control: 10,
+    description:
+      "Its low balance also makes it very easy to use, and probably part of the reason Momo has been able to pull off so many amazing “tweeners”.",
+    favorite: true,
     image:
       "https://cdn.discordapp.com/attachments/1150483066259775582/1151422447099330560/MomoPuma.webp",
     material: "Soft EVA",

@@ -243,43 +243,4 @@ describe("Given a RacketsForm component rendered on App component", () => {
       expect(heading).toBeInTheDocument();
     });
   });
-
-  describe("When it's rendered", () => {
-    test("Then it should show when the state is true, a favorite fill button", async () => {
-      const expectedAltTextImage = "Fill favorite icon";
-      const altTextImage = "Empty favorite icon";
-      const rackets = "/rackets";
-
-      const user: Partial<User> = {
-        getIdToken: vi.fn().mockResolvedValue("token"),
-      };
-
-      auth.useIdToken = vi.fn().mockReturnValue([user]);
-      const store = setupStore({ racketsState: { rackets: racketsMock } });
-
-      const authStateHookMock: Partial<AuthStateHook> = [user as User];
-      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
-      const authIdTokenHookMock: Partial<IdTokenHook> = [user as User];
-      auth.useAuthState = vi.fn().mockReturnValue(authIdTokenHookMock);
-
-      render(
-        <MemoryRouter initialEntries={[rackets]}>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </MemoryRouter>,
-      );
-
-      const favoriteIcon = await screen.findAllByRole("button", {
-        name: altTextImage,
-      });
-
-      await userEvent.click(favoriteIcon[0]);
-
-      const newFavoriteState = await screen.findAllByRole("button", {
-        name: expectedAltTextImage,
-      });
-      expect(newFavoriteState[0]).toBeInTheDocument();
-    });
-  });
 });

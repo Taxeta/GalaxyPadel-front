@@ -22,7 +22,7 @@ const RacketCard = ({
   racketPosition,
 }: RacketsCardProps): React.ReactElement => {
   const dispatch = useAppDispatch();
-  const { deleteRacketApi } = useRacketsApi();
+  const { deleteRacketApi, modifyRacketByIdApi } = useRacketsApi();
 
   const deleteRacket = async () => {
     await deleteRacketApi(id!);
@@ -30,8 +30,10 @@ const RacketCard = ({
     dispatch(deleteRacketActionCreator(id!));
   };
 
-  const toggleRacket = () => {
-    dispatch(toggleRacketActionCreator(id!));
+  const toggleRacket = async () => {
+    const modifyRacket = await modifyRacketByIdApi(id!, favorite!);
+
+    dispatch(toggleRacketActionCreator(modifyRacket));
   };
 
   return (
@@ -51,23 +53,13 @@ const RacketCard = ({
       </div>
       <div className="button-favorite-container">
         <Button className="button-favorite__icon" onClick={toggleRacket}>
-          {!favorite ? (
-            <img
-              className="favorite-icon"
-              src={favoriteEmptyIcon}
-              alt={`Empty favorite icon`}
-              width="48"
-              height="48"
-            />
-          ) : (
-            <img
-              className="favorite-icon"
-              src={favoriteFillIcon}
-              alt={`Fill favorite icon`}
-              width="48"
-              height="48"
-            />
-          )}
+          <img
+            className={"favorite-icon"}
+            src={favorite ? favoriteFillIcon : favoriteEmptyIcon}
+            alt={favorite ? `Fill favorite icon` : `Empty favorite icon`}
+            width="48"
+            height="48"
+          />
         </Button>
       </div>
 

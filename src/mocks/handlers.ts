@@ -38,6 +38,13 @@ export const handlers = [
       return res(ctx.json({ racket: getMockId }));
     },
   ),
+
+  rest.patch(
+    `${import.meta.env.VITE_API_RACKETS_URL}rackets/${onlyMockId}`,
+    (_req, res, ctx) => {
+      return res(ctx.json({ racket: { ...getMockId } }));
+    },
+  ),
 ];
 
 export const errorHandlers = [
@@ -65,7 +72,14 @@ export const errorHandlers = [
   rest.get(
     `${import.meta.env.VITE_API_RACKETS_URL}rackets/${onlyMockId}`,
     (_req, res, ctx) => {
-      return res(ctx.status(500, "Couldn't load tha racket"));
+      return res(ctx.status(500, "Couldn't load the racket"));
+    },
+  ),
+
+  rest.patch(
+    `${import.meta.env.VITE_API_RACKETS_URL}rackets/${onlyMockId}`,
+    (_req, res, ctx) => {
+      return res(ctx.status(500, "Can't modify the racket"));
     },
   ),
 ];

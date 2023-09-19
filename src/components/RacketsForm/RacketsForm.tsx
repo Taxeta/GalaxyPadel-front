@@ -9,9 +9,7 @@ interface FormProps {
 }
 
 const RacketsForm = ({ actionOnSubmit }: FormProps) => {
-  const [newRacket, setNewRacket] = useState<
-    Omit<Racket, "id" | "user" | "favorite">
-  >({
+  const [newRacket, setNewRacket] = useState<Omit<Racket, "id" | "user">>({
     name: "",
     shape: "",
     weight: 0,
@@ -20,6 +18,7 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
     control: 1,
     image: "",
     description: "",
+    favorite: true,
   });
 
   const changeNewRacket = (

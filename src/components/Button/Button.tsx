@@ -5,12 +5,14 @@ interface ButtonProps
     ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   actionOnClick?: () => void;
+  text?: string;
 }
 
 const Button = ({
   children,
   actionOnClick,
   className,
+  text,
   ...props
 }: Partial<ButtonProps>): React.ReactElement => {
   return (
@@ -19,6 +21,7 @@ const Button = ({
       onClick={actionOnClick}
       {...props}
     >
+      {text}
       {children}
     </button>
   );
