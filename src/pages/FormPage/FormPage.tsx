@@ -23,7 +23,13 @@ const FormPage = () => {
     dispatch(addRacketActionCreator(racket));
 
     navigate(paths.rackets);
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
   };
+
   return (
     <div className="form-page">
       <h1 className="form-title">Create your racket</h1>

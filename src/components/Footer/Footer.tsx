@@ -5,6 +5,7 @@ import { auth } from "../../firebase/firebase";
 
 const Footer = (): React.ReactElement => {
   const [user] = useAuthState(auth);
+
   return (
     <footer className={user ? "footer" : "footer-offline"}>
       {user && (
