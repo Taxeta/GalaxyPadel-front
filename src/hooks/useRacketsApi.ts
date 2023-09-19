@@ -1,14 +1,14 @@
-import { auth } from "../firebase/firebase";
 import axios from "axios";
-import { useIdToken } from "react-firebase-hooks/auth";
 import { useCallback } from "react";
-import { Racket, RacketsApi } from "../types";
+import { useIdToken } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
+import { showToastFunction } from "../components/Toast/Toast";
+import { auth } from "../firebase/firebase";
 import {
   startLoadingActionCreator,
   stopLoadingActionCreator,
 } from "../store/ui/ui";
-import { showToastFunction } from "../components/Toast/Toast";
+import { ApiRackets, changeIdRacket, Racket, RacketsApi } from "../types";
 
 const useRacketsApi = () => {
   const apiUrl = import.meta.env.VITE_API_RACKETS_URL;
@@ -127,7 +127,47 @@ const useRacketsApi = () => {
     [apiUrl, user],
   );
 
-  return { getRackets, deleteRacketApi, createRacketApi, getRacketByIdApi };
+  const modifyRacketByIdApi = useCallback(
+    async (id: string, favorite: boolean): Promise<changeIdRacket> => {
+      try {
+        if (!user) {
+          throw Error();
+        }
+
+        const token = await user.getIdToken();
+
+        const { data: modifyRacket } = await axios.patch<{
+          racket: ApiRackets;
+        }>(
+          `${apiUrl}rackets/${id}`,
+          { favorite },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
+        const { racket } = modifyRacket;
+
+        const racketChanged: changeIdRacket = {
+          ...racket,
+          id: racket._id,
+        };
+        delete racketChanged._id;
+
+        return racketChanged;
+      } catch {
+        throw new Error("Couldn't modify the racket");
+      }
+    },
+    [apiUrl, user],
+  );
+
+  return {
+    getRackets,
+    deleteRacketApi,
+    createRacketApi,
+    getRacketByIdApi,
+    modifyRacketByIdApi,
+  };
 };
 
 export default useRacketsApi;
