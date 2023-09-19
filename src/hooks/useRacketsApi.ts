@@ -8,7 +8,7 @@ import {
   startLoadingActionCreator,
   stopLoadingActionCreator,
 } from "../store/ui/ui";
-import { ApiRackets, changeIdRacket, Racket, RacketsApi } from "../types";
+import { ApiRackets, NewApiRacket, Racket, RacketsApi } from "../types";
 
 const useRacketsApi = () => {
   const apiUrl = import.meta.env.VITE_API_RACKETS_URL;
@@ -128,7 +128,7 @@ const useRacketsApi = () => {
   );
 
   const modifyRacketByIdApi = useCallback(
-    async (id: string, favorite: boolean): Promise<changeIdRacket> => {
+    async (id: string, favorite: boolean): Promise<NewApiRacket> => {
       try {
         if (!user) {
           throw Error();
@@ -147,7 +147,7 @@ const useRacketsApi = () => {
         );
         const { racket } = modifyRacket;
 
-        const racketChanged: changeIdRacket = {
+        const racketChanged: NewApiRacket = {
           ...racket,
           id: racket._id,
         };

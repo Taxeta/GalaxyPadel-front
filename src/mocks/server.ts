@@ -5,6 +5,6 @@ export const server = setupServer(...handlers);
 
 beforeAll(() => server.listen());
 
-afterEach(() => server.resetHandlers(...handlers));
+afterEach(() => server.resetHandlers());
 
 afterAll(() => server.close());

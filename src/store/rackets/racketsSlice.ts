@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RacketState } from "../types";
-import { Racket } from "../../types";
+import { NewApiRacket, Racket } from "../../types";
 
 const initialRacketsState: RacketState = {
   rackets: [],
@@ -34,22 +34,21 @@ const racketsSlice = createSlice({
     }),
 
     loadSelectedRacket: (
-      currentRacketState: RacketState,
+      currentRacketState,
       action: PayloadAction<Racket>,
-    ) => ({
+    ): RacketState => ({
       ...currentRacketState,
       selectedRacket: action.payload,
     }),
 
     toggleRacket: (
-      currentUsersState,
-      action: PayloadAction<string>,
+      currentRacketsState,
+      action: PayloadAction<NewApiRacket>,
     ): RacketState => ({
-      ...currentUsersState,
-      rackets: currentUsersState.rackets.map((racket) =>
-        racket.id === action.payload
-          ? { ...racket, favorite: !racket.favorite }
-          : { ...racket },
+      ...currentRacketsState,
+      selectedRacket: action.payload,
+      rackets: currentRacketsState.rackets.map((racket) =>
+        racket.id === action.payload.id ? action.payload : racket,
       ),
     }),
   },

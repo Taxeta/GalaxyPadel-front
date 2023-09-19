@@ -1,8 +1,13 @@
 import { renderHook } from "@testing-library/react";
 import useRacketsApi from "./useRacketsApi";
-import { myMockId, racketMock, racketsMock } from "../mocks/racketsMock";
+import {
+  myMockId,
+  myMockId3,
+  racketMock,
+  racketsMock,
+} from "../mocks/racketsMock";
 import { User } from "firebase/auth";
-import auth, { AuthStateHook } from "react-firebase-hooks/auth";
+import auth, { AuthStateHook, IdTokenHook } from "react-firebase-hooks/auth";
 import { errorHandlers } from "../mocks/handlers";
 import { server } from "../mocks/server";
 import { setupStore } from "../store";
@@ -148,6 +153,67 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
       const newRacket = getRacketByIdApi(id);
 
       expect(newRacket).rejects.toThrowError(error);
+    });
+  });
+});
+
+describe("Given a function getRackets from useRacketsApi hook", () => {
+  describe("When calls a modifyRacketById function with id '64f3a180784b0b6d4ddd8feb' and modify favorite", async () => {
+    const user: Partial<User> = {
+      getIdToken: vi.fn().mockResolvedValue("token"),
+    };
+
+    const authStateHookMock: Partial<AuthStateHook> = [user as User];
+    auth.useIdToken = vi.fn().mockReturnValue([user]);
+    auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+    const { result } = renderHook(async () => await useRacketsApi(), {
+      wrapper: uiWrapper,
+    });
+    const { modifyRacketByIdApi } = await result.current;
+
+    const id = "64f3a180784b0b6d4ddd8fe2";
+
+    test("Then it should return the property favorite to true of the racket 'Puma SolarATTACK Momo'", async () => {
+      const selectedRacket = await modifyRacketByIdApi(
+        id,
+        myMockId3[0].favorite,
+      );
+
+      expect(selectedRacket).toHaveProperty("favorite", false);
+    });
+
+    test("Then it should throw an error 'Couldn't create the racket'", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const error = new Error("Couldn't modify the racket");
+
+      const newRacket = modifyRacketByIdApi(id, myMockId3[0].favorite);
+
+      expect(newRacket).rejects.toThrowError(error);
+    });
+  });
+
+  describe("When calling a modifyRacketApi function without user", () => {
+    test("Then it should throw an error 'Couldn't modify the racket'", async () => {
+      const id = "casdsadasd25427";
+
+      const authStateHookMock: Partial<AuthStateHook> = [undefined];
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+      const idTokenHookMock: Partial<IdTokenHook> = [undefined];
+      auth.useIdToken = vi.fn().mockReturnValue(idTokenHookMock);
+
+      const error = new Error("Couldn't modify the racket");
+
+      const { result } = renderHook(async () => await useRacketsApi(), {
+        wrapper: uiWrapper,
+      });
+      const { modifyRacketByIdApi } = await result.current;
+
+      const selectedRacket = modifyRacketByIdApi(id, myMockId3[0].favorite);
+
+      expect(selectedRacket).rejects.toThrowError(error);
     });
   });
 });
