@@ -1,5 +1,5 @@
 import Button from "../../components/Button/Button";
-import { signInWithPopup } from "firebase/auth";
+import { browserPopupRedirectResolver, signInWithPopup } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import imageLogin from "../../assets/imageLogin.png";
 import "./HomePage.css";
@@ -26,7 +26,7 @@ const HomePage = (): React.ReactElement => {
   }
 
   const login = async () => {
-    await signInWithPopup(auth, githubProvider);
+    await signInWithPopup(auth, githubProvider, browserPopupRedirectResolver);
     showToastFunction(`Welcome to Galaxy Padel!`, "info");
     navigate(paths.rackets);
   };
