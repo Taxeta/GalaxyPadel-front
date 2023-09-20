@@ -4,7 +4,7 @@
 
 Welcome to GalaxyPadel mobile web App. This website has been built with the intention of sharing information about padel rackets and being able to add a rating about their use.
 
-The application stack is currently Typescript, with the react library, Firebase SDK as authentication with gitHub, Eslint, Prettier, Sonar for testing validation, React-Router-Dom for routing, Redux-Toolkit, Vitest and Node js.
+The application stack is currently Typescript, with the react library and node js as a cross-platform real-time execution environment. Firebase SDK as authentication with GitHub user account, Eslint and Prettier to maintain a good code structure, Sonar for testing validation, React-Router-Dom for routing path's, Redux-Toolkit to manage application states, Vitest as unit testing framework, msw to use mocks on testing , axios library to make requests to the render server, and husky with hooks to help us make commits
 
 :white_circle: :yellow_circle: :white_circle: :yellow_circle: :white_circle: :yellow_circle:
 
@@ -15,13 +15,13 @@ The application stack is currently Typescript, with the react library, Firebase 
 
 ## Scripts:
 
-:purple_circle: npm run dev: "vite"
+:small_blue_diamond: npm run dev: "vite"
 
-:green_circle: npm run build: "tsc && vite build"
+:small_orange_diamond: npm run build: "tsc && vite build"
 
-:purple_circle: npm run test: "vitest run"
+:small_blue_diamond: npm run test: "vitest run"
 
-:green_circle: npm run test:coverage: "vitest run --coverage"
+:small_orange_diamond: npm run test:coverage: "vitest run --coverage"
 
 :white_circle: :yellow_circle: :white_circle: :yellow_circle: :white_circle: :yellow_circle:
 
