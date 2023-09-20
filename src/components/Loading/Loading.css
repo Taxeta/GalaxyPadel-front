@@ -1,3 +1,7 @@
+.loader-position {
+  position: relative;
+}
+
 .loader {
   position: absolute;
   width: 120px;

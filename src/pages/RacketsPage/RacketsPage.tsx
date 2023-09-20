@@ -43,6 +43,7 @@ const RacketsPage = (): React.ReactElement => {
 
   return (
     <div className="list-page">
+      {isLoading && <Loading />}
       {hasRackets
         ? !loading && (
             <>
@@ -51,7 +52,6 @@ const RacketsPage = (): React.ReactElement => {
             </>
           )
         : !isLoading && !loading && <NoRackets />}
-      {isLoading && <Loading />}
     </div>
   );
 };
