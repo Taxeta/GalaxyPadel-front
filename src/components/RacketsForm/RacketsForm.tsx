@@ -111,10 +111,10 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
           min="1"
           max="10"
           value={newRacket.power}
-          list="datalist"
+          list="datalist power"
           onChange={changeNewRacket}
         />
-        <DataList />
+        <DataList text={"power"} />
       </div>
       <div className="form-slot-range">
         <label className="form__label" htmlFor="control">
@@ -126,11 +126,11 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
           id="control"
           min="1"
           max="10"
-          list="datalist"
+          list="datalist control"
           value={newRacket.control}
           onChange={changeNewRacket}
         />
-        <DataList />
+        <DataList text={"control"} />
       </div>
       <div className="form-slot">
         <label className="form__label" htmlFor="image">

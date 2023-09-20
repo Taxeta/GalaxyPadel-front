@@ -1,8 +1,12 @@
 import "./RacketsForm.css";
 
-export const DataList = (): React.ReactElement => {
+interface DataListProps {
+  text: string;
+}
+
+export const DataList = ({ text }: DataListProps): React.ReactElement => {
   return (
-    <datalist className="detail-list" id="datalist">
+    <datalist className="detail-list" id={`datalist ${text}`}>
       <option value="1" label="1" />
       <option value="2" label="2" />
       <option value="3" label="3" />
