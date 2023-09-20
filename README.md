@@ -6,12 +6,24 @@ Welcome to GalaxyPadel mobile web App. This website has been built with the inte
 
 The application stack is currently Typescript, with the react library, Firebase SDK as authentication with gitHub, Eslint, Prettier, Sonar for testing validation, React-Router-Dom for routing, Redux-Toolkit, Vitest and Node js.
 
-:orange_square: :green_square: :orange_square: :green_square: :orange_square: :green_square:
+:white_circle: :yellow_circle: :white_circle: :yellow_circle: :white_circle: :yellow_circle:
 
 :small_red_triangle: Web displayed in the netlify url: https://jose-vera-final-project-202307-bcn.netlify.app/
 
 :small_red_triangle: Sonar coverage metric
 ![sonarcloudfrontend](https://cdn.discordapp.com/attachments/1150483066259775582/1154112202471657553/sonarcloudfrontend.png)
+
+## Scripts:
+
+:purple_circle: npm run dev: "vite"
+
+:green_circle: npm run build: "tsc && vite build"
+
+:purple_circle: npm run test: "vitest run"
+
+:green_circle: npm run test:coverage: "vitest run --coverage"
+
+:white_circle: :yellow_circle: :white_circle: :yellow_circle: :white_circle: :yellow_circle:
 
 The web application is a CRUD where users can perform the following functions:
 
