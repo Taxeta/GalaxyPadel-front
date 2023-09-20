@@ -19,6 +19,14 @@ const RacketsPage = (): React.ReactElement => {
   const isLoading = useAppSelector((state) => state.uiState.isLoading);
   const rackets = useAppSelector((state) => state.racketsState.rackets);
 
+  const preloadImages = (image: string) => {
+    const preloadImageLink = document.createElement("link");
+    preloadImageLink.href = image;
+    preloadImageLink.rel = "preload";
+    preloadImageLink.as = "image";
+    document.head.appendChild(preloadImageLink);
+  };
+
   const hasRackets = rackets.length > 0;
 
   useEffect(() => {
@@ -27,6 +35,8 @@ const RacketsPage = (): React.ReactElement => {
       (async () => {
         const rackets = await getRackets();
         dispatch(loadRacketsActionCreator(rackets!));
+
+        preloadImages(rackets![0].image);
       })();
     }
   }, [dispatch, getRackets, user]);
