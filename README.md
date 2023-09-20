@@ -2,6 +2,9 @@
 
 Welcome to GalaxyPadel mobile web App. This website has been built with the intention of sharing information about padel rackets and being able to add a rating about their use.
 
+- donde se despliega
+- métrica de coverage de sonar
+
 The web application is a CRUD where users can perform the following functions:
 
 - It is a complete website where users can create paddle rackets once registered with GitHub.

@@ -9,16 +9,12 @@ describe("Given a RacketCard component", () => {
   describe("When it's rendered", () => {
     test("Then it should show an image with the alternative text 'Adidas Metalbone 3.2 racket'", () => {
       const alternativeText = "Adidas Metalbone 3.2 racket";
-      const racketPosition = 1;
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <RacketCard
-              racketPosition={racketPosition}
-              racket={racketsMock[0]}
-            />
+            <RacketCard isLazy={false} racket={racketsMock[0]} />
           </Provider>
         </BrowserRouter>,
       );
@@ -30,16 +26,12 @@ describe("Given a RacketCard component", () => {
 
     test("Then it should show the heading text 'Adidas Metalbone 3.2'", () => {
       const headingText = "Adidas Metalbone 3.2";
-      const racketPosition = 1;
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <RacketCard
-              racketPosition={racketPosition}
-              racket={racketsMock[0]}
-            />
+            <RacketCard isLazy={false} racket={racketsMock[0]} />
           </Provider>
         </BrowserRouter>,
       );
@@ -55,13 +47,12 @@ describe("Given a RacketCard component", () => {
   describe("When it's rendered", () => {
     test("Then it should show an image with the alternative text 'Head Speed Motion racket'", () => {
       const headingText = "Adidas Metalbone 3.2";
-      const racketPosition = 3;
       const racket = racketsMock[0];
 
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <RacketCard racketPosition={racketPosition} racket={racket} />
+            <RacketCard isLazy={true} racket={racket} />
           </Provider>
         </BrowserRouter>,
       );
@@ -77,16 +68,12 @@ describe("Given a RacketCard component", () => {
   describe("When it's rendered", () => {
     test("It should show a button with the text 'See details'", () => {
       const linkText = "See details";
-      const racketPosition = 1;
       const store = setupStore({ racketsState: { rackets: racketsMock } });
 
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <RacketCard
-              racketPosition={racketPosition}
-              racket={racketsMock[0]}
-            />
+            <RacketCard isLazy={false} racket={racketsMock[0]} />
           </Provider>
         </BrowserRouter>,
       );

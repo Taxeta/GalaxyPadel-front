@@ -14,12 +14,12 @@ import { Link } from "react-router-dom";
 
 interface RacketsCardProps {
   racket: Partial<Racket>;
-  racketPosition: number;
+  isLazy: boolean;
 }
 
 const RacketCard = ({
   racket: { id, name, image, shape, weight, favorite },
-  racketPosition,
+  isLazy,
 }: RacketsCardProps): React.ReactElement => {
   const dispatch = useAppDispatch();
   const { deleteRacketApi, modifyRacketByIdApi } = useRacketsApi();
@@ -69,7 +69,7 @@ const RacketCard = ({
         alt={`${name} racket`}
         width="280"
         height="280"
-        loading={racketPosition > 2 ? "lazy" : "eager"}
+        {...(isLazy && { loading: "lazy" })}
       />
 
       <h2 className="racket__name">{name}</h2>

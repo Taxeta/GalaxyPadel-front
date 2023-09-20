@@ -9,7 +9,7 @@ const RacketsList = (): React.ReactElement => {
     <ul>
       {rackets?.map((racket, racketPosition) => (
         <li className="racket-content" key={racket.id}>
-          <RacketCard racket={racket} racketPosition={racketPosition} />
+          <RacketCard racket={racket} isLazy={racketPosition > 2} />
         </li>
       ))}
     </ul>
