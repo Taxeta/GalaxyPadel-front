@@ -9,11 +9,14 @@ import {
   stopLoadingActionCreator,
 } from "../store/ui/ui";
 import { ApiRackets, NewApiRacket, Racket, RacketsApi } from "../types";
+import { useNavigate } from "react-router-dom";
+import paths from "../paths/paths";
 
 const useRacketsApi = () => {
   const apiUrl = import.meta.env.VITE_API_RACKETS_URL;
   const dispatch = useDispatch();
   const [user] = useIdToken(auth);
+  const navigate = useNavigate();
 
   const getRackets = useCallback(async () => {
     dispatch(startLoadingActionCreator());
@@ -121,14 +124,18 @@ const useRacketsApi = () => {
           return racket;
         }
       } catch {
+        dispatch(stopLoadingActionCreator());
+        showToastFunction("This detail racket doesn't exist", "error");
+        navigate(paths.rackets);
         throw new Error("Couldn't get the racket");
       }
     },
-    [apiUrl, user],
+    [apiUrl, user, dispatch, navigate],
   );
 
   const modifyRacketByIdApi = useCallback(
     async (id: string, favorite: boolean): Promise<NewApiRacket> => {
+      dispatch(startLoadingActionCreator());
       try {
         if (!user) {
           throw Error();
@@ -152,14 +159,17 @@ const useRacketsApi = () => {
           id: racket._id,
         };
         delete racketChanged._id;
+        dispatch(stopLoadingActionCreator());
 
         return racketChanged;
       } catch {
+        dispatch(stopLoadingActionCreator());
+
         showToastFunction("Could not favorite", "error");
         throw new Error("Couldn't modify the racket");
       }
     },
-    [apiUrl, user],
+    [apiUrl, user, dispatch],
   );
 
   return {
