@@ -13,6 +13,7 @@ import { server } from "../mocks/server";
 import { setupStore } from "../store";
 import { Provider } from "react-redux";
 import { PropsWithChildren } from "react";
+import { BrowserRouter } from "react-router-dom";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -21,7 +22,11 @@ beforeEach(() => {
 const uiWrapper = ({ children }: PropsWithChildren): React.ReactElement => {
   const store = setupStore({ racketsState: { rackets: racketsMock } });
 
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <BrowserRouter>
+      <Provider store={store}>{children}</Provider>
+    </BrowserRouter>
+  );
 };
 
 describe("Given a function getRackets from useRacketsApi hook", () => {
