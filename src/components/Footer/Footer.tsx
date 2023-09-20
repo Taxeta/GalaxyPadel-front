@@ -1,22 +1,38 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Footer.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
+import paths from "../../paths/paths";
 
 const Footer = (): React.ReactElement => {
   const [user] = useAuthState(auth);
+  const { pathname } = useLocation();
 
   return (
     <footer className={user ? "footer" : "footer-offline"}>
       {user && (
         <ul className="footer__navigation">
           <li>
-            <NavLink className="footer-navigation__rackets" to="/rackets">
+            <NavLink
+              className={
+                pathname === paths.rackets
+                  ? "footer-navigation__active"
+                  : "footer-navigation__inactive"
+              }
+              to="/rackets"
+            >
               Rackets
             </NavLink>
           </li>
           <li>
-            <NavLink className="footer-navigation__create" to="/create">
+            <NavLink
+              className={
+                pathname === paths.create
+                  ? "footer-navigation__active"
+                  : "footer-navigation__inactive"
+              }
+              to="/create"
+            >
               Create
             </NavLink>
           </li>

@@ -45,8 +45,11 @@
   font-family: var(--secondary-font);
 }
 
-.footer-navigation__rackets.active,
-.footer-navigation__create.active {
+.footer-navigation__active {
   border-bottom: 1px solid var(--white);
   cursor: pointer;
+}
+
+.footer-navigation__inactive {
+  border: none;
 }
