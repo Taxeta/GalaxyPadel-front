@@ -22,6 +22,7 @@ const RacketsPage = (): React.ReactElement => {
   const hasRackets = rackets.length > 0;
 
   useEffect(() => {
+    document.title = "Rackets List";
     if (user) {
       (async () => {
         const rackets = await getRackets();

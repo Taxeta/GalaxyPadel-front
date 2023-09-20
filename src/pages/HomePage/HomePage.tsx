@@ -6,7 +6,7 @@ import "./HomePage.css";
 import { auth, githubProvider } from "../../firebase/firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import paths from "../../paths/paths";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { useAppSelector } from "../../store";
 import { showToastFunction } from "../../components/Toast/Toast";
 
@@ -16,6 +16,10 @@ const HomePage = (): React.ReactElement => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const isLoading = useAppSelector((state) => state.uiState.isLoading);
+
+  useEffect(() => {
+    document.title = "GalaxyPadel | Homepage";
+  }, []);
 
   if (user && !isLoading) {
     return <Navigate to={paths.rackets} />;

@@ -23,6 +23,8 @@ const DetailRacketPage = (): React.ReactElement => {
 
         if (selectedRacket) {
           dispatch(loadSelectedRacketActionCreator(selectedRacket));
+
+          document.title = `Detail racket ${selectedRacket?.name}`;
         }
       })();
     }

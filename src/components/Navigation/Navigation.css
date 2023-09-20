@@ -1,7 +1,9 @@
-.navigation-list__rackets.active,
-.navigation-list__create.active {
+.navigation-list__active.active {
   border-bottom: 1px solid var(--white);
   cursor: pointer;
+}
+.navigation-list__inactive {
+  border: none;
 }
 
 .navigation {

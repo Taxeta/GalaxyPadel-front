@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import "./FormPage.css";
 import RacketsForm from "../../components/RacketsForm/RacketsForm";
 import useRacketsApi from "../../hooks/useRacketsApi";
@@ -14,6 +14,10 @@ const FormPage = () => {
   const { createRacketApi } = useRacketsApi();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Rackets form";
+  }, []);
 
   const actionOnSubmit = async (
     newRacket: Omit<Racket, "id" | "user" | "favorite">,

@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import paths from "../../paths/paths";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import "./ErrorPage.css";
 
 export const ErrorPagePreload = lazy(() => import("./ErrorPage"));
 
 const ErrorPage = (): React.ReactElement => {
+  useEffect(() => {
+    document.title = "Rackets List";
+  }, []);
+
   return (
     <div className="error">
       <span className="error__status" aria-label="code">
