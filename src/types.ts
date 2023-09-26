@@ -9,6 +9,7 @@ export interface ApiRackets {
   description: string;
   image: string;
   favorite: boolean;
+  visibility: boolean;
   user: string;
 }
 
@@ -36,5 +37,6 @@ export interface NewApiRacket {
   description: string;
   image: string;
   favorite: boolean;
+  visibility: boolean;
   user: string;
 }

@@ -134,7 +134,11 @@ const useRacketsApi = () => {
   );
 
   const modifyRacketByIdApi = useCallback(
-    async (id: string, favorite: boolean): Promise<NewApiRacket> => {
+    async (
+      id: string,
+      favorite: boolean,
+      visibility: boolean,
+    ): Promise<NewApiRacket> => {
       dispatch(startLoadingActionCreator());
       try {
         if (!user) {
@@ -147,7 +151,7 @@ const useRacketsApi = () => {
           racket: ApiRackets;
         }>(
           `${apiUrl}rackets/${id}`,
-          { favorite },
+          { favorite, visibility },
           {
             headers: { Authorization: `Bearer ${token}` },
           },

@@ -19,6 +19,7 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
     image: "",
     description: "",
     favorite: true,
+    visibility: true,
   });
 
   const changeNewRacket = (
