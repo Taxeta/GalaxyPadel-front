@@ -1,4 +1,4 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useState } from "react";
 import useRacketsApi from "../../hooks/useRacketsApi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
@@ -10,7 +10,7 @@ import {
 import { useParams } from "react-router-dom";
 import "./DetailRacketPage.css";
 import { NewApiRacket } from "../../types";
-import Button from "../../components/Button/Button";
+import { Switch } from "@mui/material";
 
 export const DetailRacketPagePreload = lazy(() => import("./DetailRacketPage"));
 
@@ -20,7 +20,7 @@ const DetailRacketPage = (): React.ReactElement => {
   const { getRacketByIdApi, modifyVisibilityRacket } = useRacketsApi();
   const [user] = useAuthState(auth);
   const racket = useAppSelector((state) => state.racketsState.selectedRacket);
-  const visibility = racket?.visibility;
+  const [isChecked, setIsChecked] = useState(racket?.visibility || false);
 
   useEffect(() => {
     if (user) {
@@ -29,7 +29,7 @@ const DetailRacketPage = (): React.ReactElement => {
 
         if (selectedRacket) {
           dispatch(loadSelectedRacketActionCreator(selectedRacket));
-
+          setIsChecked(!selectedRacket.visibility);
           document.title = `Detail racket ${selectedRacket?.name}`;
         }
       })();
@@ -49,15 +49,17 @@ const DetailRacketPage = (): React.ReactElement => {
   };
 
   const handleToggleVisibility = async () => {
-    if (racket && visibility !== undefined) {
-      await toggleVisibilityRacket(racket!, visibility);
+    if (racket && racket.visibility !== undefined) {
+      const newVisibility = !isChecked;
+      setIsChecked(newVisibility);
+      await toggleVisibilityRacket(racket!, newVisibility);
     }
   };
 
   return (
     <article className="detail-content">
       <h1 className="detail__title">{racket?.name}</h1>
-      <Button onClick={handleToggleVisibility}>Cambiar visiblidad</Button>
+      <Switch checked={!isChecked} onChange={handleToggleVisibility} />
       <div className="detail__container">
         <img
           className="detail__image"

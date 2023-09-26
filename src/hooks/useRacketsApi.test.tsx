@@ -183,7 +183,6 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
       const selectedRacket = await modifyRacketByIdApi(
         id,
         myMockId3[0].favorite,
-        myMockId3[0].visibility,
       );
 
       expect(selectedRacket).toHaveProperty("favorite", false);
@@ -194,11 +193,7 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
 
       const error = new Error("Couldn't modify the racket");
 
-      const newRacket = modifyRacketByIdApi(
-        id,
-        myMockId3[0].favorite,
-        myMockId3[0].visibility,
-      );
+      const newRacket = modifyRacketByIdApi(id, myMockId3[0].favorite);
 
       expect(newRacket).rejects.toThrowError(error);
     });
@@ -221,11 +216,7 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
       });
       const { modifyRacketByIdApi } = await result.current;
 
-      const selectedRacket = modifyRacketByIdApi(
-        id,
-        myMockId3[0].favorite,
-        myMockId3[0].visibility,
-      );
+      const selectedRacket = modifyRacketByIdApi(id, myMockId3[0].favorite);
 
       expect(selectedRacket).rejects.toThrowError(error);
     });
