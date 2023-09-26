@@ -134,11 +134,7 @@ const useRacketsApi = () => {
   );
 
   const modifyRacketByIdApi = useCallback(
-    async (
-      id: string,
-      favorite: boolean,
-      visibility: boolean,
-    ): Promise<NewApiRacket> => {
+    async (id: string, favorite: boolean): Promise<NewApiRacket> => {
       dispatch(startLoadingActionCreator());
       try {
         if (!user) {
@@ -151,16 +147,15 @@ const useRacketsApi = () => {
           racket: ApiRackets;
         }>(
           `${apiUrl}rackets/${id}`,
-          { favorite, visibility },
+          { favorite },
           {
             headers: { Authorization: `Bearer ${token}` },
           },
         );
-        const { racket } = modifyRacket;
 
         const racketChanged: NewApiRacket = {
-          ...racket,
-          id: racket._id,
+          ...modifyRacket.racket,
+          id: modifyRacket.racket._id,
         };
         delete racketChanged._id;
         dispatch(stopLoadingActionCreator());
@@ -176,12 +171,51 @@ const useRacketsApi = () => {
     [apiUrl, user, dispatch],
   );
 
+  const modifyVisibilityRacket = useCallback(
+    async (id: string, visibility: boolean): Promise<NewApiRacket> => {
+      dispatch(startLoadingActionCreator());
+      try {
+        if (!user) {
+          throw Error();
+        }
+
+        const token = await user.getIdToken();
+
+        const { data: modifyRacket } = await axios.patch<{
+          racket: ApiRackets;
+        }>(
+          `${apiUrl}rackets/${id}`,
+          { visibility },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
+
+        const racketChanged: NewApiRacket = {
+          ...modifyRacket.racket,
+          id: modifyRacket.racket._id,
+        };
+        delete racketChanged._id;
+        dispatch(stopLoadingActionCreator());
+
+        return racketChanged;
+      } catch {
+        dispatch(stopLoadingActionCreator());
+
+        showToastFunction("Couldn't racket visible", "error");
+        throw new Error("Couldn't change visibility of the racket");
+      }
+    },
+    [apiUrl, user, dispatch],
+  );
+
   return {
     getRackets,
     deleteRacketApi,
     createRacketApi,
     getRacketByIdApi,
     modifyRacketByIdApi,
+    modifyVisibilityRacket,
   };
 };
 

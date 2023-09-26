@@ -15,6 +15,7 @@ export const racketsMock: Racket[] = [
     shape: "Diamond shape",
     weight: 355,
     user: "userId",
+    visibility: true,
   },
   {
     id: "64f3a180784b0b6d4ddd8fe3",
@@ -29,6 +30,7 @@ export const racketsMock: Racket[] = [
     power: 7,
     shape: "Round shape",
     weight: 370,
+    visibility: true,
     user: "userId",
   },
 ];
@@ -47,6 +49,7 @@ export const racketsMock1: Racket[] = [
     power: 10,
     shape: "Diamond shape",
     weight: 355,
+    visibility: true,
     user: "userId",
   },
   {
@@ -55,6 +58,7 @@ export const racketsMock1: Racket[] = [
     description:
       "Precise touch and high maneuverability. This racket will help players excel on defense and disguise drop shots. It is not designed to be the most powerful racket.",
     favorite: true,
+    visibility: true,
     image:
       "https://cdn.discordapp.com/attachments/1150483066259775582/1151422446835081226/BullPadelVertex.webp",
     material: "Multi-EVA",
@@ -71,6 +75,7 @@ export const apiRacketsMock: ApiRackets[] = [
     user: "userId",
     _id: "64f3a180784b0b6d4ddd8fe2",
     favorite: false,
+    visibility: true,
     control: 8,
     description:
       "Slightly softer core, slightly increasing sweet spot size and core reactivity. Intermediate-advanced level players looking for power and control.",
@@ -88,6 +93,7 @@ export const apiRacketsMock: ApiRackets[] = [
     description:
       "Precise touch and high maneuverability. This racket will help players excel on defense and disguise drop shots. It is not designed to be the most powerful racket.",
     favorite: false,
+    visibility: true,
     image:
       "https://cdn.discordapp.com/attachments/1150483066259775582/1151422446835081226/BullPadelVertex.webp",
     material: "Multi-EVA",
@@ -113,12 +119,14 @@ export const newRacketsMock: ApiRackets = {
   power: 8,
   shape: "Round shape",
   weight: 365,
+  visibility: true,
 };
 
 export const racketMock: Racket = {
   user: "userId",
   id: "64f3a180784b0b6d4ddd8feb",
   favorite: false,
+  visibility: true,
   control: 10,
   description:
     "It is a perfect padel racket for players who like soft padel rackets who are looking for good control, but who need a bit of power.",
@@ -137,6 +145,7 @@ export const myMockId: Racket = {
   description:
     "Its low balance also makes it very easy to use, and probably part of the reason Momo has been able to pull off so many amazing “tweeners”.",
   favorite: false,
+  visibility: true,
   image:
     "https://cdn.discordapp.com/attachments/1150483066259775582/1151422447099330560/MomoPuma.webp",
   material: "Soft EVA",
@@ -155,6 +164,7 @@ export const getMockId: ApiRackets = {
   description:
     "Its low balance also makes it very easy to use, and probably part of the reason Momo has been able to pull off so many amazing “tweeners”.",
   favorite: false,
+  visibility: true,
   image:
     "https://cdn.discordapp.com/attachments/1150483066259775582/1151422447099330560/MomoPuma.webp",
   material: "Soft EVA",
@@ -172,6 +182,7 @@ export const myMockId2: Racket[] = [
     description:
       "Its low balance also makes it very easy to use, and probably part of the reason Momo has been able to pull off so many amazing “tweeners”.",
     favorite: false,
+    visibility: true,
     image:
       "https://cdn.discordapp.com/attachments/1150483066259775582/1151422447099330560/MomoPuma.webp",
     material: "Soft EVA",
@@ -190,6 +201,7 @@ export const myMockId3: Racket[] = [
     description:
       "Its low balance also makes it very easy to use, and probably part of the reason Momo has been able to pull off so many amazing “tweeners”.",
     favorite: true,
+    visibility: true,
     image:
       "https://cdn.discordapp.com/attachments/1150483066259775582/1151422447099330560/MomoPuma.webp",
     material: "Soft EVA",

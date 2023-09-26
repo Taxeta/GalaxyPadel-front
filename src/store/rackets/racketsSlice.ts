@@ -54,10 +54,10 @@ const racketsSlice = createSlice({
 
     toggleVisibilityRacket: (
       currentRacketsState,
-      action: PayloadAction<string>,
+      action: PayloadAction<NewApiRacket>,
     ) => {
       const selectedRacket = currentRacketsState.rackets.find(
-        (racket) => racket.id === action.payload,
+        (racket) => racket.id === action.payload.id,
       );
       if (selectedRacket) {
         selectedRacket.visibility = !selectedRacket.visibility;
