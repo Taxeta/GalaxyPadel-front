@@ -10,7 +10,7 @@ import {
 import { useParams } from "react-router-dom";
 import "./DetailRacketPage.css";
 import { NewApiRacket } from "../../types";
-import { Switch } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
 
 export const DetailRacketPagePreload = lazy(() => import("./DetailRacketPage"));
 
@@ -59,7 +59,6 @@ const DetailRacketPage = (): React.ReactElement => {
   return (
     <article className="detail-content">
       <h1 className="detail__title">{racket?.name}</h1>
-      <Switch checked={!isChecked} onChange={handleToggleVisibility} />
       <div className="detail__container">
         <img
           className="detail__image"
@@ -106,6 +105,13 @@ const DetailRacketPage = (): React.ReactElement => {
             </span>{" "}
             {racket?.description}
           </li>
+          <FormControlLabel
+            className="detail__switch"
+            control={
+              <Switch checked={!isChecked} onChange={handleToggleVisibility} />
+            }
+            label="Make it visible to other users?"
+          />
         </ul>
       </div>
     </article>
