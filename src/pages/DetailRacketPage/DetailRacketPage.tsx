@@ -108,7 +108,11 @@ const DetailRacketPage = (): React.ReactElement => {
           <FormControlLabel
             className="detail__switch"
             control={
-              <Switch checked={!isChecked} onChange={handleToggleVisibility} />
+              <Switch
+                checked={!isChecked}
+                aria-label="switch"
+                onChange={handleToggleVisibility}
+              />
             }
             label="Make it visible to other users?"
           />

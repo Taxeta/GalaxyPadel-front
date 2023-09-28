@@ -221,4 +221,66 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
       expect(selectedRacket).rejects.toThrowError(error);
     });
   });
+
+  describe("When calls a modifyVisibilityRacket function with id '64f3a180784b0b6d4ddd8feb' and modify visibility", async () => {
+    const user: Partial<User> = {
+      getIdToken: vi.fn().mockResolvedValue("token"),
+    };
+
+    const authStateHookMock: Partial<AuthStateHook> = [user as User];
+    auth.useIdToken = vi.fn().mockReturnValue([user]);
+    auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+    const { result } = renderHook(async () => await useRacketsApi(), {
+      wrapper: uiWrapper,
+    });
+    const { modifyVisibilityRacket } = await result.current;
+
+    const id = "64f3a180784b0b6d4ddd8fe2";
+
+    test("Then it should return the property visibility to false of the racket 'Puma SolarATTACK Momo'", async () => {
+      const selectedRacket = await modifyVisibilityRacket(
+        id,
+        myMockId3[0].visibility,
+      );
+
+      expect(selectedRacket).toHaveProperty("visibility", true);
+    });
+
+    test("Then it should throw an error 'Couldn't change visibility of the racket'", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const error = new Error("Couldn't change visibility of the racket");
+
+      const newRacket = modifyVisibilityRacket(id, myMockId3[0].visibility);
+
+      expect(newRacket).rejects.toThrowError(error);
+    });
+  });
+
+  describe("When calling a modifyVisibilityRacket function without user", () => {
+    test("Then it should throw an error 'Couldn't change visibility of the racket'", async () => {
+      const id = "casdsadasd25427";
+
+      const authStateHookMock: Partial<AuthStateHook> = [undefined];
+      auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
+
+      const idTokenHookMock: Partial<IdTokenHook> = [undefined];
+      auth.useIdToken = vi.fn().mockReturnValue(idTokenHookMock);
+
+      const error = new Error("Couldn't change visibility of the racket");
+
+      const { result } = renderHook(async () => await useRacketsApi(), {
+        wrapper: uiWrapper,
+      });
+      const { modifyVisibilityRacket } = await result.current;
+
+      const selectedRacket = modifyVisibilityRacket(
+        id,
+        myMockId3[0].visibility,
+      );
+
+      expect(selectedRacket).rejects.toThrowError(error);
+    });
+  });
 });

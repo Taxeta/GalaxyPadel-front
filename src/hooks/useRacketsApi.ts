@@ -202,7 +202,7 @@ const useRacketsApi = () => {
       } catch {
         dispatch(stopLoadingActionCreator());
 
-        showToastFunction("Couldn't racket visible", "error");
+        showToastFunction("Couldn't set the racket visible", "error");
         throw new Error("Couldn't change visibility of the racket");
       }
     },

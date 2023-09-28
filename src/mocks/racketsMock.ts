@@ -212,3 +212,22 @@ export const myMockId3: Racket[] = [
     user: "64fafa72adb338f7af6830f5",
   },
 ];
+
+export const myMockId4: Racket[] = [
+  {
+    id: "64f3a180784b0b6d4ddd8fe2",
+    control: 10,
+    description:
+      "Its low balance also makes it very easy to use, and probably part of the reason Momo has been able to pull off so many amazing “tweeners”.",
+    favorite: false,
+    visibility: false,
+    image:
+      "https://cdn.discordapp.com/attachments/1150483066259775582/1151422447099330560/MomoPuma.webp",
+    material: "Soft EVA",
+    name: "Puma SolarATTACK Momo",
+    power: 8,
+    shape: "Round shape",
+    weight: 370,
+    user: "64fafa72adb338f7af6830f5",
+  },
+];
