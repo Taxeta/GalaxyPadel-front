@@ -106,6 +106,7 @@ const DetailRacketPage = (): React.ReactElement => {
             {racket?.description}
           </li>
           <FormControlLabel
+            id="detail__switch"
             className="detail__switch"
             control={
               <Switch
