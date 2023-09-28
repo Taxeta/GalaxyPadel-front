@@ -41,7 +41,7 @@ const racketsSlice = createSlice({
       selectedRacket: action.payload,
     }),
 
-    toggleRacket: (
+    toggleFavoriteRacket: (
       currentRacketsState,
       action: PayloadAction<NewApiRacket>,
     ): RacketState => ({
@@ -51,6 +51,18 @@ const racketsSlice = createSlice({
         racket.id === action.payload.id ? action.payload : racket,
       ),
     }),
+
+    toggleVisibilityRacket: (
+      currentRacketsState,
+      action: PayloadAction<NewApiRacket>,
+    ) => {
+      const selectedRacket = currentRacketsState.rackets.find(
+        (racket) => racket.id === action.payload.id,
+      );
+      if (selectedRacket) {
+        selectedRacket.visibility = !selectedRacket.visibility;
+      }
+    },
   },
 });
 
@@ -60,5 +72,6 @@ export const {
   deleteRackets: deleteRacketActionCreator,
   addRacket: addRacketActionCreator,
   loadSelectedRacket: loadSelectedRacketActionCreator,
-  toggleRacket: toggleRacketActionCreator,
+  toggleFavoriteRacket: toggleRacketActionCreator,
+  toggleVisibilityRacket: toggleVisibilityRacketActionCreator,
 } = racketsSlice.actions;

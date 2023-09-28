@@ -14,8 +14,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fontsource/assistant": "^5.0.8",
     "@fontsource/nunito": "^5.0.8",
+    "@mui/material": "^5.14.11",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.5.0",
     "firebase": "^10.3.1",

@@ -1,20 +1,26 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useState } from "react";
 import useRacketsApi from "../../hooks/useRacketsApi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { loadSelectedRacketActionCreator } from "../../store/rackets/racketsSlice";
+import {
+  loadSelectedRacketActionCreator,
+  toggleVisibilityRacketActionCreator,
+} from "../../store/rackets/racketsSlice";
 import { useParams } from "react-router-dom";
 import "./DetailRacketPage.css";
+import { NewApiRacket } from "../../types";
+import { FormControlLabel, Switch } from "@mui/material";
 
 export const DetailRacketPagePreload = lazy(() => import("./DetailRacketPage"));
 
 const DetailRacketPage = (): React.ReactElement => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { getRacketByIdApi } = useRacketsApi();
+  const { getRacketByIdApi, modifyVisibilityRacket } = useRacketsApi();
   const [user] = useAuthState(auth);
   const racket = useAppSelector((state) => state.racketsState.selectedRacket);
+  const [isChecked, setIsChecked] = useState(racket?.visibility || false);
 
   useEffect(() => {
     if (user) {
@@ -23,12 +29,32 @@ const DetailRacketPage = (): React.ReactElement => {
 
         if (selectedRacket) {
           dispatch(loadSelectedRacketActionCreator(selectedRacket));
-
+          setIsChecked(!selectedRacket.visibility);
           document.title = `Detail racket ${selectedRacket?.name}`;
         }
       })();
     }
   }, [user, dispatch, getRacketByIdApi, id]);
+
+  const toggleVisibilityRacket = async (
+    racket: Partial<NewApiRacket>,
+    visibility: boolean,
+  ) => {
+    const racketVisibility = await modifyVisibilityRacket(
+      racket.id!,
+      visibility,
+    );
+
+    dispatch(toggleVisibilityRacketActionCreator(racketVisibility));
+  };
+
+  const handleToggleVisibility = async () => {
+    if (racket && racket.visibility !== undefined) {
+      const newVisibility = !isChecked;
+      setIsChecked(newVisibility);
+      await toggleVisibilityRacket(racket!, newVisibility);
+    }
+  };
 
   return (
     <article className="detail-content">
@@ -79,6 +105,17 @@ const DetailRacketPage = (): React.ReactElement => {
             </span>{" "}
             {racket?.description}
           </li>
+          <FormControlLabel
+            className="detail__switch"
+            control={
+              <Switch
+                checked={!isChecked}
+                aria-label="switch"
+                onChange={handleToggleVisibility}
+              />
+            }
+            label="Make it visible to other users?"
+          />
         </ul>
       </div>
     </article>

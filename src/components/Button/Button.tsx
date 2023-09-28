@@ -4,23 +4,17 @@ interface ButtonProps
   extends PropsWithChildren,
     ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  actionOnClick?: () => void;
   text?: string;
 }
 
 const Button = ({
   children,
-  actionOnClick,
   className,
   text,
   ...props
 }: Partial<ButtonProps>): React.ReactElement => {
   return (
-    <button
-      className={`button ${className}`}
-      onClick={actionOnClick}
-      {...props}
-    >
+    <button className={`button ${className}`} {...props}>
       {text}
       {children}
     </button>

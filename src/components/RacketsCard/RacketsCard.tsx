@@ -30,7 +30,7 @@ const RacketCard = ({
     dispatch(deleteRacketActionCreator(id!));
   };
 
-  const toggleRacket = async () => {
+  const toggleFavoriteRacket = async () => {
     const modifyRacket = await modifyRacketByIdApi(id!, favorite!);
 
     dispatch(toggleRacketActionCreator(modifyRacket));
@@ -52,7 +52,10 @@ const RacketCard = ({
         </div>
       </div>
       <div className="button-favorite-container">
-        <Button className="button-favorite__icon" onClick={toggleRacket}>
+        <Button
+          className="button-favorite__icon"
+          onClick={toggleFavoriteRacket}
+        >
           <img
             className={"favorite-icon"}
             src={favorite ? favoriteFillIcon : favoriteEmptyIcon}
