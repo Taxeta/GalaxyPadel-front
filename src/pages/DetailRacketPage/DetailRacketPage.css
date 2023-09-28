@@ -52,8 +52,8 @@
   margin: 0;
 }
 
-.detail__switch.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
-  font-size: 14px !important;
-  font-weight: bold !important;
-  font-family: var(--primary-font) !important;
+#detail__switch-span {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: var(--primary-font);
 }
