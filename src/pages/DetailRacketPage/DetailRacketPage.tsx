@@ -8,9 +8,9 @@ import {
   toggleVisibilityRacketActionCreator,
 } from "../../store/rackets/racketsSlice";
 import { useParams } from "react-router-dom";
+import { FormControlLabel, Switch } from "@mui/material";
 import "./DetailRacketPage.css";
 import { NewApiRacket } from "../../types";
-import { FormControlLabel, Switch } from "@mui/material";
 
 export const DetailRacketPagePreload = lazy(() => import("./DetailRacketPage"));
 
