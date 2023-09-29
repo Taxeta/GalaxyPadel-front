@@ -7,7 +7,6 @@
   padding: 15px;
   color: var(--white);
   background-color: var(--primary-color);
-  box-shadow: 4px 0 4px 0 #000000;
 }
 
 .footer__data {
@@ -36,7 +35,6 @@
   padding: 15px;
   color: var(--white);
   background-color: var(--primary-color);
-  box-shadow: 4px 0 4px 0 #000000;
 }
 
 .company-name {

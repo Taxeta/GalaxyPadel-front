@@ -8,6 +8,13 @@ interface FormProps {
   actionOnSubmit: (newRacket: Omit<Racket, "id" | "user" | "favorite">) => void;
 }
 
+const handleScrollToBottom = () => {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  });
+};
+
 const RacketsForm = ({ actionOnSubmit }: FormProps) => {
   const [newRacket, setNewRacket] = useState<Omit<Racket, "id" | "user">>({
     name: "",
@@ -161,7 +168,11 @@ const RacketsForm = ({ actionOnSubmit }: FormProps) => {
         />
       </div>
       <div className="form__button">
-        <Button type="submit" className="big-button-solid">
+        <Button
+          type="submit"
+          className="big-button-solid"
+          onClick={handleScrollToBottom}
+        >
           Create
         </Button>
       </div>

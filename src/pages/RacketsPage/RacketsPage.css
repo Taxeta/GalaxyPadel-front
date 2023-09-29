@@ -3,29 +3,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--secondary-color);
+  background-image: var(--background-regular-image);
+  background-position: center;
   min-height: 100vh;
 }
 
 .list-page__title {
-  color: var(--white);
+  color: var(--black);
   font-family: var(--secondary-font);
   font-size: 24px;
-  font-weight: 700;
-  padding: 0 17px;
+  font-weight: 900;
+  padding: 5px 17px;
   text-align: center;
   text-transform: uppercase;
-}
-
-.list-page__secondtitle {
-  display: flex;
-  color: var(--white);
-  font-family: var(--secondary-font);
-  font-size: 24px;
-  font-weight: 700;
-  margin: 50px 32px;
-  text-align: center;
-  text-transform: uppercase;
+  border: 3px solid #1b4078;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255, 0.4);
 }
 
 .create-link {
