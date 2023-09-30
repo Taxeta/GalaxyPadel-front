@@ -3,8 +3,26 @@ import { store } from "../../store";
 import RacketsForm from "./RacketsForm";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import auth, { AuthStateHook } from "react-firebase-hooks/auth";
+import { User } from "@firebase/auth";
 
 const actionOnSubmit = vi.fn();
+
+const mockScrollBotom = vi.fn();
+
+beforeEach(() => {
+  window.scrollTo = mockScrollBotom;
+});
+
+afterEach(() => {
+  mockScrollBotom.mockReset();
+});
+
+const user: Partial<User> = { displayName: "Arturo" };
+
+const authStateHookMock: Partial<AuthStateHook> = [user as User];
+
+auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
 
 describe("Given a RacketsForm component", () => {
   const nameLabelText = "Name:";
@@ -122,6 +140,7 @@ describe("Given a RacketsForm component", () => {
       await userEvent.click(button);
 
       expect(actionOnSubmit).toHaveBeenCalled();
+      expect(mockScrollBotom).toHaveBeenCalledTimes(1);
     });
   });
 });
