@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   background-image: var(--background-regular-image);
-  background-position: center;
+
   min-height: 100vh;
 }
 

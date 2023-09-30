@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { FormControlLabel, Switch } from "@mui/material";
 import "./DetailRacketPage.css";
 import { NewApiRacket } from "../../types";
+import Loading from "../../components/Loading/Loading";
 
 export const DetailRacketPagePreload = lazy(() => import("./DetailRacketPage"));
 
@@ -20,6 +21,7 @@ const DetailRacketPage = (): React.ReactElement => {
   const { getRacketByIdApi, modifyVisibilityRacket } = useRacketsApi();
   const [user] = useAuthState(auth);
   const racket = useAppSelector((state) => state.racketsState.selectedRacket);
+  const isLoading = useAppSelector((state) => state.uiState.isLoading);
   const [isChecked, setIsChecked] = useState(racket?.visibility || false);
 
   useEffect(() => {
@@ -57,72 +59,78 @@ const DetailRacketPage = (): React.ReactElement => {
   };
 
   return (
-    <article className="detail-content">
-      <h1 className="detail__title">{racket?.name}</h1>
-      <div className="detail__container">
-        <img
-          className="detail__image"
-          src={racket?.image}
-          alt={`${racket?.name} racket`}
-          width="280"
-          height="280"
-        />
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <article className="detail-content">
+          <h1 className="detail__title">{racket?.name}</h1>
+          <div className="detail__container">
+            <img
+              className="detail__image"
+              src={racket?.image}
+              alt={`${racket?.name} racket`}
+              width="280"
+              height="280"
+            />
 
-        <ul className="detail__list">
-          <li>
-            <span className="detail__list-bold" aria-label="shape">
-              Shape:
-            </span>{" "}
-            {racket?.shape}
-          </li>
-          <li>
-            <span className="detail__list-bold" aria-label="weight">
-              Weight:
-            </span>{" "}
-            {racket?.weight} g
-          </li>
-          <li>
-            <span className="detail__list-bold" aria-label="material">
-              Material:
-            </span>{" "}
-            {racket?.material}
-          </li>
-          <li>
-            <span className="detail__list-bold" aria-label="power">
-              Power(1-10):
-            </span>{" "}
-            {racket?.power}
-          </li>
-          <li>
-            <span className="detail__list-bold" aria-label="control">
-              Control (1-10):
-            </span>{" "}
-            {racket?.control}
-          </li>
-          <li>
-            <span className="detail__list-bold" aria-label="description">
-              Description:
-            </span>{" "}
-            {racket?.description}
-          </li>
-          <FormControlLabel
-            id="detail__switch"
-            control={
-              <Switch
-                checked={!isChecked}
-                aria-label="switch"
-                onChange={handleToggleVisibility}
+            <ul className="detail__list">
+              <li>
+                <span className="detail__list-bold" aria-label="shape">
+                  Shape:
+                </span>{" "}
+                {racket?.shape}
+              </li>
+              <li>
+                <span className="detail__list-bold" aria-label="weight">
+                  Weight:
+                </span>{" "}
+                {racket?.weight} g
+              </li>
+              <li>
+                <span className="detail__list-bold" aria-label="material">
+                  Material:
+                </span>{" "}
+                {racket?.material}
+              </li>
+              <li>
+                <span className="detail__list-bold" aria-label="power">
+                  Power(1-10):
+                </span>{" "}
+                {racket?.power}
+              </li>
+              <li>
+                <span className="detail__list-bold" aria-label="control">
+                  Control (1-10):
+                </span>{" "}
+                {racket?.control}
+              </li>
+              <li>
+                <span className="detail__list-bold" aria-label="description">
+                  Description:
+                </span>{" "}
+                {racket?.description}
+              </li>
+              <FormControlLabel
+                id="detail__switch"
+                control={
+                  <Switch
+                    checked={!isChecked}
+                    aria-label="switch"
+                    onChange={handleToggleVisibility}
+                  />
+                }
+                label={
+                  <span id="detail__switch-span">
+                    Make it visible to other users?
+                  </span>
+                }
               />
-            }
-            label={
-              <span id="detail__switch-span">
-                Make it visible to other users?
-              </span>
-            }
-          />
-        </ul>
-      </div>
-    </article>
+            </ul>
+          </div>
+        </article>
+      )}
+    </>
   );
 };
 

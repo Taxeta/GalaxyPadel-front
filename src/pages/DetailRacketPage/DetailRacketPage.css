@@ -1,6 +1,6 @@
 .detail-content {
   background-image: var(--background-regular-image);
-  background-position: center;
+
   min-height: 100vh;
   padding: 160px 20px 120px 20px;
   display: flex;

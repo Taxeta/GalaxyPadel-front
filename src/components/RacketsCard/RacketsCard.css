@@ -5,6 +5,7 @@
   border: 4px solid #1b4078;
   overflow: hidden;
   max-width: 280px;
+  height: 460px;
 }
 
 .racket__image {
@@ -24,8 +25,9 @@
   font-size: 24px;
   font-weight: 700;
   text-align: center;
+  height: 64px;
   margin-top: 15px;
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 
 .racket__atributes {

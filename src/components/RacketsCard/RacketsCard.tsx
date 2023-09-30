@@ -36,6 +36,10 @@ const RacketCard = ({
     dispatch(toggleRacketActionCreator(modifyRacket));
   };
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <article className="racket">
       <div className="icons-container">
@@ -81,7 +85,11 @@ const RacketCard = ({
           <li>{shape}</li>
           <li>{weight} g</li>
         </ul>
-        <Link to={`/rackets/${id}`} className="button-fill">
+        <Link
+          to={`/rackets/${id}`}
+          onClick={handleScrollToTop}
+          className="button-fill"
+        >
           See details
         </Link>
       </div>

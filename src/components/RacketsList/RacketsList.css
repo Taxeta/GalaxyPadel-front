@@ -1,3 +1,19 @@
 .racket-content {
   margin: 25px 0 25px 0;
 }
+
+@media (min-width: 600px) {
+  .racket-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 900px) {
+  .racket-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+}
