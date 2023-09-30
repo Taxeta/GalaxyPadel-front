@@ -9,6 +9,7 @@
   --secondary-font: "Assistant", "sans-serif";
   --background-login-image: url(../assets/loginBackground.webp);
   --background-error-image: url(../assets/backgroundError.webp);
+  --background-regular-image: url(../assets/background-regular2.webp);
 }
 
 *,

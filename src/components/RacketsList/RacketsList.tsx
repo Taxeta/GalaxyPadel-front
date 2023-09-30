@@ -6,10 +6,10 @@ const RacketsList = (): React.ReactElement => {
   const rackets = useAppSelector((state) => state.racketsState.rackets);
 
   return (
-    <ul>
+    <ul className="racket-grid">
       {rackets?.map((racket, racketPosition) => (
         <li className="racket-content" key={racket.id}>
-          <RacketCard racket={racket} isLazy={racketPosition > 2} />
+          <RacketCard racket={racket} isLazy={racketPosition > 3} />
         </li>
       ))}
     </ul>

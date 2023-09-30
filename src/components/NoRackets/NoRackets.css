@@ -1,6 +1,6 @@
 .no-rackets__title {
   display: flex;
-  color: var(--white);
+  color: var(--black);
   font-family: var(--secondary-font);
   font-size: 24px;
   font-weight: 700;
@@ -19,7 +19,7 @@
 .create-link {
   font-size: 22px;
   font-family: var(--secondary-font);
-  color: var(--white);
+  color: var(--black);
   border: 1px hidden;
   cursor: pointer;
   background-color: var(--primary-color);

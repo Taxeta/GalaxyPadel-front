@@ -3,6 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import Footer from "./Footer";
 import { User } from "firebase/auth";
 import auth, { AuthStateHook } from "react-firebase-hooks/auth";
+import userEvent from "@testing-library/user-event";
+
+const mockScrollTop = vi.fn();
+
+beforeEach(() => {
+  window.scrollTo = mockScrollTop;
+});
+
+afterEach(() => {
+  mockScrollTop.mockReset();
+});
 
 describe("Given a Footer component", () => {
   const user: Partial<User> = { displayName: "Arturo" };
@@ -11,7 +22,7 @@ describe("Given a Footer component", () => {
 
   auth.useAuthState = vi.fn().mockReturnValue(authStateHookMock);
   describe("When it's rendered", () => {
-    test("Then it should show the links 'Rackets' and 'Create'", () => {
+    test("Then it should show the links 'Rackets' and 'Create'", async () => {
       const homeLink = "Rackets";
       const createLink = "Create";
 
@@ -26,6 +37,10 @@ describe("Given a Footer component", () => {
 
       expect(navLinkHome).toBeInTheDocument();
       expect(navLinkCreate).toBeInTheDocument();
+
+      await userEvent.click(navLinkHome);
+
+      expect(mockScrollTop).toHaveBeenCalledTimes(1);
     });
   });
 

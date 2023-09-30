@@ -8,6 +8,10 @@ const Footer = (): React.ReactElement => {
   const [user] = useAuthState(auth);
   const { pathname } = useLocation();
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className={user ? "footer" : "footer-offline"}>
       {user && (
@@ -20,6 +24,7 @@ const Footer = (): React.ReactElement => {
                   : "footer-navigation__inactive"
               }
               to="/rackets"
+              onClick={handleScrollToTop}
             >
               Rackets
             </NavLink>
@@ -32,6 +37,7 @@ const Footer = (): React.ReactElement => {
                   : "footer-navigation__inactive"
               }
               to="/create"
+              onClick={handleScrollToTop}
             >
               Create
             </NavLink>

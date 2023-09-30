@@ -27,11 +27,6 @@ const FormPage = () => {
     dispatch(addRacketActionCreator(racket));
 
     navigate(paths.rackets);
-
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
   };
 
   return (

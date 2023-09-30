@@ -3,7 +3,6 @@
   flex-direction: row;
   padding: 15px 15px 0 15px;
   background-color: var(--primary-color);
-  box-shadow: 0 4px 4px 0 #000000;
   color: var(--white);
   width: 100%;
   justify-content: space-between;
@@ -38,4 +37,23 @@
 .header__logout {
   display: flex;
   margin-top: 2px;
+}
+
+@media (min-width: 600px) {
+  .header__title {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: 28px;
+    margin: 0;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header__container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
 }

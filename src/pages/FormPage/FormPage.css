@@ -3,14 +3,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--secondary-color);
+  background-image: var(--background-regular-image);
+
   min-height: 100vh;
 }
 
 .form-title {
   text-transform: uppercase;
-  font-size: 24px;
+  font-size: 26px;
   font-family: var(--secondary-font);
-  color: var(--white);
-  font-weight: 700;
+  color: var(--black);
+  font-weight: bold;
+  border: 3px solid #1b4078;
+  border-radius: 10px;
+  padding: 5px 17px;
+  background-color: rgb(255, 255, 255, 0.4);
 }
