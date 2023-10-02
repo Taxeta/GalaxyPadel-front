@@ -2,7 +2,7 @@
   display: flex;
   color: var(--black);
   font-family: var(--secondary-font);
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   margin: 50px 32px;
   text-align: center;
@@ -13,14 +13,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--secondary-color);
 }
 
 .create-link {
   font-size: 22px;
   font-family: var(--secondary-font);
-  color: var(--black);
-  border: 1px hidden;
+  color: var(--white);
+  border: 1px solid var(--white);
   cursor: pointer;
   background-color: var(--primary-color);
   padding: 25px 60px;
