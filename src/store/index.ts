@@ -6,10 +6,12 @@ import {
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { racketsReducer } from "./rackets/racketsSlice";
 import { uiReducer } from "./ui/ui";
+import { paginationReducer } from "./pagination/paginationSlice";
 
 const rootReducer = combineReducers({
   racketsState: racketsReducer,
   uiState: uiReducer,
+  pagination: paginationReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
