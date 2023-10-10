@@ -11,6 +11,7 @@ import {
 import { ApiRackets, NewApiRacket, Racket, RacketsApi } from "../types";
 import { useNavigate } from "react-router-dom";
 import paths from "../paths/paths";
+import { initialPaginationActionCreator } from "../store/pagination/paginationSlice";
 
 const useRacketsApi = () => {
   const apiUrl = import.meta.env.VITE_API_RACKETS_URL;
@@ -18,32 +19,43 @@ const useRacketsApi = () => {
   const [user] = useIdToken(auth);
   const navigate = useNavigate();
 
-  const getRackets = useCallback(async () => {
-    dispatch(startLoadingActionCreator());
-    try {
-      if (user) {
-        const token = await user.getIdToken();
+  const getRackets = useCallback(
+    async (page: number, pageSize: number) => {
+      dispatch(startLoadingActionCreator());
+      try {
+        if (user) {
+          const token = await user.getIdToken();
 
-        const { data: apiRackets } = await axios.get<RacketsApi>(
-          `${apiUrl}rackets`,
-          { headers: { Authorization: `Bearer ${token}` } },
-        );
+          const { data: apiRackets } = await axios.get<RacketsApi>(
+            `${apiUrl}rackets?page=${page}&pageSize=${pageSize}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            },
+          );
 
-        const apiRacketsCards = apiRackets.rackets;
+          const apiRacketsCards = apiRackets.rackets;
 
-        const rackets = apiRacketsCards.map<Racket>(({ _id, ...rackets }) => ({
-          ...rackets,
-          id: _id,
-        }));
+          const rackets = apiRacketsCards.map<Racket>(
+            ({ _id, ...rackets }) => ({
+              ...rackets,
+              id: _id,
+            }),
+          );
 
+          const totalRackets = rackets.length;
+
+          dispatch(initialPaginationActionCreator(totalRackets));
+
+          dispatch(stopLoadingActionCreator());
+          return rackets;
+        }
+      } catch {
         dispatch(stopLoadingActionCreator());
-        return rackets;
+        throw new Error("Can't get any racket");
       }
-    } catch {
-      dispatch(stopLoadingActionCreator());
-      throw new Error("Can't get any racket");
-    }
-  }, [user, apiUrl, dispatch]);
+    },
+    [user, apiUrl, dispatch],
+  );
 
   const deleteRacketApi = useCallback(
     async (_id: string) => {

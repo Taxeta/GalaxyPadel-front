@@ -15,7 +15,7 @@ const racketsSlice = createSlice({
       action: PayloadAction<Racket[]>,
     ): RacketState => ({
       ...currentRacketsState,
-      rackets: action.payload,
+      rackets: [...currentRacketsState.rackets, ...action.payload],
     }),
 
     deleteRackets: (
