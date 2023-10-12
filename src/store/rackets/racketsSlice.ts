@@ -13,10 +13,18 @@ const racketsSlice = createSlice({
     loadRackets: (
       currentRacketsState,
       action: PayloadAction<Racket[]>,
-    ): RacketState => ({
-      ...currentRacketsState,
-      rackets: [...currentRacketsState.rackets, ...action.payload],
-    }),
+    ): RacketState => {
+      const uniqueRackets = action.payload.filter((racket) => {
+        return !currentRacketsState.rackets.some(
+          (hasRacket) => hasRacket.id === racket.id,
+        );
+      });
+
+      return {
+        ...currentRacketsState,
+        rackets: [...currentRacketsState.rackets, ...uniqueRackets],
+      };
+    },
 
     deleteRackets: (
       currentRacketsState,

@@ -7,6 +7,7 @@ const paginationSlice = createSlice({
     pageSize: 10,
     totalPages: 1,
     totalRackets: 0,
+    loadingMore: false,
   },
   reducers: {
     setPage: (state, action: PayloadAction<number>) => {
@@ -22,6 +23,9 @@ const paginationSlice = createSlice({
       state.totalRackets = action.payload;
       state.totalPages = Math.ceil(action.payload / state.pageSize);
     },
+    setLoadingMore: (state, action: PayloadAction<boolean>) => {
+      state.loadingMore = action.payload;
+    },
   },
 });
 
@@ -31,4 +35,5 @@ export const {
   setTotalPages: setTotalPagesActionCreator,
   setTotalRackets: setTotalRacketsActionCreator,
   initialPagination: initialPaginationActionCreator,
+  setLoadingMore: setLoadingMoreActionCreator,
 } = paginationSlice.actions;

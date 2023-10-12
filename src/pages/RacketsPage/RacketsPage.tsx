@@ -1,4 +1,4 @@
-import { lazy, useEffect, useState } from "react";
+import { lazy, useEffect, useState, useCallback } from "react";
 import RacketsList from "../../components/RacketsList/RacketsList";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { loadRacketsActionCreator } from "../../store/rackets/racketsSlice";
@@ -8,6 +8,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase";
 import Loading from "../../components/Loading/Loading";
 import NoRackets from "../../components/NoRackets/NoRackets";
+import useDebounce from "../../hooks/useDebounce";
+import { setLoadingMoreActionCreator } from "../../store/pagination/paginationSlice";
 
 export const RacketsPagePreload = lazy(() => import("./RacketsPage"));
 
@@ -17,9 +19,11 @@ const RacketsPage = (): React.ReactElement => {
   const [user, loading] = useAuthState(auth);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const debouncedCurrentPage = useDebounce(currentPage, 200);
 
   const isLoading = useAppSelector((state) => state.uiState.isLoading);
   const rackets = useAppSelector((state) => state.racketsState.rackets);
+  const isLoadingMore = useAppSelector((state) => state.pagination.loadingMore);
 
   const pageSize = 10;
   const firstItemPage = (currentPage - 1) * pageSize;
@@ -33,34 +37,50 @@ const RacketsPage = (): React.ReactElement => {
     document.head.appendChild(preloadImageLink);
   };
 
-  const newPageScroll = () => {
+  const newPageScroll = useCallback(() => {
     const scrolledToBottom =
       window.innerHeight + document.documentElement.scrollTop + 1 >=
       document.documentElement.offsetHeight;
 
-    if (scrolledToBottom) {
+    if (scrolledToBottom && !isLoading && !isLoadingMore) {
+      dispatch(setLoadingMoreActionCreator(true));
       setCurrentPage((previousPage) => previousPage + 1);
     }
-  };
+  }, [dispatch, isLoading, isLoadingMore]);
 
   useEffect(() => {
     document.title = "Rackets List";
 
-    if (user) {
+    if (user && isLoadingMore) {
       (async () => {
-        const rackets = await getRackets(currentPage, pageSize);
-        if (rackets && rackets.length > 0) {
-          dispatch(loadRacketsActionCreator(rackets));
-
-          preloadImages(rackets[0].image);
+        try {
+          const rackets = await getRackets(debouncedCurrentPage, pageSize);
+          if (rackets && rackets.length > 0) {
+            dispatch(loadRacketsActionCreator(rackets));
+            preloadImages(rackets[0].image);
+          }
+        } catch {
+          throw new Error("Error loading more rackets:");
         }
+        dispatch(setLoadingMoreActionCreator(false));
       })();
     }
+  }, [
+    dispatch,
+    getRackets,
+    user,
+    debouncedCurrentPage,
+    pageSize,
+    isLoadingMore,
+  ]);
 
+  useEffect(() => {
     window.addEventListener("scroll", newPageScroll);
 
-    return () => window.removeEventListener("scroll", newPageScroll);
-  }, [dispatch, getRackets, user, currentPage, pageSize]);
+    return () => {
+      window.removeEventListener("scroll", newPageScroll);
+    };
+  }, [newPageScroll]);
 
   return (
     <div className="list-page">
