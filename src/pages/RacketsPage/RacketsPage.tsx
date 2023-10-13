@@ -37,6 +37,21 @@ const RacketsPage = (): React.ReactElement => {
     document.head.appendChild(preloadImageLink);
   };
 
+  const loadFirstRacketsPage = useCallback(
+    async (page: number) => {
+      try {
+        const rackets = await getRackets(page, pageSize);
+        if (rackets && rackets.length > 0) {
+          dispatch(loadRacketsActionCreator(rackets));
+          preloadImages(rackets[0].image);
+        }
+      } catch {
+        throw new Error("Error loading rackets for page:");
+      }
+    },
+    [dispatch, getRackets],
+  );
+
   const newPageScroll = useCallback(() => {
     const scrolledToBottom =
       window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -52,18 +67,8 @@ const RacketsPage = (): React.ReactElement => {
     document.title = "Rackets List";
 
     if (user && isLoadingMore) {
-      (async () => {
-        try {
-          const rackets = await getRackets(debouncedCurrentPage, pageSize);
-          if (rackets && rackets.length > 0) {
-            dispatch(loadRacketsActionCreator(rackets));
-            preloadImages(rackets[0].image);
-          }
-        } catch {
-          throw new Error("Error loading more rackets:");
-        }
-        dispatch(setLoadingMoreActionCreator(false));
-      })();
+      loadFirstRacketsPage(debouncedCurrentPage);
+      dispatch(setLoadingMoreActionCreator(false));
     }
   }, [
     dispatch,
@@ -72,7 +77,14 @@ const RacketsPage = (): React.ReactElement => {
     debouncedCurrentPage,
     pageSize,
     isLoadingMore,
+    loadFirstRacketsPage,
   ]);
+
+  useEffect(() => {
+    if (user) {
+      loadFirstRacketsPage(currentPage);
+    }
+  }, [currentPage, user, pageSize, loadFirstRacketsPage]);
 
   useEffect(() => {
     window.addEventListener("scroll", newPageScroll);
