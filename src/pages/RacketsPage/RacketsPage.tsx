@@ -24,6 +24,7 @@ const RacketsPage = (): React.ReactElement => {
   const isLoading = useAppSelector((state) => state.uiState.isLoading);
   const rackets = useAppSelector((state) => state.racketsState.rackets);
   const isLoadingMore = useAppSelector((state) => state.pagination.loadingMore);
+  const totalRackets = useAppSelector((state) => state.pagination.totalRackets);
 
   const pageSize = 10;
   const firstItemPage = (currentPage - 1) * pageSize;
@@ -37,7 +38,7 @@ const RacketsPage = (): React.ReactElement => {
     document.head.appendChild(preloadImageLink);
   };
 
-  const loadFirstRacketsPage = useCallback(
+  const loadRacketsPage = useCallback(
     async (page: number) => {
       try {
         const rackets = await getRackets(page, pageSize);
@@ -57,17 +58,19 @@ const RacketsPage = (): React.ReactElement => {
       window.innerHeight + document.documentElement.scrollTop + 1 >=
       document.documentElement.offsetHeight;
 
-    if (scrolledToBottom && !isLoading && !isLoadingMore) {
+    const allRacketsLoaded = totalRackets === rackets.length;
+
+    if (scrolledToBottom && !isLoading && !isLoadingMore && allRacketsLoaded) {
       dispatch(setLoadingMoreActionCreator(true));
       setCurrentPage((previousPage) => previousPage + 1);
     }
-  }, [dispatch, isLoading, isLoadingMore]);
+  }, [dispatch, isLoading, isLoadingMore, rackets.length, totalRackets]);
 
   useEffect(() => {
     document.title = "Rackets List";
 
     if (user && isLoadingMore) {
-      loadFirstRacketsPage(debouncedCurrentPage);
+      loadRacketsPage(debouncedCurrentPage);
       dispatch(setLoadingMoreActionCreator(false));
     }
   }, [
@@ -77,14 +80,14 @@ const RacketsPage = (): React.ReactElement => {
     debouncedCurrentPage,
     pageSize,
     isLoadingMore,
-    loadFirstRacketsPage,
+    loadRacketsPage,
   ]);
 
   useEffect(() => {
     if (user) {
-      loadFirstRacketsPage(currentPage);
+      loadRacketsPage(currentPage);
     }
-  }, [currentPage, user, pageSize, loadFirstRacketsPage]);
+  }, [currentPage, user, pageSize, loadRacketsPage]);
 
   useEffect(() => {
     window.addEventListener("scroll", newPageScroll);

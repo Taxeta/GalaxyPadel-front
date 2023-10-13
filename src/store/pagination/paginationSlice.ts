@@ -17,7 +17,7 @@ const paginationSlice = createSlice({
       state.totalPages = action.payload;
     },
     setTotalRackets: (state, action: PayloadAction<number>) => {
-      state.totalRackets = action.payload;
+      state.totalRackets += action.payload;
     },
     initialPagination: (state, action: PayloadAction<number>) => {
       state.totalRackets = action.payload;
