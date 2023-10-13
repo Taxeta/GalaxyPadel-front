@@ -4,13 +4,17 @@ import deleteIcon from "../../assets/deleteIcon.svg";
 import favoriteEmptyIcon from "../../assets/favoriteEmptyIcon.svg";
 import favoriteFillIcon from "../../assets/favoriteFillIcon.svg";
 import "./RacketsCard.css";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import {
   deleteRacketActionCreator,
   toggleRacketActionCreator,
 } from "../../store/rackets/racketsSlice";
 import useRacketsApi from "../../hooks/useRacketsApi";
 import { Link } from "react-router-dom";
+import {
+  setTotalPagesActionCreator,
+  setTotalRacketsActionCreator,
+} from "../../store/pagination/paginationSlice";
 
 interface RacketsCardProps {
   racket: Partial<Racket>;
@@ -24,8 +28,18 @@ const RacketCard = ({
   const dispatch = useAppDispatch();
   const { deleteRacketApi, modifyRacketByIdApi } = useRacketsApi();
 
+  const totalRackets = useAppSelector((state) => state.pagination.totalRackets);
+  const pageSize = useAppSelector((state) => state.pagination.pageSize);
+
   const deleteRacket = async () => {
     await deleteRacketApi(id!);
+
+    const newTotalRackets = totalRackets - 1;
+
+    const newTotalPages = Math.ceil(newTotalRackets / pageSize);
+
+    dispatch(setTotalPagesActionCreator(newTotalRackets));
+    dispatch(setTotalRacketsActionCreator(newTotalPages));
 
     dispatch(deleteRacketActionCreator(id!));
   };

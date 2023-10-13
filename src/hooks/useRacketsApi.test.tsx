@@ -46,7 +46,7 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
     } = renderHook(() => useRacketsApi(), { wrapper: uiWrapper });
 
     test("Then it should receive a list of rackets", async () => {
-      const rackets = await getRackets();
+      const rackets = await getRackets(1, 10);
 
       expect(rackets).toStrictEqual(racketsMock);
     });
@@ -56,7 +56,7 @@ describe("Given a function getRackets from useRacketsApi hook", () => {
 
       const error = new Error("Can't get any racket");
 
-      const rackets = getRackets();
+      const rackets = getRackets(1, 10);
 
       expect(rackets).rejects.toThrowError(error);
     });
