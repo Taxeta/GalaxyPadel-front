@@ -67,7 +67,7 @@ const RacketsPage = (): React.ReactElement => {
   }, [dispatch, isLoading, isLoadingMore, rackets.length, totalRackets]);
 
   useEffect(() => {
-    document.title = "Rackets List";
+    document.title = "GalaxyPadel | Rackets List";
 
     if (user && isLoadingMore) {
       loadRacketsPage(debouncedCurrentPage);

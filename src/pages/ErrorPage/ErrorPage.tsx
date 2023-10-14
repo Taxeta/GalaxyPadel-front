@@ -7,7 +7,7 @@ export const ErrorPagePreload = lazy(() => import("./ErrorPage"));
 
 const ErrorPage = (): React.ReactElement => {
   useEffect(() => {
-    document.title = "Rackets List";
+    document.title = "GalaxyPadel | Error Page";
   }, []);
 
   return (

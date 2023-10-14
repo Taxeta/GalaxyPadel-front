@@ -4,6 +4,7 @@ import { NewApiRacket, Racket } from "../../types";
 
 const initialRacketsState: RacketState = {
   rackets: [],
+  selectedRacket: null,
 };
 
 const racketsSlice = createSlice({
@@ -71,6 +72,10 @@ const racketsSlice = createSlice({
         selectedRacket.visibility = !selectedRacket.visibility;
       }
     },
+
+    clearSelectedRacket: (state) => {
+      state.selectedRacket = null;
+    },
   },
 });
 
@@ -82,4 +87,5 @@ export const {
   loadSelectedRacket: loadSelectedRacketActionCreator,
   toggleFavoriteRacket: toggleRacketActionCreator,
   toggleVisibilityRacket: toggleVisibilityRacketActionCreator,
+  clearSelectedRacket: clearSelectedRacketActionCreator,
 } = racketsSlice.actions;

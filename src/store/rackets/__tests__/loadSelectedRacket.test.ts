@@ -8,7 +8,10 @@ import {
 describe("Given a rackets slice", () => {
   describe("When it receives a loadSelectedRacket action with 'racketMock'", () => {
     test("Then it should return a new state with the selected Racket 'racketMock'", () => {
-      const currentRacketState: RacketState = { rackets: [] };
+      const currentRacketState: RacketState = {
+        rackets: [],
+        selectedRacket: null,
+      };
       const loadSelectedRacketAction =
         loadSelectedRacketActionCreator(racketMock);
 
