@@ -136,13 +136,12 @@ const useRacketsApi = () => {
           return racket;
         }
       } catch {
-        dispatch(stopLoadingActionCreator());
         showToastFunction("This detail racket doesn't exist", "error");
         navigate(paths.rackets);
         throw new Error("Couldn't get the racket");
       }
     },
-    [apiUrl, user, dispatch, navigate],
+    [apiUrl, user, navigate],
   );
 
   const modifyRacketByIdApi = useCallback(

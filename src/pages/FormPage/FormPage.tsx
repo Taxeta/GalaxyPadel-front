@@ -23,7 +23,7 @@ const FormPage = () => {
   const pageSize = useAppSelector((state) => state.pagination.pageSize);
 
   useEffect(() => {
-    document.title = "Rackets form";
+    document.title = "GalaxyPadel | Rackets form";
   }, []);
 
   const actionOnSubmit = async (
